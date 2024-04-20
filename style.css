@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+@media only screen and (max-width:900px)and (max-height:500px) {
+    html{
+        width: 900px;
+        height: 500px;
+    }
+}
+
+body{
+    min-width: 900px;   
+    position: relative;
+    width: 100%;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+header{
+    position: relative;
+    width: 720px;
+    text-align: center;
+    margin: 50px auto 0 auto;
+}
+header>p{
+    margin-top: 10px;
+}
+
+article{
+    position: relative;
+    width: 720px;
+    font-size: 13px;
+    line-height: 22px;
+    margin: 30px auto 50px auto;
+    background: linear-gradient(.25turn , #e1e1e1,
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #ffff, 
+    #ffff, #ffff, #ffff, #ffff, #e1e1e1);
+}
+.article{
+    padding: 40px 40px 0 40px;
+}
+.p1{
+    font-weight: bold;
+}
+.text{
+    width: 90%;
+    height: 30px;
+    margin: 10px 0 20px 0;
+    transition: 0.5s ease;
+    padding: 0 5% 0 5%;
+}
+.text:focus{
+    background-color: aquamarine;
+}
+.text:hover{
+    background-color: aquamarine;
+}
+.button{
+    background-color: rgb(0, 171, 183);
+    color: #ffff;
+    font-size: 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 5px 30px 5px 30px;
+}
+.button:hover{
+    background-color: rgb(158, 0, 216);
+}
+.notification{
+    color: #ff0000;
+    margin-left: 20px;
+}
+.a{
+    text-align: center;
+    margin-top: 20px;
+}
+.a>a{
+    text-decoration: none;
+}
+.a>a:visited{
+    color: #000dff;
+}
+.a>a:hover{
+    color: #ff0000;
+}
+footer{
+    position: relative;
+    height: 100px;
+}
