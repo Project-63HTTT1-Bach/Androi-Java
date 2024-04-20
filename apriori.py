@@ -1,5 +1,6 @@
 import pandas as pd
 from mlxtend.preprocessing import TransactionEncoder
+<<<<<<< HEAD
 from itertools import combinations
 
 <<<<<<< HEAD
@@ -9,6 +10,10 @@ from itertools import combinations
 #123
 # test Bảo
 >>>>>>> TruongQuocBao
+=======
+from itertools import combination
+
+>>>>>>> LeManhDuy
 class AprioriAlgorithm_AssociationRule:
     def __init__(self, min_supp, min_conf):
         self.min_supp = min_supp
@@ -131,5 +136,9 @@ apriori.find_rules(data)
 
 frequent_itemsets = apriori.get_frequent_itemsets()
 association_rules = apriori.get_association_rules()
+<<<<<<< HEAD
 
 # Duy
+=======
+#Duy12313
+>>>>>>> LeManhDuy
