@@ -1,6 +1,6 @@
 import pandas as pd
 from mlxtend.preprocessing import TransactionEncoder
-from itertools import combinations
+from itertools import combination
 
 class AprioriAlgorithm_AssociationRule:
     def __init__(self, min_supp, min_conf):
@@ -124,5 +124,4 @@ apriori.find_rules(data)
 
 frequent_itemsets = apriori.get_frequent_itemsets()
 association_rules = apriori.get_association_rules()
-
-# Duy
+#Duy12313
