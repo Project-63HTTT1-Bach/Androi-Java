@@ -2,12 +2,9 @@ import pandas as pd
 from mlxtend.preprocessing import TransactionEncoder
 from itertools import combinations
 
-<<<<<<< HEAD
 #test1009
 #123
-=======
 # test Bảo
->>>>>>> a1cb043bfd0c92ea5b127b81512cd155a8318524
 class AprioriAlgorithm_AssociationRule:
     def __init__(self, min_supp, min_conf):
         self.min_supp = min_supp
