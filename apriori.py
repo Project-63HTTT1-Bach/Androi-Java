@@ -3,6 +3,7 @@ from mlxtend.preprocessing import TransactionEncoder
 from itertools import combinations
 
 # test Bách
+# test Bảo
 class AprioriAlgorithm_AssociationRule:
     def __init__(self, min_supp, min_conf):
         self.min_supp = min_supp
