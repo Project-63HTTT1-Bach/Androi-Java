@@ -12,7 +12,6 @@ from apriori import AprioriAlgorithm_AssociationRule
 from NaiveBayes import NaiveBayesClassifier
 import random
 
-# thích thì nhích
 def read_data(file_path):
     data = pd.read_csv(file_path)
     X = data.drop('Satisfaction Level', axis=1).values
@@ -537,3 +536,5 @@ result_text_widget_created = True
 add_data_created = False
 # Run the GUI
 root.mainloop()
+
+# test Bach
