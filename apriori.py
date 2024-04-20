@@ -125,13 +125,4 @@ apriori.find_rules(data)
 frequent_itemsets = apriori.get_frequent_itemsets()
 association_rules = apriori.get_association_rules()
 
-print("=== Frequent Itemsets ===\n")
-for i in range(len(frequent_itemsets)):
-    print("\nL" + str(i+1) + "\n")
-    for item in frequent_itemsets[i]:
-        print(str(item) + "\n")
-    print("\nSize of set of large itemsets L"+ str(i + 1) + " : "+str(len(frequent_itemsets[i])) + "\n")
-print("\n\n")
-print("=== Association Rules ===\n")
-for rule in association_rules:
-        print(str(rule[0]) + " -> " + str(rule[1]) + "   conf: " + str(rule[2]) + "\n")
+# Duy
