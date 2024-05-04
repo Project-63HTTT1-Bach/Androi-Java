@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.myapplication"
+    namespace = "com.example.gkquizhindi"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.myapplication"
-        minSdk = 24
+        applicationId = "com.example.gkquizhindi"
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"

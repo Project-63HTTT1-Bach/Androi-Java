@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.gkquizhindi;
 
 import org.junit.Test;
 
