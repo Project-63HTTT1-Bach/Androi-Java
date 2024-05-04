@@ -1,0 +1,22 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id ans_a
+id ans_b
+id ans_c
+id ans_d
+id btn_submit
+id choices_layout
+id question
+id total_question
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base.Theme.QuizTest
+style Theme.QuizTest
+xml backup_rules
+xml data_extraction_rules
