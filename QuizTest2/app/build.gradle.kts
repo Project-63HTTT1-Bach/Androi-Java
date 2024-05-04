@@ -3,12 +3,16 @@ plugins {
 }
 
 android {
+<<<<<<< HEAD:app/build.gradle.kts
 <<<<<<< HEAD
     namespace = "com.example.quiz"
+=======
+    namespace = "com.example.quiztest"
+>>>>>>> TruongQuocBao:QuizTest2/app/build.gradle.kts
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.quiz"
+        applicationId = "com.example.quiztest"
         minSdk = 26
 =======
     namespace = "com.example.gkquizhindi"
@@ -35,12 +39,15 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+<<<<<<< HEAD:app/build.gradle.kts
 <<<<<<< HEAD
     buildFeatures{
         viewBinding=true
     }
 =======
 >>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
+=======
+>>>>>>> TruongQuocBao:QuizTest2/app/build.gradle.kts
 }
 
 dependencies {

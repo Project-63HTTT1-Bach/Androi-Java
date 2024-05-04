@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+<<<<<<< HEAD:app/src/main/res/values/colors.xml
 <<<<<<< HEAD
     <color name="gray">#F4F4F4</color>
     <color name="orange">#FF8F00</color>
@@ -11,4 +12,6 @@
     <color name="second">#00E89D</color>
     <color name="third">#FF6565</color>
 >>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
+=======
+>>>>>>> TruongQuocBao:QuizTest2/app/src/main/res/values/colors.xml
 </resources>
