@@ -10,16 +10,20 @@
         android:label="@string/app_name1"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ExamPrativce"
-        tools:targetApi="31" >
+        android:theme="@style/Theme.GkQuizHindi"
+        tools:targetApi="31">
+        <activity
+            android:name=".StartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashActivity2"
-            android:exported="true"
-            android:label="@string/app_name1"
-            android:theme="@style/Theme.ExamPrativce.NoActionBar" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
