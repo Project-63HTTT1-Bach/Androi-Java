@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ExamPractice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ExamPrativce" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -14,15 +14,12 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.ExamPractice.NoActionBar">
+    <style name="Theme.ExamPrativce.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.ExamPractice.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.ExamPrativce.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.ExamPractice.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-  
-    <style name="Theme.GkQuizHindi" parent="Base.Theme.GkQuizHindi" />
-
+    <style name="Theme.ExamPrativce.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
