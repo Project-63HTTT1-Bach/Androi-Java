@@ -1,6 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
 <<<<<<< HEAD
+<<<<<<< HEAD
     <style name="Base.Theme.Quiz" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
          <item name="colorPrimary">@color/orange</item>
@@ -9,10 +10,17 @@
     <style name="Theme.Quiz" parent="Base.Theme.Quiz" />
 =======
     <style name="Base.Theme.GkQuizHindi" parent="Theme.Material3.DayNight.NoActionBar">
+=======
+    <style name="Base.Theme.QuizTest" parent="Theme.Material3.DayNight.NoActionBar">
+>>>>>>> TruongQuocBao
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
+<<<<<<< HEAD
     <style name="Theme.GkQuizHindi" parent="Base.Theme.GkQuizHindi" />
 >>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
+=======
+    <style name="Theme.QuizTest" parent="Base.Theme.QuizTest" />
+>>>>>>> TruongQuocBao
 </resources>

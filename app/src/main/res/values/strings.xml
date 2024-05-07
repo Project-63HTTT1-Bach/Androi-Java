@@ -1,5 +1,6 @@
 <resources>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <string name="app_name">Quiz</string>
     <string name="quizapp">QuizApp</string>
 =======
@@ -8,4 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 >>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
+=======
+    <string name="app_name">QuizTest</string>
+>>>>>>> TruongQuocBao
 </resources>
