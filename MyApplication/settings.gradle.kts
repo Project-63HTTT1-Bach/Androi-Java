@@ -19,5 +19,12 @@ dependencyResolutionManagement {
     }
 }
 
+<<<<<<< HEAD:MyApplication/settings.gradle.kts
 rootProject.name = "My Application"
 include(":app")
+=======
+
+rootProject.name = "ExamPractice"
+include(":app")
+
+>>>>>>> df05a7a05c9586c55c67161ee8bf5ab7960d6bea:settings.gradle.kts
