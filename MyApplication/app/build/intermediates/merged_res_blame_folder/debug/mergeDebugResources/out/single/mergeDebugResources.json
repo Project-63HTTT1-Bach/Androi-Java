@@ -1,0 +1,114 @@
+[
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\font_antic.ttf.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\font\\antic.ttf"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-anydpi_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-anydpi\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\anim_bottom_animation.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\anim\\bottom_animation.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\layout_activity_register.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\drawable_ii.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\drawable\\ii.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-anydpi_ic_launcher.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-anydpi\\ic_launcher.xml"
+    },
+    {
+        "merged": "com.example.myapplication.app-debug-39:/layout_activity_login.xml.flat",
+        "source": "com.example.myapplication.app-main-41:/layout/activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\font_li.ttf.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\font\\li.ttf"
+    },
+    {
+        "merged": "com.example.myapplication.app-debug-39:/layout_activity_register.xml.flat",
+        "source": "com.example.myapplication.app-main-41:/layout/activity_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\anim_top_animation.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\anim\\top_animation.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.myapplication.app-debug-39:/layout_activity_main.xml.flat",
+        "source": "com.example.myapplication.app-main-41:/layout/activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-debug-39:\\drawable_na.png.flat",
+        "source": "C:\\Users\\tqbao\\.gradle\\daemon\\8.4\\com.example.myapplication.app-main-41:\\drawable\\na.png"
+    }
+]
