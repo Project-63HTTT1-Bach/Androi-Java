@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ExamPractice"
+rootProject.name = "Login_Register"
 include(":app")
+ 
