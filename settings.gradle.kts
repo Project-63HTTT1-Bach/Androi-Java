@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Gk Quiz Hindi"
+rootProject.name = "First_project"
 include(":app")
  
