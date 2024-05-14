@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">First_project</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="button1">Button1</string>
+    <string name="button4">Button4</string>
+    <string name="button3">Button3</string>
+    <string name="button2">Button2</string>
+</resources>
