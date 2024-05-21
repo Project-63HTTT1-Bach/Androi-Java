@@ -1,6 +1,29 @@
 <resources>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <string name="app_name">Quiz</string>
+    <string name="quizapp">QuizApp</string>
+=======
     <string name="app_name">Gk Quiz Hindi</string>
     <string name="app_name_logo">GK QUIZ</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+>>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
+=======
+    <string name="app_name">QuizTest</string>
+>>>>>>> TruongQuocBao
+=======
+    <string name="app_name">Exam Practice</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+>>>>>>> 667a99b4fb23eaf4720c07720cfc609ea75b5895
 </resources>

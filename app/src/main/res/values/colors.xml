@@ -2,8 +2,22 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="first">#00CCA4</color>
-    <color name="second">#00E89D</color>
-    <color name="third">#FF6565</color>
-    <color name="fourth">#E3E3E3</color>
+    <color name="primaryColor">#6A5AE0</color>
+    <color name="lightStateBlue">#9087E5</color>
+    <color name="lightPink">#FFCCD5</color>
+    <color name="darkRed">#660012</color>
+    <color name="Blue">#6BB8FF</color>
+    <color name="lightBlue">#8FC9FF</color>
+    <color name="Yellow">#FFC93D</color>
+    <color name="lightYellow">#FFD66B</color>
+    <color name="lightGreen">#5EDEC3</color>
+    <color name="lighterGreen">#84E6D1</color>
+    <color name="brightPink">#FF6B84</color>
+    <color name="Pink">#FF8FA2</color>
+    <color name="Gray">#726E96</color>
+    <color name="lightGray">#E1E1E2</color>
+    <color name="Orange">#FF9B57</color>
+    <color name="lightOrange">#FFB380</color>
+    <color name="skyBlue">#A9ADF3</color>
+    <color name="lightSkyBlue">#C4D0FB</color>
 </resources>
