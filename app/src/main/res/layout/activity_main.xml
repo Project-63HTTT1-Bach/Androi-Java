@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +15,9 @@
         android:layout_height="160dp"
         android:src="@drawable/Pic1"  />
 =======
+=======
+
+>>>>>>> 667a99b4fb23eaf4720c07720cfc609ea75b5895
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -36,11 +40,15 @@
         android:textSize="30dp"
         android:textStyle="bold"
         />
+<<<<<<< HEAD
 >>>>>>> TruongQuocBao
+=======
+>>>>>>> 667a99b4fb23eaf4720c07720cfc609ea75b5895
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 <<<<<<< HEAD
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_corner"
@@ -99,6 +107,8 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 >>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
 =======
+=======
+>>>>>>> 667a99b4fb23eaf4720c07720cfc609ea75b5895
         android:id="@+id/choices_layout"
         android:layout_centerInParent="true"
         android:orientation="vertical">
@@ -158,4 +168,7 @@
         android:textSize="24sp"/>
 
 </RelativeLayout>
+<<<<<<< HEAD
 >>>>>>> TruongQuocBao
+=======
+>>>>>>> 667a99b4fb23eaf4720c07720cfc609ea75b5895
