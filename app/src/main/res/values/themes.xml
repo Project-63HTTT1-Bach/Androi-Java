@@ -1,54 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <style name="Base.Theme.Quiz" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-         <item name="colorPrimary">@color/orange</item>
-    </style>
-
-    <style name="Theme.Quiz" parent="Base.Theme.Quiz" />
-=======
-    <style name="Base.Theme.GkQuizHindi" parent="Theme.Material3.DayNight.NoActionBar">
-=======
-    <style name="Base.Theme.QuizTest" parent="Theme.Material3.DayNight.NoActionBar">
->>>>>>> TruongQuocBao
+    <style name="Base.Theme.QuizApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-<<<<<<< HEAD
-    <style name="Theme.GkQuizHindi" parent="Base.Theme.GkQuizHindi" />
->>>>>>> ae55638b6c2f84b2b929a4dec0f612f8860f150a
-=======
-    <style name="Theme.QuizTest" parent="Base.Theme.QuizTest" />
->>>>>>> TruongQuocBao
-=======
-    <style name="Theme.ExamPractice" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
-
-    <style name="Theme.ExamPractice.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="Theme.ExamPractice.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
-    <style name="Theme.ExamPractice.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-  
-    <style name="Theme.GkQuizHindi" parent="Base.Theme.GkQuizHindi" />
-
->>>>>>> 667a99b4fb23eaf4720c07720cfc609ea75b5895
+    <style name="Theme.QuizApp" parent="Base.Theme.QuizApp" />
 </resources>
