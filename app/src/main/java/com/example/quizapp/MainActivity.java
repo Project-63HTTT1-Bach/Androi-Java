@@ -1,4 +1,4 @@
-package com.example.login_register;
+package com.example.quizapp;
 
 import android.os.Bundle;
 
