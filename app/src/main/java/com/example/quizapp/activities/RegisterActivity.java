@@ -3,7 +3,6 @@ package com.example.quizapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,37 +13,27 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quizapp.R;
 
-public class LoginActivity extends AppCompatActivity {
-    private TextView btnRegiter;
-    private TextView btnForgotPassword;
+public class RegisterActivity extends AppCompatActivity {
+    private TextView btnLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_register);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
-        btnRegiter = (TextView) findViewById(R.id.btnRegister);
-        btnRegiter.setOnClickListener(new View.OnClickListener() {
+        btnLogin = (TextView) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
-
-        btnForgotPassword = (TextView) findViewById(R.id.btnForgotPassword);
-        btnForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
-                startActivity(intent);
-            }
-        });
-
     }
 }
