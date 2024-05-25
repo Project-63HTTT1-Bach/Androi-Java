@@ -6,7 +6,8 @@
     android:background="@drawable/primary_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DescriptionQuiz">
+    tools:context=".EditDescription">
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="24dp"
@@ -19,15 +20,14 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="650dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/auth_border"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -52,13 +52,12 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="36dp"
                     android:gravity="center"
                     android:text="Exam test"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -121,11 +120,12 @@
                         android:layout_height="wrap_content"
                         android:text="Start: " />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/Time_start"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9:30 15/4/2024" />
+                        android:hint="select start_time"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -142,13 +142,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Start: " />
+                        android:text="End: " />
 
-                    <TextView
-                        android:id="@+id/Time_end"
+                    <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9:30 15/4/2024" />
+                        android:hint="select end_time"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -167,11 +167,12 @@
                         android:layout_height="wrap_content"
                         android:text="By: " />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/by_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mr. Bach" />
+                        android:hint="name"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -185,22 +186,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/createby">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The golden sun peeked over the horizon, casting a warm glow across the
-                        verdant meadow. Dew-kissed blades of grass sparkled like diamonds in the early morning light.
-                        A gentle breeze rustled the branches of the towering oak trees that." />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="description "
+                            android:textSize="20sp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_start"
+            android:id="@+id/btn_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_green"
-            android:text="Start"
+            android:text="Save"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
