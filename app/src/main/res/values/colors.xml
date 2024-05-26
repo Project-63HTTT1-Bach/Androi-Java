@@ -5,9 +5,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-
     <color name="Red"> #FF0000 </color>
     <color name="Green">#06B317</color>
+
     <color name="lightStateBlue">#9087E5</color>
     <color name="lightPink">#FFCCD5</color>
     <color name="darkRed">#660012</color>
@@ -25,4 +25,7 @@
     <color name="lightOrange">#FFB380</color>
     <color name="skyBlue">#A9ADF3</color>
     <color name="lightSkyBlue">#C4D0FB</color>
+    <color name="textInputHint">#858585</color>
+    <color name="textLink">#1C89B6</color>
+    <color name="lightBorder">#C2C8D0</color>
 </resources>
