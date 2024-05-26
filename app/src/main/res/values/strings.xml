@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">QuizApp</string>
+    <string name="Code_PIN">Code PIN</string>
+    <string name="complete_quiz">Congratulations on completing quiz! </string>
 </resources>
