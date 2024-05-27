@@ -129,7 +129,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="FullName"
                     android:textSize="20sp"
                     android:textColor="@color/Gray" />
@@ -147,7 +147,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
+                    android:layout_marginStart="5dp"
                     android:textSize="20sp"
                     android:text="Birthday"
                     android:textColor="@color/Gray" />
@@ -165,7 +165,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="Phone"
                     android:textSize="20sp"
                     android:textColor="@color/Gray" />
@@ -183,7 +183,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
-                    android:gravity="center"
+                    android:layout_marginStart="5dp"
                     android:text="Email"
                     android:textSize="20sp"
                     android:textColor="@color/Gray" />
