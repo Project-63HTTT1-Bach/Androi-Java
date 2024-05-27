@@ -18,24 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="650dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/auth_border"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
+    <include xmlns:android="http://schemas.android.com/apk/res/android"
+        layout="@layout/activity_desc" />
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="425dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="24dp"
             android:background="#E8E5FA"
             android:backgroundTint="#E8E5FA"
             android:foregroundGravity="center"
@@ -61,28 +52,40 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
+                <LinearLayout
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
-                    android:text="Question: 20"
-                    android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Question: "
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:layout_width="62dp"
+                        android:layout_height="wrap_content"
+                        android:hint="time"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="92dp"
+                    android:layout_marginStart="70dp"
                     android:text="Time :"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView2"
                     app:layout_constraintStart_toEndOf="@+id/textView2"
                     app:layout_constraintTop_toTopOf="@+id/textView2"
-                    app:layout_constraintVertical_bias="0.0" />
+                   />
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -190,7 +193,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:hint="description "
-                            android:textSize="20sp" />
+                        android:textSize="20sp" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -206,5 +209,4 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
