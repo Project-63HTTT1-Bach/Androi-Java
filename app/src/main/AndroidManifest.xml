@@ -58,13 +58,13 @@
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".changeProfile"
+            android:name=".activities.ChangeProfile"
             android:exported="false" />
         <activity
-            android:name=".setting"
+            android:name=".activities.LeaderboardTop$Setting"
             android:exported="false" />
         <activity
-            android:name=".me"
+            android:name=".activities.LeaderboardTop$Me"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"
