@@ -92,8 +92,7 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_gravity="center"
                 android:background="@drawable/ic_top1"/>
         </LinearLayout>
         <LinearLayout
@@ -137,12 +136,12 @@
                     android:text="1,469 points"
                     android:layout_marginStart="5dp"/>
             </LinearLayout>
+
             <ImageView
                 android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
-                android:background="@drawable/ic_top2"/>
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_top2" />
 
         </LinearLayout>
         <LinearLayout
@@ -189,8 +188,7 @@
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginStart="15dp"
+                android:layout_gravity="center"
                 android:background="@drawable/ic_top3"/>
 
         </LinearLayout>
