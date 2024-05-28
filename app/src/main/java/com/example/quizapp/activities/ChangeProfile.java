@@ -1,4 +1,4 @@
-package com.example.quizapp;
+package com.example.quizapp.activities;
 
 import android.os.Bundle;
 
@@ -8,7 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class changeProfile extends AppCompatActivity {
+import com.example.quizapp.R;
+
+public class ChangeProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

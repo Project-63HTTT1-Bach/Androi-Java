@@ -7,25 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CreateQuiz">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/auth_border"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <include xmlns:android="http://schemas.android.com/apk/res/android"
+        layout="@layout/activity_desc" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="425dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="24dp"
             android:background="#E8E5FA"
             android:backgroundTint="#E8E5FA"
             android:foregroundGravity="center"
@@ -186,9 +177,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="The golden sun peeked over the horizon, casting a warm glow across the
-                        verdant meadow. Dew-kissed blades of grass sparkled like diamonds in the early morning light.
-                        A gentle breeze rustled the branches of the towering oak trees that." />
+                        android:text="The golden sun peeked over the horizon, casting a warm glow across the verdant meadow. Dew-kissed blades of grass sparkled like diamonds in the early morning light A gentle breeze rustled the branches of the towering oak trees that." />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -204,6 +193,5 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
