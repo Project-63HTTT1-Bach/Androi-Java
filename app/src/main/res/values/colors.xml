@@ -5,7 +5,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="Red"> #FF0000 </color>
+    <color name="Red">#FF0000</color>
     <color name="Green">#06B317</color>
     <color name="lightStateBlue">#9087E5</color>
     <color name="lightPink">#FFCCD5</color>
