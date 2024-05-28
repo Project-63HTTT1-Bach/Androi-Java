@@ -10,7 +10,7 @@
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fcvFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
@@ -45,3 +45,4 @@
             app:tint="@color/primaryColor" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
