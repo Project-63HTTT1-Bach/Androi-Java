@@ -40,7 +40,6 @@
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_navhomeselected"/>
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/llDiscovery"
             android:layout_width="wrap_content"
