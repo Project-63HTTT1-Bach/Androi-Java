@@ -196,7 +196,7 @@
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/white_border">
+        android:background="@drawable/auth_border">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
@@ -215,57 +215,16 @@
                 android:textColor="@color/primaryColor"
                 android:layout_marginStart="170dp"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_quizitem"
-            >
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/ic_quiz1"/>
-
-            <TextView
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="Statistics Math Quiz"
-                android:layout_margin="5dp"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_quizmoreinfo"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-        <LinearLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="500dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/rounded_quizitem">
-            <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_margin="5dp"
-                android:background="@drawable/ic_quiz2"/>
-            <TextView
-                android:layout_width="230dp"
-                android:layout_height="wrap_content"
-                android:text="Integers Quiz"
-                android:textStyle="bold"
-                android:textSize="18dp"
-                android:layout_margin="5dp"
-                android:layout_marginStart="10dp"/>
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/ic_quizmoreinfo"
-                android:layout_gravity="center"/>
-        </LinearLayout>
-
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/white_border"
+            android:orientation="vertical"/>
 
     </LinearLayout>
 

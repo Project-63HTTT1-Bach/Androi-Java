@@ -131,6 +131,7 @@
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
                     android:text="FullName"
+                    android:paddingStart="10dp"
                     android:textSize="20sp"
                     android:textColor="@color/Gray" />
 
@@ -148,6 +149,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
+                    android:paddingStart="10dp"
                     android:textSize="20sp"
                     android:text="Birthday"
                     android:textColor="@color/Gray" />
@@ -165,6 +167,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
+                    android:paddingStart="10dp"
                     android:layout_marginStart="5dp"
                     android:text="Phone"
                     android:textSize="20sp"
@@ -184,6 +187,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
+                    android:paddingStart="10dp"
                     android:text="Email"
                     android:textSize="20sp"
                     android:textColor="@color/Gray" />

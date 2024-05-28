@@ -1,2 +1,4 @@
-package com.example.quizapp.livequiz.model;public class LiveQuizRepository {
+package com.example.quizapp.livequiz.model;
+
+public class LiveQuizRepository {
 }
