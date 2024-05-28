@@ -19,9 +19,6 @@
             android:name=".activities.LeaderboardTop"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashScreenLoading"
-            android:exported="false" />
-        <activity
             android:name=".activities.SplashScreen"
             android:exported="false" />
         <activity
