@@ -12,10 +12,12 @@ public class QuizItem {
     }
 
     public String getTitle() {
+
         return title;
     }
 
     public int getIconResourceId() {
+
         return iconResourceId;
     }
 }
