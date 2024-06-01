@@ -8,8 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.quizapp.R;
-import Adapter.FriendAdapter;
-import Adapter.QuizAdapter;
+import com.example.quizapp.Adapter.FriendAdapter;
+import com.example.quizapp.Adapter.QuizAdapter;
+
 import com.example.quizapp.models.Friend;
 import com.example.quizapp.models.QuizItem;
 import java.util.ArrayList;

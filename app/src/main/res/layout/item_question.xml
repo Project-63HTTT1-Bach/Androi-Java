@@ -20,7 +20,7 @@
             android:id="@+id/txt_question"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:layout_margin="20dp"
             android:text="Question"
             android:textSize="16sp"
