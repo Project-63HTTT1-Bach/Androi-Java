@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.quizapp.R;
 import com.example.quizapp.Adapter.QuizAdapter;
+
 import com.example.quizapp.models.QuizItem;
 
 import java.util.ArrayList;
