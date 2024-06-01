@@ -13,7 +13,7 @@
         android:theme="@style/Theme.QuizApp"
         tools:targetApi="31">
         <activity
-            android:name=".activities.AddQuestion"
+            android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LeaderboardMore"
@@ -28,19 +28,19 @@
             android:name=".activities.Result"
             android:exported="false" />
         <activity
-            android:name=".CreateQuestion"
+            android:name=".activities.AddQuestion"
             android:exported="false" />
         <activity
-            android:name=".EditDescription"
+            android:name=".activities.EditDescription"
             android:exported="false" />
         <activity
-            android:name=".CreateQuiz"
+            android:name=".activities.CreateQuiz"
             android:exported="false" />
         <activity
-            android:name=".Question"
+            android:name=".activities.Question"
             android:exported="false" />
         <activity
-            android:name=".DescriptionQuiz"
+            android:name=".activities.DescriptionQuiz"
             android:exported="false" />
         <activity
             android:name=".activities.JoinQuiz"
@@ -67,7 +67,7 @@
             android:name=".activities.LeaderboardTop$Me"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.CreateQuestion"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
