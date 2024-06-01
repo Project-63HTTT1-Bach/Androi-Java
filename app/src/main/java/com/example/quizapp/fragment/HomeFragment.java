@@ -3,12 +3,19 @@ package com.example.quizapp.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.quizapp.R;
+import com.example.quizapp.Adapter.QuizAdapter;
+import com.example.quizapp.models.QuizItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,10 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RecyclerView recyclerViewLiveQuizzes;
+    private QuizAdapter liveQuizAdapter;
+    private List<QuizItem> liveQuizList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -61,6 +72,22 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        // Thiết lập RecyclerView
+        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
+        recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        // Khởi tạo danh sách Live Quiz
+        liveQuizList = new ArrayList<>();
+        liveQuizList.add(new QuizItem("Statistics Math Quiz", R.drawable.ic_quiz1));
+        liveQuizList.add(new QuizItem("Integers Quiz", R.drawable.ic_quiz2));
+        // Thêm các item khác nếu cần
+
+        // Thiết lập Adapter cho RecyclerView
+        liveQuizAdapter = new QuizAdapter(liveQuizList);
+        recyclerViewLiveQuizzes.setAdapter(liveQuizAdapter);
+
+        return view;
     }
 }
