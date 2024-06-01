@@ -178,9 +178,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
                 android:text="The golden sun peeked over the horizon, casting a warm glow across the verdant meadow. Dew-kissed blades of grass sparkled like diamonds in the early morning light.
-A gentle breeze rustled the branches of the towering oak trees that." />
+A gentle breeze rustled the branches of the towering oak trees that."
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 

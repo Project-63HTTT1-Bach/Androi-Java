@@ -17,6 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_back" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,6 +43,7 @@
             android:text="QUIZ APP"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
         <LinearLayout
             android:id="@+id/cv_join_quiz"
             android:layout_width="368dp"
