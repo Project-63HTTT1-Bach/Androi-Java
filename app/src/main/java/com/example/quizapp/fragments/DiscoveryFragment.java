@@ -1,4 +1,4 @@
-package com.example.quizapp.fragment;
+package com.example.quizapp.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.quizapp.R;
-import com.example.quizapp.Adapter.FriendAdapter;
-import com.example.quizapp.Adapter.QuizAdapter;
+import com.example.quizapp.adapters.FriendAdapter;
+import com.example.quizapp.adapters.QuizAdapter;
 
 import com.example.quizapp.models.Friend;
 import com.example.quizapp.models.QuizItem;

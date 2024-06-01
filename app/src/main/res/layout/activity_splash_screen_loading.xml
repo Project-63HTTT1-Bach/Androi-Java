@@ -20,7 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Icon in the center of the progress bar -->
     <ImageView
         android:id="@+id/centerIcon"
         android:layout_width="90dp"

@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_quizitem"
     android:orientation="horizontal"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:gravity="center_vertical">
 
     <ImageView
         android:id="@+id/quizIcon"

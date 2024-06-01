@@ -1,4 +1,4 @@
-package com.example.quizapp.Adapter;
+package com.example.quizapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
