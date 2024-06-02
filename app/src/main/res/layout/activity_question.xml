@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
-    tools:context=".activities.Question">
+    tools:context=".activities.QuestionActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -99,50 +99,10 @@
 
         </androidx.cardview.widget.CardView>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_answer_1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="36dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/rounded_dark_button"
-                android:text="Answer"
-                android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_answer_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/rounded_dark_button"
-                android:text="Answer"
-                android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_answer_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/rounded_dark_button"
-                android:text="Answer"
-                android:textColor="@color/white" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_answer_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/rounded_dark_button"
-                android:text="Answer"
-                android:textColor="@color/white"/>
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

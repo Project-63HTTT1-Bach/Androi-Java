@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quizapp.R;
 
-public class LeaderboardTop extends AppCompatActivity {
+public class LeaderboardTopActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

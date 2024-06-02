@@ -6,13 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
-    tools:context=".activities.DescriptionQuiz">
+    tools:context=".activities.DescriptionQuizActivity">
 
     <include xmlns:android="http://schemas.android.com/apk/res/android"
         layout="@layout/layout_desc" />
 
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="0dp"
         android:layout_height="425dp"
         android:layout_marginStart="24dp"
@@ -194,5 +195,5 @@ A gentle breeze rustled the branches of the towering oak trees that."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 </androidx.constraintlayout.widget.ConstraintLayout>
