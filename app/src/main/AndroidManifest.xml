@@ -16,34 +16,34 @@
             android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LeaderboardMore"
+            android:name=".activities.LeaderboardMoreActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LeaderboardTop"
+            android:name=".activities.LeaderboardTopActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashScreen"
+            android:name=".activities.SplashScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Result"
+            android:name=".activities.ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.AddQuestion"
+            android:name=".activities.AddQuestionActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.EditDescription"
+            android:name=".activities.EditDescriptionActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.CreateQuiz"
+            android:name=".activities.CreateQuizActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.Question"
+            android:name=".activities.QuestionActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.DescriptionQuiz"
+            android:name=".activities.DescriptionQuizActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.JoinQuiz"
+            android:name=".activities.JoinQuizActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ChangePasswordActivity"
@@ -58,16 +58,16 @@
             android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.ChangeProfile"
+            android:name=".activities.ChangeProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LeaderboardTop$Setting"
+            android:name=".activities.LeaderboardTopActivity$Setting"
             android:exported="false" />
         <activity
-            android:name=".activities.LeaderboardTop$Me"
+            android:name=".activities.LeaderboardTopActivity$Me"
             android:exported="false" />
         <activity
-            android:name=".activities.CreateQuestion"
+            android:name=".activities.CreateQuestionActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

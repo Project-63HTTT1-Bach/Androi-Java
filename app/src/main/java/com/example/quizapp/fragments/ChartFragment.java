@@ -1,29 +1,26 @@
-package com.example.quizapp.fragment;
+// ChartFragment.java
+package com.example.quizapp.fragments;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.example.quizapp.R;
-import com.example.quizapp.Adapter.QuizAdapter;
+import com.example.quizapp.adapters.QuizAdapter;
 
 import com.example.quizapp.models.QuizItem;
-
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link ChartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class ChartFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,11 +31,11 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RecyclerView recyclerViewLiveQuizzes;
-    private QuizAdapter liveQuizAdapter;
-    private List<QuizItem> liveQuizList;
+    private RecyclerView recyclerView;
+    private QuizAdapter adapter;
+    private List<QuizItem> quizItems;
 
-    public HomeFragment() {
+    public ChartFragment() {
         // Required empty public constructor
     }
 
@@ -48,11 +45,11 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment ChartFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static ChartFragment newInstance(String param1, String param2) {
+        ChartFragment fragment = new ChartFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -73,21 +70,20 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_chart, container, false);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Thiết lập RecyclerView
-        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
-        recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
+        quizItems = new ArrayList<>();
+        quizItems.add(new QuizItem("Statistics Math Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new QuizItem("Developer Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new QuizItem("Matrices Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new QuizItem("Integer Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new QuizItem("Matrices Quiz", R.drawable.ic_quiz1));
+        // Add more items as needed
 
-        // Khởi tạo danh sách Live Quiz
-        liveQuizList = new ArrayList<>();
-        liveQuizList.add(new QuizItem("Statistics Math Quiz", R.drawable.ic_quiz1));
-        liveQuizList.add(new QuizItem("Integers Quiz", R.drawable.ic_quiz2));
-        // Thêm các item khác nếu cần
-
-        // Thiết lập Adapter cho RecyclerView
-        liveQuizAdapter = new QuizAdapter(liveQuizList);
-        recyclerViewLiveQuizzes.setAdapter(liveQuizAdapter);
+        adapter = new QuizAdapter(quizItems);
+        recyclerView.setAdapter(adapter);
 
         return view;
     }
