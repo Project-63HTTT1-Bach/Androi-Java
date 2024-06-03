@@ -8,7 +8,7 @@
     tools:context=".activities.RegisterActivity">
 
     <include xmlns:android="http://schemas.android.com/apk/res/android"
-        layout="@layout/activity_auth" />
+        layout="@layout/layout_auth" />
 
     <LinearLayout
         android:layout_width="match_parent"

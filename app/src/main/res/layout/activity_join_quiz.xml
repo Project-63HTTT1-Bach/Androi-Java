@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
-    tools:context=".activities.JoinQuiz">
+    tools:context=".activities.JoinQuizActivity">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -19,10 +19,10 @@
         app:srcCompat="@drawable/ic_back" />
 
     <LinearLayout
-        android:id="@+id/ic_layout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -31,61 +31,37 @@
             android:id="@+id/imageView"
             android:layout_width="64dp"
             android:layout_height="64dp"
+            android:layout_marginTop="64dp"
             android:padding="10dp"
             app:srcCompat="@drawable/logo" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ic_layout">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:padding="10dp"
             android:text="QUIZ APP"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            tools:layout_editor_absoluteX="177dp"
-            tools:layout_editor_absoluteY="216dp" />
-    </LinearLayout>
+            android:textStyle="bold" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv_join_quiz"
-        android:layout_width="368dp"
-        android:layout_height="219dp"
-        android:layout_marginTop="178dp"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout
+            android:id="@+id/cv_join_quiz"
+            android:layout_width="368dp"
+            android:layout_height="219dp"
+            android:background="@drawable/white_border"
+            android:backgroundTint="#9E93EF"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#9E93EF">
 
             <EditText
                 android:id="@+id/editTextText"
                 android:layout_width="266dp"
                 android:layout_height="64dp"
-                android:layout_marginTop="44dp"
                 android:background="#C4D0FB"
-                android:ems="10"
                 android:gravity="center"
                 android:hint="@string/Code_PIN"
-                android:inputType="text"
-                android:textColor="@color/design_default_color_on_secondary"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColor="@color/design_default_color_on_secondary" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_join_quiz"
@@ -95,89 +71,55 @@
                 android:background="@drawable/rounded_dark_button"
                 android:padding="10dp"
                 android:text="Join Quiz"
-                android:textColor="@color/white"
-                app:circularflow_defaultRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextText"
-                app:layout_constraintVertical_bias="0.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <LinearLayout
-        android:id="@+id/line1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="23dp"
-        android:gravity="bottom"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="22dp"
-        tools:layout_editor_absoluteY="424dp">
+                android:textColor="@color/white" />
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/line3"
-            android:layout_width="139dp"
-            android:layout_height="1dp"
-            android:background="#FFC2C8D0"
-            android:orientation="vertical"></LinearLayout>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <TextView
-            android:id="@+id/text1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OR"
-            android:textColor="#C2C8D0"
-            android:textSize="12sp" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:gravity="center">
 
-        <View
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <TextView
+                android:layout_width="160dp"
+                android:layout_height="1dp"
+                android:background="@drawable/line_border"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:text="OR"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:layout_width="170dp"
+                android:layout_height="1dp"
+                android:background="@drawable/line_border"
+                android:backgroundTint="@color/white" />
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/line4"
-            android:layout_width="140dp"
-            android:layout_height="2dp"
-            android:background="#FFC2C8D0"
-            android:orientation="vertical"></LinearLayout>
-    </LinearLayout>
+            android:layout_width="369dp"
+            android:layout_height="163dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/white_border"
+            android:backgroundTint="#9E93EF"
+            android:gravity="center"
+            android:orientation="vertical">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="369dp"
-        android:layout_height="163dp"
-        android:layout_marginTop="30dp"
-        app:cardCornerRadius="30dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/line1">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#9E93EF">
 
             <TextView
                 android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
+                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="Let's start create your quiz "
                 android:textColor="@color/white"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textSize="24sp" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_create_quiz"
@@ -186,14 +128,9 @@
                 android:background="@drawable/rounded_dark_button"
                 android:padding="10dp"
                 android:text="Create Quiz"
-                android:textColor="@color/white"
-                app:circularflow_defaultRadius="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/text" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 // FriendAdapter.java
-package Adapter;
+package com.example.quizapp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

@@ -1,4 +1,4 @@
-package Adapter;// LeaderboardAdapter.java
+package com.example.quizapp.adapters;// LeaderboardAdapter.java
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
