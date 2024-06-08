@@ -15,10 +15,6 @@
         android:background="@drawable/circle_border"
         android:gravity="center"
         android:text="1"
-<<<<<<< HEAD
-        android:textColor="#8C8C8C"
-=======
->>>>>>> TruongQuocBao
         android:textSize="14sp"
         android:textStyle="bold" />
 
