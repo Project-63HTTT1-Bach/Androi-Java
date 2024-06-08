@@ -15,14 +15,13 @@
     <LinearLayout
         android:id="@+id/llBottomnav"
         android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@drawable/auth_border"
         android:elevation="10dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        tools:targetApi="lollipop">
+        android:orientation="horizontal">
 
         <LinearLayout
             android:id="@+id/llHome"
@@ -46,9 +45,7 @@
             android:id="@+id/llDiscovery"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
             android:layout_marginEnd="25dp"
-            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -66,8 +63,6 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -84,8 +79,6 @@
             android:id="@+id/llMe"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
             android:layout_weight="1"
             android:gravity="center"
             android:orientation="horizontal">
@@ -105,7 +98,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center|bottom"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/add_border"
         android:elevation="15dp"
         android:scaleType="centerCrop"
