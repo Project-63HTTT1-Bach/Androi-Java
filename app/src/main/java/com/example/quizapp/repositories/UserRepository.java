@@ -5,7 +5,7 @@ import android.content.Context;
 import java.util.ArrayList;
 
 import com.example.quizapp.models.User;
-import com.example.quizapp.sqlliteopenhelper.SqliteOpenHelper;
+import com.example.quizapp.sqliteOpenHelper.SqliteOpenHelper;
 
 public class UserRepository {
     private final SqliteOpenHelper dbHelper;
@@ -14,7 +14,7 @@ public class UserRepository {
     public UserRepository(Context context) {
         dbHelper = new SqliteOpenHelper(context);
         if (userList.isEmpty()) {
-            userList = dbHelper.getAllUsers(); // Load from DB if the list is empty
+//            userList = dbHelper.getAllUsers(); // Load from DB if the list is empty
         }
     }
 
@@ -33,7 +33,7 @@ public class UserRepository {
 
     public boolean addUser(User u) {
         if (!checkExistedUser(u)) {
-            dbHelper.insertUser(u.getFullname(), u.getPassword(), u.getEmail());
+//            dbHelper.insertUser(u.getFullname(), u.getPassword(), u.getEmail());
             userList.add(u); // Add to the static list
             return true;
         } else {
@@ -68,7 +68,7 @@ public class UserRepository {
             if (user.getEmail().equals(u.getEmail())) {
                 user.setFullname(u.getFullname());
                 user.setPassword(u.getPassword());
-                dbHelper.updateUser(u.getFullname(), u.getPassword(), u.getEmail());
+//                dbHelper.updateUser(u.getFullname(), u.getPassword(), u.getEmail());
                 return true;
             }
         }
