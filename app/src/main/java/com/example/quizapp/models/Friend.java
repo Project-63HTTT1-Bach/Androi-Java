@@ -2,7 +2,6 @@
 package com.example.quizapp.models;
 
 public class Friend {
-
     private String name;
     private int points;
     private int avatarResourceId;

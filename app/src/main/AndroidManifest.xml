@@ -22,7 +22,7 @@
             android:name=".activities.LeaderboardTopActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashScreenActivity"
+            android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ResultActivity"
@@ -55,7 +55,7 @@
             android:name=".activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.CreateQuestionActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ChangeProfileActivity"
@@ -67,7 +67,7 @@
             android:name=".activities.LeaderboardTopActivity$Me"
             android:exported="false" />
         <activity
-            android:name=".activities.CreateQuestionActivity"
+            android:name=".activities.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
