@@ -192,11 +192,9 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="15dp"
-        android:background="@drawable/white_border">
+        android:background="@drawable/auth_border">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
@@ -214,12 +212,15 @@
                 android:textColor="@color/primaryColor"
                 android:layout_marginStart="170dp"/>
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewLiveQuizzes"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"/>
+            android:layout_height="wrap_content">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewLiveQuizzes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"/>
+        </ScrollView>
     </LinearLayout>
 
 </LinearLayout>
