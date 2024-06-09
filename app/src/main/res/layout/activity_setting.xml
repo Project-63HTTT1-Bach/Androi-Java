@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/primary_background"
+    tools:context=".activities.LeaderboardTopActivity$Setting">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Setting"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/white_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header">
+
+        <LinearLayout
+            android:id="@+id/btnEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@drawable/rounded_button"
+            android:gravity="center_vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivEdit"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_edit" />
+
+            <TextView
+                android:id="@+id/tvEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/ivEdit"
+                android:gravity="center_vertical"
+                android:text="Edit"
+                android:textColor="@color/primaryColor"
+                android:textSize="28sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivUseravatar"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:src="@drawable/user_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
+
+        <TextView
+            android:id="@+id/txtId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ID: #123456"
+            android:textColor="@color/Gray"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivUseravatar" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvInformation"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardElevation="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtId">
+
+            <GridLayout
+                android:id="@+id/glIconLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:columnCount="2"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:rowCount="4">
+
+                <TextView
+                    android:id="@+id/tvFullname1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginStart="5dp"
+                    android:text="FullName"
+                    android:textSize="20sp"
+                    android:textColor="@color/Gray" />
+
+                <TextView
+                    android:id="@+id/tvFullname2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:textSize="20sp"
+                    android:text="Madelyn Dias" />
+
+                <TextView
+                    android:id="@+id/tvBirthday1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:text="Birthday"
+                    android:textColor="@color/Gray" />
+
+                <TextView
+                    android:id="@+id/tvBirthday2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="29/03/2003"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tvPhone1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginStart="5dp"
+                    android:text="Phone"
+                    android:textSize="20sp"
+                    android:textColor="@color/Gray" />
+
+                <TextView
+                    android:id="@+id/tvPhone2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:textSize="20sp"
+                    android:text="0981958934" />
+
+                <TextView
+                    android:id="@+id/tvEmail1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginStart="5dp"
+                    android:text="Email"
+                    android:textSize="20sp"
+                    android:textColor="@color/Gray" />
+
+                <TextView
+                    android:id="@+id/tvEmail2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="2"
+                    android:text="bach1234566@gmail.com"
+                    android:textSize="20sp"/>
+            </GridLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="20dp"
+            android:layout_marginBottom="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <LinearLayout
+                android:id="@+id/btnLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/Red"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                app:layout_constraintHorizontal_bias="0.497"
+                >
+                <ImageView
+                    android:id="@+id/ivLogout"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_logout" />
+
+                <TextView
+                    android:id="@+id/tvLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_toEndOf="@id/ivEdit"
+                    android:gravity="center_vertical"
+                    android:text="Logout"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
