@@ -1,7 +1,10 @@
 package com.example.quizapp.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,8 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.quizapp.R;
+import com.example.quizapp.activities.AllQuizActivity;
+import com.example.quizapp.activities.FindFriendsActivity;
+import com.example.quizapp.activities.SettingActivity;
 import com.example.quizapp.adapters.QuizAdapter;
 
 import com.example.quizapp.models.QuizItem;
@@ -90,5 +99,29 @@ public class HomeFragment extends Fragment {
         recyclerViewLiveQuizzes.setAdapter(liveQuizAdapter);
 
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        LinearLayout seeFindFriends = (LinearLayout) view.findViewById(R.id.seeFindFriends);
+        TextView seeAllQuizzes = (TextView) view.findViewById((R.id.seeAllQuizzes));
+
+        seeFindFriends.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), FindFriendsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        seeAllQuizzes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AllQuizActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

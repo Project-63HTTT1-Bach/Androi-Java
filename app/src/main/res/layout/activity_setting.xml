@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
-    tools:context=".activities.LeaderboardTopActivity$Setting">
-
+    tools:context=".activities.SettingActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
@@ -105,11 +104,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivUseravatar" />
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             android:id="@+id/cvInformation"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:cardElevation="4dp"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtId">
@@ -118,10 +118,10 @@
                 android:id="@+id/glIconLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
                 android:columnCount="2"
                 android:gravity="center"
                 android:orientation="horizontal"
+                android:padding="10dp"
                 android:rowCount="4">
 
                 <TextView
@@ -131,16 +131,16 @@
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
                     android:text="FullName"
-                    android:textSize="20sp"
-                    android:textColor="@color/Gray" />
+                    android:textColor="@color/Gray"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvFullname2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
-                    android:textSize="20sp"
-                    android:text="Madelyn Dias" />
+                    android:text="Madelyn Dias"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvBirthday1"
@@ -148,9 +148,9 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
-                    android:textSize="20sp"
                     android:text="Birthday"
-                    android:textColor="@color/Gray" />
+                    android:textColor="@color/Gray"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvBirthday2"
@@ -158,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
                     android:text="29/03/2003"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvPhone1"
@@ -167,16 +167,16 @@
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
                     android:text="Phone"
-                    android:textSize="20sp"
-                    android:textColor="@color/Gray" />
+                    android:textColor="@color/Gray"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvPhone2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
-                    android:textSize="20sp"
-                    android:text="0981958934" />
+                    android:text="0981958934"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvEmail1"
@@ -185,27 +185,28 @@
                     android:layout_columnWeight="1"
                     android:layout_marginStart="5dp"
                     android:text="Email"
-                    android:textSize="20sp"
-                    android:textColor="@color/Gray" />
+                    android:textColor="@color/Gray"
+                    android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tvEmail2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
-                    android:text="bach1234566@gmail.com"
-                    android:textSize="20sp"/>
+                    android:text="bach12345666@gmail.com"
+                    android:textSize="20sp" />
             </GridLayout>
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
             android:layout_marginBottom="25dp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
+
             <LinearLayout
                 android:id="@+id/btnLogout"
                 android:layout_width="wrap_content"
@@ -214,8 +215,8 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                app:layout_constraintHorizontal_bias="0.497"
-                >
+                app:layout_constraintHorizontal_bias="0.497">
+
                 <ImageView
                     android:id="@+id/ivLogout"
                     android:layout_width="26dp"
@@ -239,6 +240,4 @@
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

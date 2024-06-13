@@ -5,6 +5,7 @@
     android:background="@drawable/rounded_quizitem"
     android:orientation="horizontal"
     android:padding="10dp"
+    android:layout_margin="10dp"
     android:gravity="center_vertical">
 
     <ImageView

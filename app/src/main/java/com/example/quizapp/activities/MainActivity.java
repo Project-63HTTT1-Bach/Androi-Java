@@ -1,5 +1,6 @@
 package com.example.quizapp.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -107,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
                             .replace(R.id.fcvFragment, MeFragment.class,null)
                             .commit();
                 }
+            }
+        });
+        ivAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, JoinQuizActivity.class);
+                startActivity(intent);
             }
         });
     }
