@@ -19,6 +19,15 @@
             android:exported="false" />
         <activity
             android:name=".activities.GithubLoginActivity"
+                  android:exported="false" />
+        <activity>
+            android:name=".activities.FindFriendsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.AllQuizActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SettingActivity"
             android:exported="false" />
         <activity
             android:name=".activities.LoginActivity"

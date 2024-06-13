@@ -20,7 +20,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
                 + "username TEXT NOT NULL, "
                 + "password TEXT NOT NULL, "
                 + "email TEXT, "
-                + "profilePicture BLOB)";
+                + "profilePicture TEXT)";
         db.execSQL(CREATE_USER_TABLE);
 
         // Create Quiz table
