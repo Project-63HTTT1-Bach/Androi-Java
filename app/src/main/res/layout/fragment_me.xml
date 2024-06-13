@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
-    tools:context=".activities.LeaderboardTopActivity$Me">
+    tools:context=".fragments.MeFragment">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="0dp"
@@ -15,67 +16,61 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_back"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/btnSetting"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_settings"
             android:scaleType="centerCrop"
+            android:src="@drawable/ic_settings"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Space
         android:id="@+id/sp1"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"/>
+        app:layout_constraintTop_toBottomOf="@id/header" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/white_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sp1"
-        android:background="@drawable/white_border"
-        android:layout_margin="16dp">
+        app:layout_constraintTop_toBottomOf="@id/sp1">
+
         <TextView
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="70dp"
             android:layout_marginTop="8dp"
             android:text="Madelyn Dias"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:layout_margin="70dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <LinearLayout
             android:id="@+id/llStatslayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="16dp"
-            android:gravity="center"
             android:background="@drawable/primarycolor_border"
-            android:padding="16dp"
+            android:gravity="center"
             android:orientation="horizontal"
+            android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvUsername">
@@ -84,9 +79,9 @@
                 android:id="@+id/llStat1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -121,9 +116,9 @@
                 android:id="@+id/llStat2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -159,9 +154,9 @@
                 android:id="@+id/llStat3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <ImageView
                     android:layout_width="30dp"
@@ -185,15 +180,16 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
+
         <GridLayout
             android:id="@+id/glIconLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:columnCount="3"
-            android:rowCount="2"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
+            android:rowCount="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/llStatslayout">
@@ -237,14 +233,14 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/ivUseravatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_margin="80dp"
         android:src="@drawable/user_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="80dp"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
