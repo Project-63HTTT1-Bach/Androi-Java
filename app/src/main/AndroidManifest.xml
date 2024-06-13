@@ -15,6 +15,12 @@
         android:theme="@style/Theme.QuizApp"
         tools:targetApi="31">
         <activity
+            android:name=".activities.GoogleLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.GithubLoginActivity"
+                  android:exported="false" />
+        <activity>
             android:name=".activities.FindFriendsActivity"
             android:exported="false" />
         <activity
