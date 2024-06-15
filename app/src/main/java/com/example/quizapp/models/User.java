@@ -19,6 +19,18 @@ public class User {
         this.profilePicture = profilePicture;
     }
 
+    public User(String fullname, String email, String profilePicture) {
+        this.fullname = fullname;
+        this.email = email;
+        this.profilePicture = profilePicture;
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+
     public int getUserId() {
         return userId;
     }
