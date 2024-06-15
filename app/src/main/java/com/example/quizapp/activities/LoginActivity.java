@@ -79,9 +79,10 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = tietEmail.getText().toString().trim();
                 String password = tietPassword.getText().toString().trim();
-                if (!email.matches(emailPattern)) {
+                if(!email.matches(emailPattern)){
                     Toast.makeText(LoginActivity.this, "Enter a proper email", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else{
                     loginUser(email, password);
                 }
             }
