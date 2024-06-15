@@ -98,8 +98,7 @@ public class GoogleLoginActivity extends LoginActivity {
                         if (!userRepository.checkUser(newUser)) {
                             userRepository.addUser(newUser);
                         }
-
-                        // Chuyển hướng người dùng đến màn hình chính
+                        
                         Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
