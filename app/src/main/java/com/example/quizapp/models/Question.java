@@ -5,14 +5,12 @@ public class Question {
     private int quizId;
     private String questionText;
     private String questionType;
-    private int isCorrect;
 
-    public Question(int questionId, int quizId, String questionText, String questionType, int isCorrect) {
+    public Question(int questionId, int quizId, String questionText, String questionType) {
         this.questionId = questionId;
         this.quizId = quizId;
         this.questionText = questionText;
         this.questionType = questionType;
-        this.isCorrect = isCorrect;
     }
 
     public int getQuestionId() {
@@ -46,12 +44,5 @@ public class Question {
     public void setQuestionType(String questionType) {
         this.questionType = questionType;
     }
-
-    public int getIsCorrect() {
-        return isCorrect;
-    }
-
-    public void setIsCorrect(int isCorrect) {
-        this.isCorrect = isCorrect;
-    }
 }
+
