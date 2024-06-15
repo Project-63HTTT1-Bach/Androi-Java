@@ -13,6 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quizapp.R;
+import com.example.quizapp.models.User;
+import com.example.quizapp.repositories.UserRepository;
 import com.google.android.gms.auth.api.identity.BeginSignInRequest;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -34,7 +36,8 @@ public class GoogleLoginActivity extends LoginActivity {
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     GoogleSignInClient mGoogleSignInClient;
-    int RC_SIGN_IN;
+    int RC_SIGN_IN = 9001;
+    UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class GoogleLoginActivity extends LoginActivity {
                 .build();
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-
+        userRepository = new UserRepository(this);
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
@@ -76,13 +79,29 @@ public class GoogleLoginActivity extends LoginActivity {
                 if (task.isSuccessful()) {
                     FirebaseUser user = mAuth.getCurrentUser();
 
-                    HashMap<String, Object> map = new HashMap<>();
-                    map.put("id", user.getUid());
-                    map.put("name", user.getDisplayName());
-                    map.put("useravatar", user.getPhotoUrl().toString());
-                    database.getReference().child("users").child(user.getUid()).setValue(map);
-                    Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+                    if (user != null) {
+                        String userId = user.getUid();
+                        String userName = user.getDisplayName();
+                        String userEmail = user.getEmail();
+                        String userAvatar = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
+                        User newUser = new User(userName, userEmail, userAvatar);
+                        // Thêm vào Firebase Realtime Database
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("id", userId);
+                        map.put("name", userName);
+                        map.put("email", userEmail);
+                        map.put("avatar", userAvatar);
+                        database.getReference().child("users").child(userId).setValue(map);
+
+                        // Thêm vào SQLite
+                        if (!userRepository.checkUser(newUser)) {
+                            userRepository.addUser(newUser);
+                        }
+
+                        // Chuyển hướng người dùng đến màn hình chính
+                        Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
                     Toast.makeText(GoogleLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }

@@ -67,11 +67,11 @@ public class LoginActivity extends AppCompatActivity {
         btnOnLoginGithub = findViewById(R.id.btnOnLoginGithub);
 
         userRepository = new UserRepository(this);
-        initData();
+//        initData();
 
         ArrayList<User> userList = userRepository.getAllUsers();
         for (User user : userList) {
-            Log.d("UserRepository", "User: " + user.getFullname() + ", Email: " + user.getEmail() + ", Password: " + user.getPassword() + ", Phone: " + user.getPhone() + ", Birthday: " + user.getBirthday());
+            Log.d("UserRepository", "User: " + user.getFullname() + ", Email: " + user.getEmail() + ", Password: " + user.getPassword() );
         }
         btnOnLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -135,17 +135,19 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void initData() {
-        for (int i = 0; i < 10; i++) {
-            String name = "name" + (i + 1);
-            String username = "email" + (i + 1);
-            String password = "password" + (i + 1);
-            String phone = "012345678" + i;
-            String birthday = "2003-01-0" + (i + 1);
-
-            User user = new User(name, username, password, phone, birthday);
-            userRepository.addUser(user);
-        }
-    }
+//    private void initData() {
+//        for (int i = 0; i < 10; i++) {
+//            int id = i+1;
+//            String name = "username" + (i + 1);
+//            String email = "email" + (i + 1);
+//            String password = "password" + (i + 1);
+//            String fullname = "fullname" + i;
+//            String userCode = "2003-01-0" + (i + 1);
+//            String profilePicture = "profilePicture" +(i+1);
+//
+//            User user = new User(id, name, email, password, fullname, userCode, profilePicture);
+//            userRepository.addUser(user);
+//        }
+//    }
 
 }
