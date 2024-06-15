@@ -12,17 +12,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.quizapp.R;
 import com.example.quizapp.activities.AllQuizActivity;
 import com.example.quizapp.activities.FindFriendsActivity;
-import com.example.quizapp.activities.SettingActivity;
 import com.example.quizapp.adapters.QuizAdapter;
 
-import com.example.quizapp.models.QuizItem;
+import com.example.quizapp.models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +43,7 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerViewLiveQuizzes;
     private QuizAdapter liveQuizAdapter;
-    private List<QuizItem> liveQuizList;
+    private List<Quiz> liveQuizList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -90,8 +88,8 @@ public class HomeFragment extends Fragment {
 
         // Khởi tạo danh sách Live Quiz
         liveQuizList = new ArrayList<>();
-        liveQuizList.add(new QuizItem("Statistics Math Quiz", R.drawable.ic_quiz1));
-        liveQuizList.add(new QuizItem("Integers Quiz", R.drawable.ic_quiz2));
+        liveQuizList.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
+        liveQuizList.add(new Quiz("Integers Quiz", R.drawable.ic_quiz2));
         // Thêm các item khác nếu cần
 
         // Thiết lập Adapter cho RecyclerView

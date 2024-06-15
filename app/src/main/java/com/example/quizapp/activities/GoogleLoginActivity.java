@@ -35,6 +35,7 @@ public class GoogleLoginActivity extends LoginActivity {
     FirebaseDatabase database;
     GoogleSignInClient mGoogleSignInClient;
     int RC_SIGN_IN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,7 @@ public class GoogleLoginActivity extends LoginActivity {
         Intent intent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -65,26 +67,26 @@ public class GoogleLoginActivity extends LoginActivity {
             }
         }
     }
+
     private void firebaseAuth(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser user = mAuth.getCurrentUser();
+        mAuth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    FirebaseUser user = mAuth.getCurrentUser();
 
-                            HashMap<String, Object> map = new HashMap<>();
-                            map.put("id", user.getUid());
-                            map.put("name", user.getDisplayName());
-                            map.put("useravatar", user.getPhotoUrl().toString());
-                            database.getReference().child("users").child(user.getUid()).setValue(map);
-                            Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(GoogleLoginActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("id", user.getUid());
+                    map.put("name", user.getDisplayName());
+                    map.put("useravatar", user.getPhotoUrl().toString());
+                    database.getReference().child("users").child(user.getUid()).setValue(map);
+                    Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(GoogleLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 }
