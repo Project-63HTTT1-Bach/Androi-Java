@@ -38,6 +38,7 @@ public class GoogleLoginActivity extends LoginActivity {
     GoogleSignInClient mGoogleSignInClient;
     int RC_SIGN_IN = 9001;
     UserRepository userRepository;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
