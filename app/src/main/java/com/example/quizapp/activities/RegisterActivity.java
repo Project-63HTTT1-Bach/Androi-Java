@@ -51,19 +51,27 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = tietPassword.getText().toString().trim();
                 String confirmPassword = tietConfirmPassword.getText().toString().trim();
 
-                if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                    Toast.makeText(RegisterActivity.this, "OnRegiter fail!!!!", Toast.LENGTH_LONG).show();
-                } else if (password.equals(confirmPassword)) {
-                    User user = new User(email, password);
-                    if (userRepository.addUser(user)) {
-                        Toast.makeText(RegisterActivity.this, "OnRegiter success!!!!", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "OnRegiter fail!!!!", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(RegisterActivity.this, "OnRegiter fail!!!!", Toast.LENGTH_LONG).show();
-                }
+                Intent intent = new Intent(RegisterActivity.this, OTPVerification.class);
+
+                intent.putExtra("email", email);
+
+                startActivity(intent);
+
+
+//
+//                if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+//                    Toast.makeText(RegisterActivity.this, "OnRegiter fail!!!!", Toast.LENGTH_LONG).show();
+//                } else if (password.equals(confirmPassword)) {
+//                    User user = new User(email, password);
+//                    if (userRepository.addUser(user)) {
+//                        Toast.makeText(RegisterActivity.this, "OnRegiter success!!!!", Toast.LENGTH_LONG).show();
+//                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                    } else {
+//                        Toast.makeText(RegisterActivity.this, "OnRegiter fail!!!!", Toast.LENGTH_LONG).show();
+//                    }
+//                } else {
+//                    Toast.makeText(RegisterActivity.this, "OnRegiter fail!!!!", Toast.LENGTH_LONG).show();
+//                }
             }
         });
 

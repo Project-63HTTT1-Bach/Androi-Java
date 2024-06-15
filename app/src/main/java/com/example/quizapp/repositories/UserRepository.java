@@ -8,13 +8,13 @@ import com.example.quizapp.models.User;
 import com.example.quizapp.sqliteOpenHelper.SqliteOpenHelper;
 
 public class UserRepository {
-    private final SqliteOpenHelper dbHelper;
     private static ArrayList<User> userList = new ArrayList<>();
+    private final SqliteOpenHelper dbHelper;
 
     public UserRepository(Context context) {
         dbHelper = new SqliteOpenHelper(context);
         if (userList.isEmpty()) {
-//            userList = dbHelper.getAllUsers(); // Load from DB if the list is empty
+            userList = dbHelper.getAllUsers(); // Load from DB if the list is empty
         }
     }
 
@@ -31,9 +31,18 @@ public class UserRepository {
         return false;
     }
 
+    public boolean checkUser(User u) {
+        for (User user : userList) {
+            if (user.getEmail().equals(u.getEmail())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean addUser(User u) {
         if (!checkExistedUser(u)) {
-//            dbHelper.insertUser(u.getFullname(), u.getPassword(), u.getEmail());
+            dbHelper.insertUser(u.getUsername(), u.getPassword(), u.getFullname(), u.getUserCode(), u.getEmail(), u.getProfilePicture());
             userList.add(u); // Add to the static list
             return true;
         } else {
@@ -66,9 +75,10 @@ public class UserRepository {
     public boolean updateUser(User u) {
         for (User user : userList) {
             if (user.getEmail().equals(u.getEmail())) {
+                user.setProfilePicture(u.getProfilePicture());
                 user.setFullname(u.getFullname());
                 user.setPassword(u.getPassword());
-//                dbHelper.updateUser(u.getFullname(), u.getPassword(), u.getEmail());
+                dbHelper.updateUser(u.getUserId(), u.getUsername(), u.getPassword(), u.getFullname(), u.getUserCode(), u.getEmail(), u.getProfilePicture());
                 return true;
             }
         }
