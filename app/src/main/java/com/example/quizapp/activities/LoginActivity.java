@@ -49,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextView btnForgotPassword;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         tietEmail = findViewById(R.id.txtEmail);
         tietPassword = findViewById(R.id.txtPassword);
         btnOnLogin = findViewById(R.id.btnOnLogin);
-        btnRegiter = (TextView) findViewById(R.id.btnRegister);
+        btnRegiter = findViewById(R.id.btnRegister);
         btnOnLoginGoogle = findViewById(R.id.btnOnLoginGoogle);
         btnOnLoginGithub = findViewById(R.id.btnOnLoginGithub);
 
@@ -98,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnForgotPassword = (TextView) findViewById(R.id.btnForgotPassword);
+        btnForgotPassword = findViewById(R.id.btnForgotPassword);
         btnForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,8 +122,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void loginUser(String email, String password) {
         User user = userRepository.getUser(email);

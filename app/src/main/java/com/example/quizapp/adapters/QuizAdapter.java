@@ -9,14 +9,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizapp.R;
-import com.example.quizapp.models.QuizItem;
+import com.example.quizapp.models.Quiz;
 import java.util.List;
 
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder> {
 
-    private List<QuizItem> quizItems;
+    private List<Quiz> quizItems;
 
-    public QuizAdapter(List<QuizItem> quizItems) {
+    public QuizAdapter(List<Quiz> quizItems) {
         this.quizItems = quizItems;
     }
 
@@ -29,7 +29,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-        QuizItem item = quizItems.get(position);
+        Quiz item = quizItems.get(position);
         holder.quizTitle.setText(item.getTitle());
         holder.quizIcon.setImageResource(item.getIconResourceId());
     }

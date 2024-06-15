@@ -1,66 +1,48 @@
 package com.example.quizapp.models;
 
 public class Question {
-    private  String Question,opA,opB,opC,opD,correctAnswer;
+    private int questionId;
+    private int quizId;
+    private String questionText;
+    private String questionType;
 
-    public Question() {
-
-    }
-    public Question(String question, String opA, String opB, String opC, String opD, String correctAnswer) {
-        Question = question;
-        this.opA = opA;
-        this.opB = opB;
-        this.opC = opC;
-        this.opD = opD;
-        this.correctAnswer = correctAnswer;
+    public Question(int questionId, int quizId, String questionText, String questionType) {
+        this.questionId = questionId;
+        this.quizId = quizId;
+        this.questionText = questionText;
+        this.questionType = questionType;
     }
 
-
-    public void setOpA(String opA) {
-        this.opA = opA;
+    public int getQuestionId() {
+        return questionId;
     }
 
-    public void setOpB(String opB) {
-        this.opB = opB;
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
-    public void setOpC(String opC) {
-        this.opC = opC;
+    public int getQuizId() {
+        return quizId;
     }
 
-    public void setOpD(String opD) {
-        this.opD = opD;
+    public void setQuizId(int quizId) {
+        this.quizId = quizId;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public void setQuestion(String question) {
-        Question = question;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
-    public String getQuestion() {
-        return Question;
+    public String getQuestionType() {
+        return questionType;
     }
 
-    public String getOpA() {
-        return opA;
-    }
-
-    public String getOpB() {
-        return opB;
-    }
-
-    public String getOpC() {
-        return opC;
-    }
-
-    public String getOpD() {
-        return opD;
-    }
-
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public void setQuestionType(String questionType) {
+        this.questionType = questionType;
     }
 }
+
