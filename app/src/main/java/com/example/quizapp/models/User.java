@@ -18,11 +18,13 @@ public class User {
         this.email = email;
         this.profilePicture = profilePicture;
     }
-    public User(String fullname, String email, String profilePicture){
+
+    public User(String fullname, String email, String profilePicture) {
         this.fullname = fullname;
         this.email = email;
         this.profilePicture = profilePicture;
     }
+
     public User(String email, String password) {
         this.email = email;
         this.password = password;

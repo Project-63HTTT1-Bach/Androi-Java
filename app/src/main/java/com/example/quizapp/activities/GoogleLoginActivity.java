@@ -86,7 +86,7 @@ public class GoogleLoginActivity extends LoginActivity {
                         String userEmail = user.getEmail();
                         String userAvatar = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
                         User newUser = new User(userName, userEmail, userAvatar);
-                        // Thêm vào Firebase Realtime Database
+
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("id", userId);
                         map.put("name", userName);
