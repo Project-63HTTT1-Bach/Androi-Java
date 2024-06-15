@@ -2,26 +2,38 @@
 package com.example.quizapp.models;
 
 public class Friend {
-    private String name;
-    private int points;
-    private int avatarResourceId;
+    private int friendId;
+    private int userId;
+    private int friendUserId;
 
-    public Friend(String name, int points, int avatarResourceId) {
-        this.name = name;
-        this.points = points;
-        this.avatarResourceId = avatarResourceId;
+    public Friend(int friendId, int userId, int friendUserId) {
+        this.friendId = friendId;
+        this.userId = userId;
+        this.friendUserId = friendUserId;
     }
 
-    public String getName() {
-        return name;
+    public int getFriendId() {
+        return friendId;
     }
 
-    public int getPoints() {
-        return points;
+    public void setFriendId(int friendId) {
+        this.friendId = friendId;
     }
 
-    public int getAvatarResourceId() {
-        return avatarResourceId;
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getFriendUserId() {
+        return friendUserId;
+    }
+
+    public void setFriendUserId(int friendUserId) {
+        this.friendUserId = friendUserId;
     }
 }
 
