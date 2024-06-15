@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.quizapp.R;
@@ -21,7 +20,7 @@ import com.example.quizapp.adapters.FriendAdapter;
 import com.example.quizapp.adapters.QuizAdapter;
 
 import com.example.quizapp.models.Friend;
-import com.example.quizapp.models.QuizItem;
+import com.example.quizapp.models.Quiz;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class DiscoveryFragment extends Fragment {
     private RecyclerView rvFriends;
     private QuizAdapter quizAdapter;
     private FriendAdapter friendAdapter;
-    private List<QuizItem> quizItems;
+    private List<Quiz> quizItems;
     private List<Friend> friends;
 
     public DiscoveryFragment() {
@@ -80,11 +79,11 @@ public class DiscoveryFragment extends Fragment {
         rvFriends.setLayoutManager(new LinearLayoutManager(getContext()));
 
         quizItems = new ArrayList<>();
-        quizItems.add(new QuizItem("Statistics Math Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new QuizItem("Developer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new QuizItem("Matrices Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new QuizItem("Integer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new QuizItem("Matrices Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
+        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
         // Add more items as needed
 
         friends = new ArrayList<>();
