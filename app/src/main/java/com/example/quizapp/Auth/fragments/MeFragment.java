@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.quizapp.R;
-import com.example.quizapp.activities.SettingActivity;
+import com.example.quizapp.Auth.activities.SettingActivity;
 
 /**
  * A simple {@link Fragment} subclass.

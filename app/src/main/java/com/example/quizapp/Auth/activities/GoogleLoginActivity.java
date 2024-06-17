@@ -7,9 +7,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.quizapp.HomeAndDiscover.activities.MainActivity;
 import com.example.quizapp.R;
-import com.example.quizapp.models.User;
-import com.example.quizapp.repositories.UserRepository;
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;

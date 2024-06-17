@@ -13,7 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quizapp.R;
-import com.example.quizapp.repositories.UserRepository;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.google.android.material.textfield.TextInputEditText;
 
 public class RegisterActivity extends AppCompatActivity {

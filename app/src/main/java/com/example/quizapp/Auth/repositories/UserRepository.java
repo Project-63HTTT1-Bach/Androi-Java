@@ -2,7 +2,7 @@ package com.example.quizapp.Auth.repositories;
 
 import android.content.Context;
 
-import com.example.quizapp.models.User;
+import com.example.quizapp.Auth.models.User;
 import com.example.quizapp.sqliteOpenHelper.SqliteOpenHelper;
 
 import java.util.ArrayList;
