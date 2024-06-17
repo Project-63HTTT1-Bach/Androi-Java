@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.activities.AllQuizActivity;
-import com.example.quizapp.activities.FindFriendsActivity;
-import com.example.quizapp.adapters.FriendAdapter;
-import com.example.quizapp.adapters.QuizAdapter;
-import com.example.quizapp.models.Friend;
-import com.example.quizapp.models.Quiz;
+import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
+import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
+import com.example.quizapp.HomeAndDiscover.adapters.FriendAdapter;
+import com.example.quizapp.HomeAndDiscover.adapters.QuizAdapter;
+import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.HomeAndDiscover.models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;

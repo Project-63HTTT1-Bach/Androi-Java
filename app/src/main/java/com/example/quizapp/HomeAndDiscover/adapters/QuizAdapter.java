@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.models.Quiz;
+import com.example.quizapp.HomeAndDiscover.models.Quiz;
 
 import java.util.List;
 
