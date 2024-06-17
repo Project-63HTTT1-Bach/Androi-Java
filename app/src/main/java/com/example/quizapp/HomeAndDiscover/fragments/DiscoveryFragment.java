@@ -79,16 +79,16 @@ public class DiscoveryFragment extends Fragment {
         rvFriends.setLayoutManager(new LinearLayoutManager(getContext()));
 
         quizItems = new ArrayList<>();
-        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-        // Add more items as needed
-
-        friends = new ArrayList<>();
-        friends.add(new Friend("Maren Workman", 325, R.drawable.user_avatar));
-        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
+//        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+//        // Add more items as needed
+//
+//        friends = new ArrayList<>();
+//        friends.add(new Friend("Maren Workman", 325, R.drawable.user_avatar));
+//        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
         // Add more items as needed
 
         quizAdapter = new QuizAdapter(quizItems);

@@ -32,7 +32,7 @@ public class QuestionsAdpter extends RecyclerView.Adapter<QuestionsAdpter.Datavi
     @Override
     public void onBindViewHolder(@NonNull DataviewHolder holder, int position) {
         final Question item = questions.get(position);
-        holder.textView.setText(item.getQuestion());
+//        holder.textView.setText(item.getQuestion());
     }
 
     @Override

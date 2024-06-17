@@ -32,9 +32,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-        Quiz item = quizItems.get(position);
-        holder.quizTitle.setText(item.getTitle());
-        holder.quizIcon.setImageResource(item.getIconResourceId());
+//        Quiz item = quizItems.get(position);
+//        holder.quizTitle.setText(item.getTitle());
+//        holder.quizIcon.setImageResource(item.getIconResourceId());
     }
 
     @Override

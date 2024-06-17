@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.adapters.QuizAdapter;
-import com.example.quizapp.models.Quiz;
+import com.example.quizapp.HomeAndDiscover.adapters.QuizAdapter;
+import com.example.quizapp.Quiz.models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,15 +77,15 @@ public class ChartFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         quizItems = new ArrayList<>();
-        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
         // Add more items as needed
 
-        adapter = new QuizAdapter(quizItems);
-        recyclerView.setAdapter(adapter);
+//        adapter = new QuizAdapter(quizItems);
+//        recyclerView.setAdapter(adapter);
 
         return view;
     }

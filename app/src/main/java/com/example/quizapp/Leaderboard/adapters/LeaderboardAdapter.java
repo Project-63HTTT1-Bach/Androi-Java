@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.models.LeaderboardItem;
+import com.example.quizapp.Leaderboard.models.LeaderboardItem;
 
 import java.util.List;
 
