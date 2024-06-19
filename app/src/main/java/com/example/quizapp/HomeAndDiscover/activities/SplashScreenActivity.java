@@ -10,6 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizapp.Auth.activities.LoginActivity;
 import com.example.quizapp.R;
 
 public class SplashScreenActivity extends AppCompatActivity {

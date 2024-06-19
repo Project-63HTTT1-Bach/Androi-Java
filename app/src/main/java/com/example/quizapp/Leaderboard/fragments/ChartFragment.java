@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.HomeAndDiscover.adapters.QuizAdapter;
+import com.example.quizapp.Quiz.adapters.QuizAdapter;
 import com.example.quizapp.Quiz.models.Quiz;
 
 import java.util.ArrayList;
