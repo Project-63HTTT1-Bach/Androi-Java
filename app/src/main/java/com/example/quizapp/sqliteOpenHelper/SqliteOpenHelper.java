@@ -6,12 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.quizapp.models.Answer;
-import com.example.quizapp.models.Friend;
-import com.example.quizapp.models.Question;
-import com.example.quizapp.models.Quiz;
-import com.example.quizapp.models.Result;
-import com.example.quizapp.models.User;
+import com.example.quizapp.Quiz.models.Answer;
+import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.Quiz.models.Question;
+import com.example.quizapp.Quiz.models.Quiz;
+import com.example.quizapp.Quiz.models.Result;
+import com.example.quizapp.Auth.models.User;
 
 import java.util.ArrayList;
 

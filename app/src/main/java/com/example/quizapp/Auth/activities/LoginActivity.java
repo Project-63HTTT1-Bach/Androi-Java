@@ -15,9 +15,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizapp.HomeAndDiscover.activities.MainActivity;
 import com.example.quizapp.R;
-import com.example.quizapp.models.User;
-import com.example.quizapp.repositories.UserRepository;
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;

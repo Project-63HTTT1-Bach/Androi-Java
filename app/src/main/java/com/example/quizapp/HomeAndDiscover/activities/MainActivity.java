@@ -13,10 +13,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quizapp.R;
-import com.example.quizapp.fragments.ChartFragment;
-import com.example.quizapp.fragments.DiscoveryFragment;
-import com.example.quizapp.fragments.HomeFragment;
-import com.example.quizapp.fragments.MeFragment;
+import com.example.quizapp.Leaderboard.fragments.ChartFragment;
+import com.example.quizapp.HomeAndDiscover.fragments.DiscoveryFragment;
+import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
+import com.example.quizapp.Auth.fragments.MeFragment;
 
 public class MainActivity extends AppCompatActivity {
     private int selectedTab = 1;

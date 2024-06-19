@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.models.Friend;
+import com.example.quizapp.HomeAndDiscover.models.Friend;
 
 import java.util.List;
 
@@ -32,10 +32,10 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder holder, int position) {
-        Friend friend = friends.get(position);
-        holder.friendName.setText(friend.getName());
-        holder.friendPoints.setText(String.valueOf(friend.getPoints()) + " points");
-        holder.friendAvatar.setImageResource(friend.getAvatarResourceId());
+//        Friend friend = friends.get(position);
+//        holder.friendName.setText(friend.getName());
+//        holder.friendPoints.setText(String.valueOf(friend.getPoints()) + " points");
+//        holder.friendAvatar.setImageResource(friend.getAvatarResourceId());
     }
 
     @Override

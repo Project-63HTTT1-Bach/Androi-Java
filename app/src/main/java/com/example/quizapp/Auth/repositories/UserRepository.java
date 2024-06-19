@@ -1,8 +1,7 @@
 package com.example.quizapp.Auth.repositories;
 
-import android.content.Context;
-
-import com.example.quizapp.models.User;
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
 import com.example.quizapp.sqliteOpenHelper.SqliteOpenHelper;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class UserRepository {
     private static ArrayList<User> userList = new ArrayList<>();
     private final SqliteOpenHelper dbHelper;
 
-    public UserRepository(Context context) {
+    public UserRepository(HomeFragment context) {
         dbHelper = new SqliteOpenHelper(context);
         if (userList.isEmpty()) {
             userList = dbHelper.getAllUsers(); // Load from DB if the list is empty

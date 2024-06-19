@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizapp.HomeAndDiscover.activities.MainActivity;
 import com.example.quizapp.R;
 import com.example.quizapp.Auth.models.User;
 import com.example.quizapp.Auth.repositories.UserRepository;

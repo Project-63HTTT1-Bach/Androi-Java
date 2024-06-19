@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.models.Question;
+import com.example.quizapp.Quiz.models.Question;
 
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ public class QuestionsAdpter extends RecyclerView.Adapter<QuestionsAdpter.Datavi
     @Override
     public void onBindViewHolder(@NonNull DataviewHolder holder, int position) {
         final Question item = questions.get(position);
-        holder.textView.setText(item.getQuestion());
+//        holder.textView.setText(item.getQuestion());
     }
 
     @Override

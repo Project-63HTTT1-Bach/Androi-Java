@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.activities.AllQuizActivity;
-import com.example.quizapp.activities.FindFriendsActivity;
-import com.example.quizapp.adapters.FriendAdapter;
-import com.example.quizapp.adapters.QuizAdapter;
-import com.example.quizapp.models.Friend;
-import com.example.quizapp.models.Quiz;
+import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
+import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
+import com.example.quizapp.HomeAndDiscover.adapters.FriendAdapter;
+import com.example.quizapp.Quiz.adapters.QuizAdapter;
+import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.Quiz.models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,16 +79,16 @@ public class DiscoveryFragment extends Fragment {
         rvFriends.setLayoutManager(new LinearLayoutManager(getContext()));
 
         quizItems = new ArrayList<>();
-        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
-        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-        // Add more items as needed
-
-        friends = new ArrayList<>();
-        friends.add(new Friend("Maren Workman", 325, R.drawable.user_avatar));
-        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
+//        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
+//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
+//        // Add more items as needed
+//
+//        friends = new ArrayList<>();
+//        friends.add(new Friend("Maren Workman", 325, R.drawable.user_avatar));
+//        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
         // Add more items as needed
 
         quizAdapter = new QuizAdapter(quizItems);

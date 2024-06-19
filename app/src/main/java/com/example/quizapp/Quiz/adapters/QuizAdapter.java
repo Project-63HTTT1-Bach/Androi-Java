@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-import com.example.quizapp.models.Quiz;
+import com.example.quizapp.Quiz.models.Quiz;
 
 import java.util.List;
 
@@ -32,9 +32,9 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-        Quiz item = quizItems.get(position);
-        holder.quizTitle.setText(item.getTitle());
-        holder.quizIcon.setImageResource(item.getIconResourceId());
+//        Quiz item = quizItems.get(position);
+//        holder.quizTitle.setText(item.getTitle());
+//        holder.quizIcon.setImageResource(item.getIconResourceId());
     }
 
     @Override

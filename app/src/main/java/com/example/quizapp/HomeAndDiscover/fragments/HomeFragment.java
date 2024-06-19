@@ -14,14 +14,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.Auth.repositories.UserRepository;
+import com.example.quizapp.Quiz.adapters.QuizAdapter;
+import com.example.quizapp.Quiz.repositories.QuizRepository;
 import com.example.quizapp.R;
-import com.example.quizapp.activities.AllQuizActivity;
-import com.example.quizapp.activities.FindFriendsActivity;
-import com.example.quizapp.adapters.QuizAdapter;
-import com.example.quizapp.models.Quiz;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
+import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,9 +38,9 @@ public class HomeFragment extends Fragment {
     private String mParam2;
 
     private RecyclerView recyclerViewLiveQuizzes;
-    private QuizAdapter liveQuizAdapter;
-    private List<Quiz> liveQuizList;
-
+    private UserRepository userRepository;
+    private QuizRepository quizRepository;
+    private QuizAdapter quizAdapter;
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -77,24 +75,28 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Thiết lập RecyclerView
-        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
+        recyclerViewLiveQuizzes = (RecyclerView) view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Khởi tạo danh sách Live Quiz
-        liveQuizList = new ArrayList<>();
-        liveQuizList.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
-        liveQuizList.add(new Quiz("Integers Quiz", R.drawable.ic_quiz2));
-        // Thêm các item khác nếu cần
-
-        // Thiết lập Adapter cho RecyclerView
-        liveQuizAdapter = new QuizAdapter(liveQuizList);
+        userRepository = new UserRepository(this);
+        quizRepository = new QuizRepository(this);
+        initData();
         recyclerViewLiveQuizzes.setAdapter(liveQuizAdapter);
 
         return view;
+    }
+
+    private void initData() {
+        for (int i = 0; i < 10; i++) {
+            String name = "name" + (i + 1);
+            String username = "username" + (i + 1);
+            String password = "password" + (i + 1);
+            User user = new User(name, username, password);
+            userRepository.addUser(user);
+        }
     }
 
     @Override
