@@ -91,11 +91,11 @@ public class DiscoveryFragment extends Fragment {
 //        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
         // Add more items as needed
 
-        quizAdapter = new QuizAdapter(quizItems);
-        friendAdapter = new FriendAdapter(friends);
-
-        rvQuizzes.setAdapter(quizAdapter);
-        rvFriends.setAdapter(friendAdapter);
+//        quizAdapter = new QuizAdapter(quizItems);
+//        friendAdapter = new FriendAdapter(friends);
+//
+//        rvQuizzes.setAdapter(quizAdapter);
+//        rvFriends.setAdapter(friendAdapter);
 
         return view;
     }

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
 import com.example.quizapp.Quiz.models.Answer;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
 import com.example.quizapp.Quiz.models.Question;
@@ -119,7 +120,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public boolean insertQuiz(String quizName, int creatorId, String createDate, int isPublic, int timeLimit) {
+    public boolean insertQuiz(String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizName", quizName);
@@ -127,11 +128,12 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("createDate", createDate);
         contentValues.put("isPublic", isPublic);
         contentValues.put("timeLimit", timeLimit);
+        contentValues.put("iconImage", iconImage);
         db.insert("quiz", null, contentValues);
         return true;
     }
 
-    public boolean updateQuiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit) {
+    public boolean updateQuiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizName", quizName);
@@ -139,6 +141,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("createDate", createDate);
         contentValues.put("isPublic", isPublic);
         contentValues.put("timeLimit", timeLimit);
+        contentValues.put("iconImage", iconImage);
         db.update("quiz", contentValues, "quizId = ? ", new String[]{Integer.toString(quizId)});
         return true;
     }
@@ -161,6 +164,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             int createDateIndex = res.getColumnIndex("createDate");
             int isPublicIndex = res.getColumnIndex("isPublic");
             int timeLimitIndex = res.getColumnIndex("timeLimit");
+            int iconImageIndex = res.getColumnIndex("iconImage");
 
             if (quizIdIndex != -1 && quizNameIndex != -1 && creatorIdIndex != -1 && createDateIndex != -1 && isPublicIndex != -1 && timeLimitIndex != -1) {
                 do {
@@ -170,7 +174,8 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
                     String createDate = res.getString(createDateIndex);
                     int isPublic = res.getInt(isPublicIndex);
                     int timeLimit = res.getInt(timeLimitIndex);
-                    Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit);
+                    String iconImage = res.getString(iconImageIndex);
+                    Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit, iconImage);
                     array_list.add(quiz);
                 } while (res.moveToNext());
             }
