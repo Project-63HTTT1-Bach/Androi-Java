@@ -1,7 +1,9 @@
 
-
+<<<<<<<< HEAD:app/src/main/java/com/example/quizapp/Quiz/adapters/QuizAdapter.java
 package com.example.quizapp.Quiz.adapters;
-
+========
+package com.example.quizapp.HomeAndDiscover.adapters;
+>>>>>>>> TruongQuocBao:app/src/main/java/com/example/quizapp/HomeAndDiscover/adapters/QuizAdapter.java
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,9 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-
+<<<<<<<< HEAD:app/src/main/java/com/example/quizapp/Quiz/adapters/QuizAdapter.java
+import com.example.quizapp.Quiz.models.Quiz;
+========
 import com.example.quizapp.HomeAndDiscover.models.Quiz;
-
+>>>>>>>> TruongQuocBao:app/src/main/java/com/example/quizapp/HomeAndDiscover/adapters/QuizAdapter.java
 
 import java.util.List;
 
@@ -39,12 +43,16 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-
+<<<<<<<< HEAD:app/src/main/java/com/example/quizapp/Quiz/adapters/QuizAdapter.java
         Quiz item = quizItems.get(position);
         holder.quizName.setText(item.getQuizName());
         int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
         holder.quizIcon.setImageResource(imageResource);
-
+========
+//        Quiz item = quizItems.get(position);
+//        holder.quizTitle.setText(item.getTitle());
+//        holder.quizIcon.setImageResource(item.getIconResourceId());
+>>>>>>>> TruongQuocBao:app/src/main/java/com/example/quizapp/HomeAndDiscover/adapters/QuizAdapter.java
     }
 
     @Override
