@@ -6,11 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.quizapp.models.Friend;
-import com.example.quizapp.models.Question;
-import com.example.quizapp.models.Quiz;
-import com.example.quizapp.models.Result;
-import com.example.quizapp.models.User;
+import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
+import com.example.quizapp.Quiz.models.Answer;
+import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.Quiz.models.Question;
+import com.example.quizapp.Quiz.models.Quiz;
+import com.example.quizapp.Quiz.models.Result;
+import com.example.quizapp.Auth.models.User;
 
 import java.util.ArrayList;
 
@@ -30,8 +32,11 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" + "quizId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizName TEXT NOT NULL, " + "creatorId INTEGER NOT NULL, " + "createDate TEXT, " + "isPublic INTEGER, " + "timeLimit INTEGER, " + "FOREIGN KEY (creatorId) REFERENCES user(userId))";
         db.execSQL(CREATE_QUIZ_TABLE);
 
-        String CREATE_QUESTION_TABLE = "CREATE TABLE question (" + "questionId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizId INTEGER NOT NULL, " + "questionText TEXT NOT NULL, " + "questionType TEXT, " + "isCorrect INTEGER, " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
+        String CREATE_QUESTION_TABLE = "CREATE TABLE question (" + "questionId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizId INTEGER NOT NULL, " + "questionText TEXT NOT NULL, " + "questionType TEXT, " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
         db.execSQL(CREATE_QUESTION_TABLE);
+
+        String CREATE_ANSWER_TABLE = "CREATE TABLE answer (" + "answerId INTEGER PRIMARY KEY AUTOINCREMENT, " + "questionId INTEGER NOT NULL, " + "answerText TEXT NOT NULL, " + "isCorrect INTEGER, " + "FOREIGN KEY (questionId) REFERENCES question(questionId))";
+        db.execSQL(CREATE_ANSWER_TABLE);
 
         String CREATE_RESULT_TABLE = "CREATE TABLE result (" + "resultId INTEGER PRIMARY KEY AUTOINCREMENT, " + "userId INTEGER NOT NULL, " + "quizId INTEGER NOT NULL, " + "score INTEGER, " + "completionDate TEXT, " + "correctAnswers INTEGER, " + "incorrectAnswers INTEGER, " + "FOREIGN KEY (userId) REFERENCES user(userId), " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
         db.execSQL(CREATE_RESULT_TABLE);
@@ -115,7 +120,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public boolean insertQuiz(String quizName, int creatorId, String createDate, int isPublic, int timeLimit) {
+    public boolean insertQuiz(String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizName", quizName);
@@ -123,11 +128,12 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("createDate", createDate);
         contentValues.put("isPublic", isPublic);
         contentValues.put("timeLimit", timeLimit);
+        contentValues.put("iconImage", iconImage);
         db.insert("quiz", null, contentValues);
         return true;
     }
 
-    public boolean updateQuiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit) {
+    public boolean updateQuiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizName", quizName);
@@ -135,6 +141,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("createDate", createDate);
         contentValues.put("isPublic", isPublic);
         contentValues.put("timeLimit", timeLimit);
+        contentValues.put("iconImage", iconImage);
         db.update("quiz", contentValues, "quizId = ? ", new String[]{Integer.toString(quizId)});
         return true;
     }
@@ -157,6 +164,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             int createDateIndex = res.getColumnIndex("createDate");
             int isPublicIndex = res.getColumnIndex("isPublic");
             int timeLimitIndex = res.getColumnIndex("timeLimit");
+            int iconImageIndex = res.getColumnIndex("iconImage");
 
             if (quizIdIndex != -1 && quizNameIndex != -1 && creatorIdIndex != -1 && createDateIndex != -1 && isPublicIndex != -1 && timeLimitIndex != -1) {
                 do {
@@ -166,7 +174,8 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
                     String createDate = res.getString(createDateIndex);
                     int isPublic = res.getInt(isPublicIndex);
                     int timeLimit = res.getInt(timeLimitIndex);
-                    Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit);
+                    String iconImage = res.getString(iconImageIndex);
+                    Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit, iconImage);
                     array_list.add(quiz);
                 } while (res.moveToNext());
             }
@@ -175,24 +184,22 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public boolean insertQuestion(int quizId, String questionText, String questionType, int isCorrect) {
+    public boolean insertQuestion(int quizId, String questionText, String questionType) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizId", quizId);
         contentValues.put("questionText", questionText);
         contentValues.put("questionType", questionType);
-        contentValues.put("isCorrect", isCorrect);
         db.insert("question", null, contentValues);
         return true;
     }
 
-    public boolean updateQuestion(int questionId, int quizId, String questionText, String questionType, int isCorrect) {
+    public boolean updateQuestion(int questionId, int quizId, String questionText, String questionType) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizId", quizId);
         contentValues.put("questionText", questionText);
         contentValues.put("questionType", questionType);
-        contentValues.put("isCorrect", isCorrect);
         db.update("question", contentValues, "questionId = ? ", new String[]{Integer.toString(questionId)});
         return true;
     }
@@ -213,17 +220,67 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             int quizIdIndex = res.getColumnIndex("quizId");
             int questionTextIndex = res.getColumnIndex("questionText");
             int questionTypeIndex = res.getColumnIndex("questionType");
-            int isCorrectIndex = res.getColumnIndex("isCorrect");
 
-            if (questionIdIndex != -1 && quizIdIndex != -1 && questionTextIndex != -1 && questionTypeIndex != -1 && isCorrectIndex != -1) {
+            if (questionIdIndex != -1 && quizIdIndex != -1 && questionTextIndex != -1 && questionTypeIndex != -1) {
                 do {
                     int questionId = res.getInt(questionIdIndex);
                     int quizId = res.getInt(quizIdIndex);
                     String questionText = res.getString(questionTextIndex);
                     String questionType = res.getString(questionTypeIndex);
-                    int isCorrect = res.getInt(isCorrectIndex);
-                    Question question = new Question(questionId, quizId, questionText, questionType, isCorrect);
+                    Question question = new Question(questionId, quizId, questionText, questionType);
                     array_list.add(question);
+                } while (res.moveToNext());
+            }
+            res.close();
+        }
+        return array_list;
+    }
+
+    public boolean insertAnswer(int questionId, String answerText, int isCorrect) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("questionId", questionId);
+        contentValues.put("answerText", answerText);
+        contentValues.put("isCorrect", isCorrect);
+        db.insert("answer", null, contentValues);
+        return true;
+    }
+
+    public boolean updateAnswer(int answerId, int questionId, String answerText, int isCorrect) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("questionId", questionId);
+        contentValues.put("answerText", answerText);
+        contentValues.put("isCorrect", isCorrect);
+        db.update("answer", contentValues, "answerId = ? ", new String[]{Integer.toString(answerId)});
+        return true;
+    }
+
+    public Integer deleteAnswer(int answerId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("answer", "answerId = ? ", new String[]{Integer.toString(answerId)});
+    }
+
+    public ArrayList<Answer> getAllAnswers() {
+        ArrayList<Answer> array_list = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT * FROM answer", null);
+
+        if (res != null && res.moveToFirst()) {
+            int answerIdIndex = res.getColumnIndex("answerId");
+            int questionIdIndex = res.getColumnIndex("questionId");
+            int answerTextIndex = res.getColumnIndex("answerText");
+            int isCorrectIndex = res.getColumnIndex("isCorrect");
+
+            if (answerIdIndex != -1 && questionIdIndex != -1 && answerTextIndex != -1 && isCorrectIndex != -1) {
+                do {
+                    int answerId = res.getInt(answerIdIndex);
+                    int questionId = res.getInt(questionIdIndex);
+                    String answerText = res.getString(answerTextIndex);
+                    int isCorrect = res.getInt(isCorrectIndex);
+                    Answer answer = new Answer(answerId, questionId, answerText, isCorrect);
+                    array_list.add(answer);
                 } while (res.moveToNext());
             }
             res.close();

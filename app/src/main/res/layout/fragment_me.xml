@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/primary_background"
-    tools:context=".fragments.MeFragment">
+    tools:context=".Auth.fragments.MeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
