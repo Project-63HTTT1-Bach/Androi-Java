@@ -41,6 +41,7 @@ public class HomeFragment extends Fragment {
     private UserRepository userRepository;
     private QuizRepository quizRepository;
     private QuizAdapter quizAdapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
