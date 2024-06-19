@@ -49,6 +49,8 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // Also add the dependency for the Google Play services library and specify its version
     implementation(libs.play.services.auth)
+    implementation ("com.sun.mail:android-mail:1.6.6")
+    implementation ("com.sun.mail:android-activation:1.6.6")
 
 
 }

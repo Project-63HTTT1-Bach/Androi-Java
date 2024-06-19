@@ -78,7 +78,7 @@ public class OTPVerification extends AppCompatActivity {
             public void onClick(View v) {
                 final String generateOTP = etDigit1.getText().toString() + etDigit2.getText().toString() + etDigit3.getText().toString() + etDigit4.getText().toString() + etDigit5.getText().toString() + etDigit6.getText().toString();
             if(generateOTP.length() == 6){
- 
+
             }}
         });
 
