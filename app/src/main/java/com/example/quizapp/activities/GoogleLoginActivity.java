@@ -49,7 +49,7 @@ public class GoogleLoginActivity extends LoginActivity {
                 .build();
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        userRepository = new UserRepository(this);
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
 
