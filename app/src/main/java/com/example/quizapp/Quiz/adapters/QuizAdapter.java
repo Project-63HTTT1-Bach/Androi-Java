@@ -1,6 +1,7 @@
 
 package com.example.quizapp.Quiz.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,10 @@ import java.util.List;
 public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder> {
 
     private List<Quiz> quizItems;
+    private Context context;
 
-    public QuizAdapter(List<Quiz> quizItems) {
+    public QuizAdapter(Context context, List<Quiz> quizItems) {
+        this.context = context;
         this.quizItems = quizItems;
     }
 
@@ -32,9 +35,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-//        Quiz item = quizItems.get(position);
-//        holder.quizTitle.setText(item.getTitle());
-//        holder.quizIcon.setImageResource(item.getIconResourceId());
+        Quiz item = quizItems.get(position);
+        holder.quizName.setText(item.getQuizName());
+        int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
+        holder.quizIcon.setImageResource(imageResource);
     }
 
     @Override
@@ -45,12 +49,12 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
     public static class QuizViewHolder extends RecyclerView.ViewHolder {
 
         ImageView quizIcon, moreInfoIcon;
-        TextView quizTitle;
+        TextView quizName;
 
         public QuizViewHolder(@NonNull View itemView) {
             super(itemView);
             quizIcon = itemView.findViewById(R.id.quizIcon);
-            quizTitle = itemView.findViewById(R.id.quizTitle);
+            quizName = itemView.findViewById(R.id.quizName);
             moreInfoIcon = itemView.findViewById(R.id.moreInfoIcon);
         }
     }

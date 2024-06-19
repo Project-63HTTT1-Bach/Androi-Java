@@ -1,5 +1,7 @@
 package com.example.quizapp.Quiz.repositories;
 
+import android.content.Context;
+
 import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
 import com.example.quizapp.Quiz.models.Quiz;
 import com.example.quizapp.sqliteOpenHelper.SqliteOpenHelper;
@@ -10,7 +12,7 @@ public class QuizRepository {
     private SqliteOpenHelper dbHelper;
     private static ArrayList<Quiz> quizList = new ArrayList<>();
 
-    public QuizRepository(HomeFragment context) {
+    public QuizRepository(Context context) {
         dbHelper = new SqliteOpenHelper(context);
         if (quizList.isEmpty()) {
             quizList = dbHelper.getAllQuizzes();
@@ -36,7 +38,7 @@ public class QuizRepository {
 
     public boolean addQuiz(Quiz q) {
         if (!checkExistedQuiz(q)) {
-            if (dbHelper.insertQuiz(q.getQuizName(), q.getCreatorId(), q.getCreateDate(), q.getIsPublic(), q.getTimeLimit())) {
+            if (dbHelper.insertQuiz(q.getQuizName(), q.getCreatorId(), q.getCreateDate(), q.getIsPublic(), q.getTimeLimit(), q.getIconImage())) {
                 quizList.add(q);
                 return true;
             }
@@ -45,7 +47,7 @@ public class QuizRepository {
     }
 
     public boolean updateQuiz(Quiz q) {
-        if (dbHelper.updateQuiz(q.getQuizId(), q.getQuizName(), q.getCreatorId(), q.getCreateDate(), q.getIsPublic(), q.getTimeLimit())) {
+        if (dbHelper.updateQuiz(q.getQuizId(), q.getQuizName(), q.getCreatorId(), q.getCreateDate(), q.getIsPublic(), q.getTimeLimit(), q.getIconImage())) {
             for (Quiz quiz : quizList) {
                 if (quiz.getQuizId() == q.getQuizId()) {
                     quiz.setQuizName(q.getQuizName());
@@ -53,6 +55,7 @@ public class QuizRepository {
                     quiz.setCreateDate(q.getCreateDate());
                     quiz.setIsPublic(q.getIsPublic());
                     quiz.setTimeLimit(q.getTimeLimit());
+                    quiz.setIconImage(q.getIconImage());
                     break;
                 }
             }

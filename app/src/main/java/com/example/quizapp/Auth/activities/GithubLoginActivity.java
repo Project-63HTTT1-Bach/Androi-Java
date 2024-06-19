@@ -1,5 +1,7 @@
 package com.example.quizapp.Auth.activities;
 
+import static java.security.AccessController.getContext;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;

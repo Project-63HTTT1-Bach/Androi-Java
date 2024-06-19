@@ -1,6 +1,7 @@
 package com.example.quizapp.HomeAndDiscover.fragments;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +15,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.Auth.models.User;
 import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.Quiz.adapters.QuizAdapter;
+import com.example.quizapp.Quiz.models.Quiz;
 import com.example.quizapp.Quiz.repositories.QuizRepository;
 import com.example.quizapp.R;
 import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
+
+import java.lang.reflect.Field;
+import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -74,38 +81,69 @@ public class HomeFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        recyclerViewLiveQuizzes = (RecyclerView) view.findViewById(R.id.recyclerViewLiveQuizzes);
+        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        userRepository = new UserRepository(this);
-        quizRepository = new QuizRepository(this);
+        userRepository = new UserRepository(getContext());
+        quizRepository = new QuizRepository(getContext());
         initData();
-        recyclerViewLiveQuizzes.setAdapter(liveQuizAdapter);
+
+        List<Quiz> quizList = QuizRepository.getQuizList();
+        quizAdapter = new QuizAdapter(getContext(), quizList);
+        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
 
         return view;
     }
 
     private void initData() {
         for (int i = 0; i < 10; i++) {
-            String name = "name" + (i + 1);
             String username = "username" + (i + 1);
             String password = "password" + (i + 1);
-            User user = new User(name, username, password);
+            String fullname = "fullName" + (i + 1);
+            String userCode = "code" + (i + 1);
+            String email = "email"+(i+1)+"@gmail.com";
+            String profilePicture = "user_avatar";
+            User user = new User(i, username, password,fullname,userCode,email,profilePicture);
             userRepository.addUser(user);
         }
+        Random random = new Random();
+        List<User> users = UserRepository.getUserList();
+        for (int i = 0; i < 100; i++) {
+            int quizId = i + 1;
+            String quizName = "Quiz " + (i + 1);
+            int creatorId = users.get(random.nextInt(users.size())).getUserId();
+            String createDate = "2024-06-19";
+            int isPublic = 1;
+            int timeLimit = 60;
+            String iconImage = "ic_quiz1";
+            Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit, iconImage);
+            quizRepository.addQuiz(quiz);
+        }
+    }
+    public Uri getUri(int resId) {
+        return Uri.parse("android.resource://" + this.getParentFragment() + "/" + resId);
     }
 
+    public static int getResId(String resName, Class<?> c) {
+
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        LinearLayout seeFindFriends = (LinearLayout) view.findViewById(R.id.seeFindFriends);
-        TextView seeAllQuizzes = (TextView) view.findViewById((R.id.seeAllQuizzes));
+        LinearLayout seeFindFriends = view.findViewById(R.id.seeFindFriends);
+        TextView seeAllQuizzes = view.findViewById((R.id.seeAllQuizzes));
 
         seeFindFriends.setOnClickListener(new View.OnClickListener() {
             @Override
