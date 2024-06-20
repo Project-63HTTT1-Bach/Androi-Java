@@ -8,14 +8,16 @@ public class Quiz {
     private String createDate;
     private int isPublic;
     private int timeLimit;
+    private String iconImage;
 
-    public Quiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit) {
+    public Quiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
         this.quizId = quizId;
         this.quizName = quizName;
         this.creatorId = creatorId;
         this.createDate = createDate;
         this.isPublic = isPublic;
         this.timeLimit = timeLimit;
+        this.iconImage = iconImage;
     }
 
     public int getQuizId() {
@@ -64,5 +66,13 @@ public class Quiz {
 
     public void setTimeLimit(int timeLimit) {
         this.timeLimit = timeLimit;
+    }
+
+    public String getIconImage() {
+        return iconImage;
+    }
+
+    public void setIconImage(String iconImage) {
+        this.iconImage = iconImage;
     }
 }

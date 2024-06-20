@@ -21,7 +21,6 @@ public class User {
         this.phone = phone;
     }
 
-    // Getters and setters for all fields
     public int getUserId() {
         return userId;
     }

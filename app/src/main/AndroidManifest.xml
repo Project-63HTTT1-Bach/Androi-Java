@@ -76,12 +76,8 @@
             android:exported="false" />
         <activity
             android:name=".Auth.activities.ChangeProfileActivity"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".activities.LeaderboardTopActivity$Setting" -->
-        <!-- android:exported="false" /> -->
-        <!-- <activity -->
-        <!-- android:name=".activities.LeaderboardTopActivity$Me" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
+
         <activity
             android:name=".HomeAndDiscover.activities.SplashScreenActivity"
             android:exported="true">

@@ -16,7 +16,7 @@
         android:src="@drawable/ic_quiz1"/>
 
     <TextView
-        android:id="@+id/quizTitle"
+        android:id="@+id/quizName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -29,6 +29,7 @@
         android:id="@+id/moreInfoIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_marginStart="70dp"
         android:src="@drawable/ic_quizmoreinfo"
         android:layout_gravity="center"/>
 </LinearLayout>
