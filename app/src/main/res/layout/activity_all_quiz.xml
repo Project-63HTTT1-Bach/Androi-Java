@@ -8,11 +8,13 @@
     android:background="@drawable/primary_background"
     tools:context=".HomeAndDiscover.activities.AllQuizActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/header"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/navHeader"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -28,53 +30,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All Quiz"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cvSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        app:cardBackgroundColor="@color/purpleBlue"
-        app:cardCornerRadius="25dp"
-        app:cardElevation="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
-
-        <LinearLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="8dp"
-                android:src="@drawable/ic_search" />
-
-            <EditText
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@android:color/transparent"
-                android:hint="Search..."
-                android:imeOptions="actionSearch"
-                android:minHeight="48dp" />
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/circle_border"
+            app:title="All Quiz"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cvSearch">
+        app:layout_constraintTop_toBottomOf="@+id/navHeader">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -99,7 +63,8 @@
                 android:id="@+id/rvQuizzes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="30dp" />
         </ScrollView>
 
     </LinearLayout>
