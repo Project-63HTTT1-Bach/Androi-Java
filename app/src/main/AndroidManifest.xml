@@ -71,6 +71,8 @@
         <activity
             android:name=".Auth.activities.RegisterActivity"
             android:exported="false" />
+        <activity android:name=".Auth.activities.OTPVerification"
+            android:exported="false"/>
         <activity
             android:name=".Quiz.activities.CreateQuestionActivity"
             android:exported="false" />
