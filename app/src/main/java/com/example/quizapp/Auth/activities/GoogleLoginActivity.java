@@ -2,6 +2,7 @@ package com.example.quizapp.Auth.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
@@ -33,7 +40,8 @@ public class GoogleLoginActivity extends LoginActivity {
     GoogleSignInClient mGoogleSignInClient;
     int RC_SIGN_IN = 9001;
     UserRepository userRepository;
-
+    DatabaseReference userRef;
+    DatabaseReference userIdRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +52,41 @@ public class GoogleLoginActivity extends LoginActivity {
                 .build();
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        userIdRef = database.getReference("currentId");
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+        // Khởi tạo userRepository
+        userRepository = new UserRepository(this);
 
         Intent intent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(intent, RC_SIGN_IN);
+
+        // Kiểm tra và thiết lập giá trị khởi đầu cho currentId nếu chưa tồn tại
+        userIdRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.exists() || snapshot.getValue(Integer.class) == null) {
+                    userIdRef.setValue(0); // Giá trị khởi đầu
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("GoogleLoginActivity", "Lỗi khi đọc currentId", error.toException());
+            }
+        });
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuth(account.getIdToken());
-            } catch (Exception e) {
+            } catch (ApiException e) {
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
@@ -80,27 +105,90 @@ public class GoogleLoginActivity extends LoginActivity {
                         String userName = user.getDisplayName();
                         String userEmail = user.getEmail();
                         String userAvatar = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
-                        User newUser = new User(userName, userEmail, userAvatar);
 
-                        HashMap<String, Object> map = new HashMap<>();
-                        map.put("id", userId);
-                        map.put("name", userName);
-                        map.put("email", userEmail);
-                        map.put("avatar", userAvatar);
-                        database.getReference().child("users").child(userId).setValue(map);
+                        // Kiểm tra xem email đã tồn tại trong Firebase chưa
+                        userRef = database.getReference("users");
+                        userRef.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    // Email đã tồn tại, đăng nhập với user tương ứng
+                                    proceedToMainActivity();
+                                } else {
+                                    // Tăng giá trị ID và thêm người dùng mới
+                                    addUserWithCurrentID(userEmail, userName, userAvatar);
+                                }
+                            }
 
-                        // Thêm vào SQLite
-                        if (!userRepository.checkUser(newUser)) {
-                            userRepository.addUser(newUser);
-                        }
-                        
-                        Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Log.e("GoogleLoginActivity", "Lỗi khi đọc dữ liệu người dùng", error.toException());
+                            }
+                        });
                     }
                 } else {
                     Toast.makeText(GoogleLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    private void addUserWithCurrentID(String email, String fullName, String avatarUrl) {
+        userIdRef.runTransaction(new Transaction.Handler() {
+            @NonNull
+            @Override
+            public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                Integer currentId = currentData.getValue(Integer.class);
+                if (currentId == null) {
+                    currentData.setValue(1);
+                } else {
+                    currentData.setValue(currentId + 1);
+                }
+                return Transaction.success(currentData);
+            }
+
+            @Override
+            public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                if (committed) {
+                    Integer newId = currentData.getValue(Integer.class);
+                    if (newId != null) {
+                        // Giá trị mặc định cho các trường mới
+                        String defaultBirthday = "01/01/2000";
+                        String defaultPhone = "";
+
+                        User newUser = new User(newId, fullName, "", fullName, email, avatarUrl, defaultBirthday, defaultPhone);
+
+                        // Lưu người dùng mới vào Firebase
+                        HashMap<String, Object> map = new HashMap<>();
+                        map.put("id", newId);
+                        map.put("username", fullName);
+                        map.put("password", ""); // Mật khẩu để trống
+                        map.put("fullname", fullName);
+                        map.put("email", email);
+                        map.put("profilePicture", avatarUrl);
+                        map.put("birthday", defaultBirthday);
+                        map.put("phone", defaultPhone);
+                        database.getReference().child("users").child(newId.toString()).setValue(map);
+
+                        // Lưu người dùng mới vào SQLite
+                        if (!userRepository.checkUser(newUser)) {
+                            userRepository.addUser(newUser);
+                        }
+
+                        proceedToMainActivity();
+                    }
+                } else {
+                    Log.e("GoogleLoginActivity", "Transaction failed.");
+                }
+            }
+        });
+    }
+
+
+    private void proceedToMainActivity() {
+        Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
     }
 }
