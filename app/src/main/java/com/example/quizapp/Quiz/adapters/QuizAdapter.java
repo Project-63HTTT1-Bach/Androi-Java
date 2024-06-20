@@ -1,7 +1,5 @@
 
-
 package com.example.quizapp.Quiz.adapters;
-
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,9 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.R;
-
-import com.example.quizapp.HomeAndDiscover.models.Quiz;
-
+import com.example.quizapp.Quiz.models.Quiz;
 
 import java.util.List;
 
@@ -39,12 +35,10 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-//
-//        Quiz item = quizItems.get(position);
-//        holder.quizName.setText(item.getQuizName());
-//        int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
-//        holder.quizIcon.setImageResource(imageResource);
-
+        Quiz item = quizItems.get(position);
+        holder.quizName.setText(item.getQuizName());
+        int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
+        holder.quizIcon.setImageResource(imageResource);
     }
 
     @Override

@@ -6,9 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-
 import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
-
 import com.example.quizapp.Quiz.models.Answer;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
 import com.example.quizapp.Quiz.models.Question;
@@ -28,7 +26,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY AUTOINCREMENT, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
+        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY AUTOINCREMENT, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "userCode TEXT NOT NULL, " + "email TEXT, " + "profilePicture TEXT)";
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" + "quizId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizName TEXT NOT NULL, " + "creatorId INTEGER NOT NULL, " + "createDate TEXT, " + "isPublic INTEGER, " + "timeLimit INTEGER, " + "FOREIGN KEY (creatorId) REFERENCES user(userId))";
@@ -58,28 +56,26 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser(String username, String password, String fullname, String email, String profilePicture, String birthDay, String phone) {
+    public boolean insertUser(String username, String password, String fullname, String userCode, String email, String profilePicture) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("password", password);
         contentValues.put("fullname", fullname);
-        contentValues.put("phone", phone);
-        contentValues.put("birthday", birthDay);
+        contentValues.put("userCode", userCode);
         contentValues.put("email", email);
         contentValues.put("profilePicture", profilePicture);
         db.insert("user", null, contentValues);
         return true;
     }
 
-    public boolean updateUser(int userId, String username, String password, String fullname, String email, String profilePicture, String birthDay, String phone) {
+    public boolean updateUser(int userId, String username, String password, String fullname, String userCode, String email, String profilePicture) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
         contentValues.put("password", password);
         contentValues.put("fullname", fullname);
-        contentValues.put("phone", phone);
-        contentValues.put("birthday", birthDay);
+        contentValues.put("userCode", userCode);
         contentValues.put("email", email);
         contentValues.put("profilePicture", profilePicture);
         db.update("user", contentValues, "userId = ? ", new String[]{Integer.toString(userId)});
@@ -102,22 +98,20 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             int usernameIndex = res.getColumnIndex("username");
             int passwordIndex = res.getColumnIndex("password");
             int fullnameIndex = res.getColumnIndex("fullname");
-            int phoneIndex = res.getColumnIndex("phone");
-            int birthdayIndex = res.getColumnIndex("birthday");
+            int userCodeIndex = res.getColumnIndex("userCode");
             int emailIndex = res.getColumnIndex("email");
             int profilePictureIndex = res.getColumnIndex("profilePicture");
 
-            if (userIdIndex != -1 && birthdayIndex != -1 && usernameIndex != -1 && passwordIndex != -1 && fullnameIndex != -1 && phoneIndex != -1 && emailIndex != -1 && profilePictureIndex != -1) {
+            if (userIdIndex != -1 && usernameIndex != -1 && passwordIndex != -1 && fullnameIndex != -1 && userCodeIndex != -1 && emailIndex != -1 && profilePictureIndex != -1) {
                 do {
                     int userId = res.getInt(userIdIndex);
                     String username = res.getString(usernameIndex);
                     String password = res.getString(passwordIndex);
                     String fullname = res.getString(fullnameIndex);
-                    String phone = res.getString(phoneIndex);
+                    String userCode = res.getString(userCodeIndex);
                     String email = res.getString(emailIndex);
-                    String birthday = res.getString(birthdayIndex);
                     String profilePicture = res.getString(profilePictureIndex);
-                    User user = new User(userId, username, password, fullname, email, profilePicture, birthday, phone);
+                    User user = new User(userId, username, password, fullname, userCode, email, profilePicture);
                     array_list.add(user);
                 } while (res.moveToNext());
             }

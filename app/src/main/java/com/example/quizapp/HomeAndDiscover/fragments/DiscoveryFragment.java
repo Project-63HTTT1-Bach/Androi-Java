@@ -17,11 +17,9 @@ import com.example.quizapp.R;
 import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 import com.example.quizapp.HomeAndDiscover.adapters.FriendAdapter;
-
 import com.example.quizapp.Quiz.adapters.QuizAdapter;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
 import com.example.quizapp.Quiz.models.Quiz;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,13 +91,11 @@ public class DiscoveryFragment extends Fragment {
 //        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
         // Add more items as needed
 
-
 //        quizAdapter = new QuizAdapter(quizItems);
 //        friendAdapter = new FriendAdapter(friends);
 //
 //        rvQuizzes.setAdapter(quizAdapter);
 //        rvFriends.setAdapter(friendAdapter);
-
 
         return view;
     }

@@ -25,10 +25,6 @@ import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
 import java.lang.reflect.Field;
-
-
-import java.util.ArrayList;
-
 import java.util.List;
 import java.util.Random;
 
@@ -89,18 +85,16 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
-//        recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//
-//        userRepository = new UserRepository(getContext());
-//        quizRepository = new QuizRepository(getContext());
-//        initData();
-//
-//
-//        List<Quiz> quizList = QuizRepository.getQuizList();
-//        quizAdapter = new QuizAdapter(getContext(), quizList);
-//        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
+        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
+        recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        userRepository = new UserRepository(getContext());
+        quizRepository = new QuizRepository(getContext());
+        initData();
+
+        List<Quiz> quizList = QuizRepository.getQuizList();
+        quizAdapter = new QuizAdapter(getContext(), quizList);
+        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
 
         return view;
     }
@@ -110,11 +104,10 @@ public class HomeFragment extends Fragment {
             String username = "username" + (i + 1);
             String password = "password" + (i + 1);
             String fullname = "fullName" + (i + 1);
-            String phone = "phone" + (i + 1);
-            String birthday="";
+            String userCode = "code" + (i + 1);
             String email = "email"+(i+1)+"@gmail.com";
             String profilePicture = "user_avatar";
-            User user = new User(i, username, password,fullname,email,profilePicture,birthday,phone);
+            User user = new User(i, username, password,fullname,userCode,email,profilePicture);
             userRepository.addUser(user);
         }
         Random random = new Random();
