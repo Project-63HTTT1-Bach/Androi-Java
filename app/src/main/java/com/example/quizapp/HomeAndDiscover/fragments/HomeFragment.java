@@ -24,7 +24,6 @@ import com.example.quizapp.R;
 import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
-
 import java.lang.reflect.Field;
 
 
