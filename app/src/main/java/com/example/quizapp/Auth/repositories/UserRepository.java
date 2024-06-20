@@ -22,6 +22,15 @@ public class UserRepository {
         return userList;
     }
 
+    public boolean checkExistedUser(User u) {
+        for (User user : userList) {
+            if (user.getFullname().equals(u.getFullname())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean checkUser(User u) {
         for (User user : userList) {
             if (user.getEmail().equals(u.getEmail())) {
@@ -32,8 +41,8 @@ public class UserRepository {
     }
 
     public boolean addUser(User u) {
-        if (!checkUser(u)) {
-            dbHelper.insertUser(u.getUsername(), u.getPassword(), u.getFullname(), u.getEmail(), u.getProfilePicture(), u.getBirthday(), u.getPhone());
+        if (!checkExistedUser(u)) {
+            dbHelper.insertUser(u.getUsername(), u.getPassword(), u.getFullname(), u.getUserCode(), u.getEmail(), u.getProfilePicture());
             userList.add(u); // Add to the static list
             return true;
         } else {
@@ -41,11 +50,11 @@ public class UserRepository {
         }
     }
 
-    public void removeUser(User u) {
-        dbHelper.deleteUser(u.getUserId());
-        userList.remove(u); // Remove from the static list
-    }
-
+    //    public void removeUser(User u) {
+//        dbHelper.deleteUser(u.getUsername());
+//        userList.remove(u); // Remove from the static list
+//    }
+//
     public User getUser(String email) {
         for (User user : userList) {
             if (user.getEmail().equals(email)) {
@@ -66,12 +75,10 @@ public class UserRepository {
     public boolean updateUser(User u) {
         for (User user : userList) {
             if (user.getEmail().equals(u.getEmail())) {
-                user.setPhone(u.getPhone());
-                user.setBirthday(u.getBirthday());
                 user.setProfilePicture(u.getProfilePicture());
                 user.setFullname(u.getFullname());
                 user.setPassword(u.getPassword());
-                dbHelper.updateUser(u.getUserId(), u.getUsername(), u.getPassword(), u.getFullname(), u.getEmail(), u.getProfilePicture(), u.getPhone(), u.getBirthday());
+                dbHelper.updateUser(u.getUserId(), u.getUsername(), u.getPassword(), u.getFullname(), u.getUserCode(), u.getEmail(), u.getProfilePicture());
                 return true;
             }
         }

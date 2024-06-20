@@ -1,6 +1,7 @@
 // FriendAdapter.java
 package com.example.quizapp.HomeAndDiscover.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,8 +19,8 @@ import java.util.List;
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
 
     private List<Friend> friends;
-
-    public FriendAdapter(List<Friend> friends) {
+    private Context context;
+    public FriendAdapter(Context context, List<Friend> friends) {
         this.friends = friends;
     }
 

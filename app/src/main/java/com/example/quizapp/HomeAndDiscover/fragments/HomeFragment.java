@@ -104,11 +104,10 @@ public class HomeFragment extends Fragment {
             String username = "username" + (i + 1);
             String password = "password" + (i + 1);
             String fullname = "fullName" + (i + 1);
-            String phone = "phone" + (i + 1);
-            String birthday="";
+            String userCode = "code" + (i + 1);
             String email = "email"+(i+1)+"@gmail.com";
             String profilePicture = "user_avatar";
-            User user = new User(i, username, password,fullname,email,profilePicture,birthday,phone);
+            User user = new User(i, username, password,fullname,userCode,email,profilePicture);
             userRepository.addUser(user);
         }
         Random random = new Random();
