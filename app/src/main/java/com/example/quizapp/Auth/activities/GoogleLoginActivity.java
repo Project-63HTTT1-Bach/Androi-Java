@@ -66,7 +66,7 @@ public class GoogleLoginActivity extends LoginActivity {
         userIdRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (!snapshot.exists()) {
+                if (!snapshot.exists() || snapshot.getValue(Integer.class) == null) {
                     userIdRef.setValue(0); // Giá trị khởi đầu
                 }
             }
@@ -183,6 +183,7 @@ public class GoogleLoginActivity extends LoginActivity {
             }
         });
     }
+
 
     private void proceedToMainActivity() {
         Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
