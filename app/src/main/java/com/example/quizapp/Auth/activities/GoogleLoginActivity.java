@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 
 public class GoogleLoginActivity extends LoginActivity {
@@ -102,7 +103,7 @@ public class GoogleLoginActivity extends LoginActivity {
 
                     if (user != null) {
                         String userId = user.getUid();
-                        String userName = user.getDisplayName();
+                        String userFullName = user.getDisplayName();
                         String userEmail = user.getEmail();
                         String userAvatar = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
 
@@ -116,7 +117,7 @@ public class GoogleLoginActivity extends LoginActivity {
                                     proceedToMainActivity();
                                 } else {
                                     // Tăng giá trị ID và thêm người dùng mới
-                                    addUserWithCurrentID(userEmail, userName, userAvatar);
+                                    addUserWithCurrentID(userEmail, userFullName, userAvatar);
                                 }
                             }
 
@@ -156,13 +157,16 @@ public class GoogleLoginActivity extends LoginActivity {
                         String defaultBirthday = "01/01/2000";
                         String defaultPhone = "";
 
-                        User newUser = new User(newId, fullName, "", fullName, email, avatarUrl, defaultBirthday, defaultPhone);
+                        // Tạo chuỗi ngẫu nhiên cho password
+                        String randomPassword = generateRandomString();
+
+                        User newUser = new User(newId, email, randomPassword, fullName, email, avatarUrl, defaultBirthday, defaultPhone);
 
                         // Lưu người dùng mới vào Firebase
                         HashMap<String, Object> map = new HashMap<>();
                         map.put("id", newId);
-                        map.put("username", fullName);
-                        map.put("password", ""); // Mật khẩu để trống
+                        map.put("username", email);
+                        map.put("password", randomPassword); // Mật khẩu ngẫu nhiên
                         map.put("fullname", fullName);
                         map.put("email", email);
                         map.put("profilePicture", avatarUrl);
@@ -184,11 +188,22 @@ public class GoogleLoginActivity extends LoginActivity {
         });
     }
 
-
     private void proceedToMainActivity() {
         Intent intent = new Intent(GoogleLoginActivity.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
         finish();
+    }
+
+    // Phương thức để tạo chuỗi ngẫu nhiên
+    private String generateRandomString() {
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        int PASSWORD_LENGTH = 20;
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(PASSWORD_LENGTH);
+        for (int i = 0; i < PASSWORD_LENGTH; i++) {
+            sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
+        }
+        return sb.toString();
     }
 }

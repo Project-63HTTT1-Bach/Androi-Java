@@ -39,11 +39,11 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
-
-        Quiz item = quizItems.get(position);
-        holder.quizName.setText(item.getQuizName());
-        int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
-        holder.quizIcon.setImageResource(imageResource);
+//
+//        Quiz item = quizItems.get(position);
+//        holder.quizName.setText(item.getQuizName());
+//        int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
+//        holder.quizIcon.setImageResource(imageResource);
 
     }
 

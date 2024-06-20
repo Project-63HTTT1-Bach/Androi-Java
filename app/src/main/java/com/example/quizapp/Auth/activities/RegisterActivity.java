@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -41,6 +45,19 @@ public class RegisterActivity extends AppCompatActivity {
     private UserRepository userRepository;
     private FirebaseDatabase database;
     private DatabaseReference idRef;
+
+    // Định dạng email
+    private static final String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    // Định dạng mật khẩu
+    private static final Pattern PASSWORD_PATTERN = Pattern.compile("^" +
+            "(?=.*[0-9])" +         // ít nhất một chữ số
+            "(?=.*[a-z])" +         // ít nhất một chữ cái viết thường
+            "(?=.*[A-Z])" +         // ít nhất một chữ cái viết hoa
+            "(?=\\S+$)" +           // không khoảng trắng
+            ".{8,}" +               // ít nhất 8 ký tự
+            "$");
+
+    private ImageView ivRequirement1, ivRequirement2, ivRequirement3, ivRequirement4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +74,16 @@ public class RegisterActivity extends AppCompatActivity {
         tietPassword = findViewById(R.id.txtPassword);
         tietConfirmPassword = findViewById(R.id.txtConfirmPassword);
         btnOnRegister = findViewById(R.id.btnOnRegister);
+        ivRequirement1 = findViewById(R.id.ivRequirement1);
+        ivRequirement2 = findViewById(R.id.ivRequirement2);
+        ivRequirement3 = findViewById(R.id.ivRequirement3);
+        ivRequirement4 = findViewById(R.id.ivRequirement4);
 
         userRepository = new UserRepository(this);
         database = FirebaseDatabase.getInstance();
         idRef = database.getReference("currentId");
+
+        tietPassword.addTextChangedListener(passwordWatcher);
 
         btnOnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,20 +94,21 @@ public class RegisterActivity extends AppCompatActivity {
 
                 if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Please fill all the fields!", Toast.LENGTH_LONG).show();
-                } else if (password.equals(confirmPassword)) {
+                } else if (!Pattern.matches(emailPattern, email)) {
+                    Toast.makeText(RegisterActivity.this, "Email không hợp lệ", Toast.LENGTH_LONG).show();
+                } else if (!PASSWORD_PATTERN.matcher(password).matches()) {
+                    Toast.makeText(RegisterActivity.this, "Mật khẩu không đủ điều kiện", Toast.LENGTH_LONG).show();
+                } else if (!password.equals(confirmPassword)) {
+                    Toast.makeText(RegisterActivity.this, "Passwords do not match!", Toast.LENGTH_LONG).show();
+                } else {
                     // Kiểm tra xem email đã tồn tại trong Firebase chưa
                     DatabaseReference userRef = database.getReference("users");
                     userRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()) {
-                                // Email đã tồn tại, cập nhật mật khẩu
-                                for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                                    String userId = userSnapshot.getKey();
-                                    userRef.child(userId).child("password").setValue(password);
-                                }
-                                Toast.makeText(RegisterActivity.this, "Password updated successfully!", Toast.LENGTH_LONG).show();
-                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                // Email đã tồn tại, hiển thị thông báo lỗi
+                                Toast.makeText(RegisterActivity.this, "Email đã tồn tại, vui lòng kiểm tra lại!", Toast.LENGTH_LONG).show();
                             } else {
                                 // Tăng giá trị ID và thêm người dùng mới
                                 idRef.runTransaction(new Transaction.Handler() {
@@ -147,8 +171,6 @@ public class RegisterActivity extends AppCompatActivity {
                             Log.e("RegisterActivity", "Lỗi khi đọc dữ liệu người dùng", error.toException());
                         }
                     });
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Passwords do not match!", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -170,4 +192,48 @@ public class RegisterActivity extends AppCompatActivity {
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
+
+    private TextWatcher passwordWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String password = s.toString();
+
+            // Kiểm tra độ dài mật khẩu
+            if (password.length() >= 8) {
+                ivRequirement1.setVisibility(View.VISIBLE);
+            } else {
+                ivRequirement1.setVisibility(View.INVISIBLE);
+            }
+
+            // Kiểm tra có ít nhất một chữ cái viết thường
+            if (password.matches(".*[a-z].*")) {
+                ivRequirement2.setVisibility(View.VISIBLE);
+            } else {
+                ivRequirement2.setVisibility(View.INVISIBLE);
+            }
+
+            // Kiểm tra có ít nhất một chữ cái viết hoa
+            if (password.matches(".*[A-Z].*")) {
+                ivRequirement3.setVisibility(View.VISIBLE);
+            } else {
+                ivRequirement3.setVisibility(View.INVISIBLE);
+            }
+
+            // Kiểm tra có ít nhất một chữ số
+            if (password.matches(".*[0-9].*")) {
+                ivRequirement4.setVisibility(View.VISIBLE);
+            } else {
+                ivRequirement4.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // Không có hành động nào cần thực hiện sau khi thay đổi
+        }
+    };
 }
