@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+
 import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
+
 import com.example.quizapp.Quiz.models.Answer;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
 import com.example.quizapp.Quiz.models.Question;

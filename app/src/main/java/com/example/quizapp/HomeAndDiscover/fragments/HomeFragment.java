@@ -25,6 +25,10 @@ import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
 import java.lang.reflect.Field;
+
+
+import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
@@ -71,6 +75,17 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
+    public static int getResId(String resName, Class<?> c) {
+
+        try {
+            Field idField = c.getDeclaredField(resName);
+            return idField.getInt(idField);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,9 +103,11 @@ public class HomeFragment extends Fragment {
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 
+
         userRepository = new UserRepository(getContext());
         quizRepository = new QuizRepository(getContext());
         initData();
+
 
         List<Quiz> quizList = QuizRepository.getQuizList();
         quizAdapter = new QuizAdapter(getContext(), quizList);
@@ -104,10 +121,11 @@ public class HomeFragment extends Fragment {
             String username = "username" + (i + 1);
             String password = "password" + (i + 1);
             String fullname = "fullName" + (i + 1);
-            String userCode = "code" + (i + 1);
-            String email = "email"+(i+1)+"@gmail.com";
+            String phone = "phone" + (i + 1);
+            String birthday = "";
+            String email = "email" + (i + 1) + "@gmail.com";
             String profilePicture = "user_avatar";
-            User user = new User(i, username, password,fullname,userCode,email,profilePicture);
+            User user = new User(i, username, password, fullname, email, profilePicture, birthday, phone);
             userRepository.addUser(user);
         }
         Random random = new Random();
@@ -124,20 +142,11 @@ public class HomeFragment extends Fragment {
             quizRepository.addQuiz(quiz);
         }
     }
+
     public Uri getUri(int resId) {
         return Uri.parse("android.resource://" + this.getParentFragment() + "/" + resId);
     }
 
-    public static int getResId(String resName, Class<?> c) {
-
-        try {
-            Field idField = c.getDeclaredField(resName);
-            return idField.getInt(idField);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

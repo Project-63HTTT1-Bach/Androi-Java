@@ -107,6 +107,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(String email, String password) {
+<<<<<<< HEAD
         User user = userRepository.getUser(email);
         if (user != null && user.getPassword().equals(password)) {
             Toast.makeText(LoginActivity.this, "OnLogin success!!!!", Toast.LENGTH_LONG).show();
@@ -116,6 +117,35 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(LoginActivity.this, "OnLogin failed!!!!", Toast.LENGTH_LONG).show();
         }
+=======
+        userRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    for (DataSnapshot userSnapshot : snapshot.getChildren()) {
+                        String dbPassword = userSnapshot.child("password").getValue(String.class);
+                        if (dbPassword != null && dbPassword.equals(password)) {
+                            Toast.makeText(LoginActivity.this, "Login success!!!!", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.putExtra("userEmail", email);
+                            startActivity(intent);
+                            finish();
+                            return;
+                        }
+                    }
+                    Toast.makeText(LoginActivity.this, "Invalid password!!!!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Email does not exist!!!!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("LoginActivity", "Database error: ", error.toException());
+                Toast.makeText(LoginActivity.this, "Login failed!!!!", Toast.LENGTH_LONG).show();
+            }
+        });
+>>>>>>> TruongQuocBao
     }
 
 //    private void initData() {
