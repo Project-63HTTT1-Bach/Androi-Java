@@ -46,9 +46,9 @@ public class UserRepository {
         userList.remove(u); // Remove from the static list
     }
 
-    public User getUser(String email) {
+    public User getUser(int userId) {
         for (User user : userList) {
-            if (user.getEmail().equals(email)) {
+            if (user.getUserId() == userId) {
                 return user;
             }
         }

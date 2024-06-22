@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class SqliteOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "quizapp.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 7;
 
     public SqliteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,22 +28,57 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY AUTOINCREMENT, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
+        String CREATE_USER_TABLE = "CREATE TABLE user (" +
+                "userId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "username TEXT NOT NULL, " + "password TEXT NOT NULL, " +
+                "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " +
+                "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
         db.execSQL(CREATE_USER_TABLE);
 
-        String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" + "quizId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizName TEXT NOT NULL, " + "creatorId INTEGER NOT NULL, " + "createDate TEXT, " + "isPublic INTEGER, " + "timeLimit INTEGER, " + "FOREIGN KEY (creatorId) REFERENCES user(userId))";
+        String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" +
+                "quizId INTEGER PRIMARY KEY, " +
+                "quizName TEXT NOT NULL, " +
+                "creatorId INTEGER NOT NULL, " +
+                "startTime TEXT, " +
+                "endTime TEXT, " +
+                "description TEXT, " +
+                "isPublic INTEGER, " +
+                "timeLimit INTEGER, " +
+                "iconImage TEXT, " +
+                "quizCode TEXT, " +
+                "FOREIGN KEY (creatorId) REFERENCES user(userId))";
         db.execSQL(CREATE_QUIZ_TABLE);
 
-        String CREATE_QUESTION_TABLE = "CREATE TABLE question (" + "questionId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizId INTEGER NOT NULL, " + "questionText TEXT NOT NULL, " + "questionType TEXT, " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
+        String CREATE_QUESTION_TABLE = "CREATE TABLE question (" +
+                "questionId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "quizId INTEGER NOT NULL, " + "questionText TEXT NOT NULL, " +
+                "questionType TEXT, " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
         db.execSQL(CREATE_QUESTION_TABLE);
 
-        String CREATE_ANSWER_TABLE = "CREATE TABLE answer (" + "answerId INTEGER PRIMARY KEY AUTOINCREMENT, " + "questionId INTEGER NOT NULL, " + "answerText TEXT NOT NULL, " + "isCorrect INTEGER, " + "FOREIGN KEY (questionId) REFERENCES question(questionId))";
+        String CREATE_ANSWER_TABLE = "CREATE TABLE answer (" +
+                "answerId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "questionId INTEGER NOT NULL, " + "answerText TEXT NOT NULL, " +
+                "isCorrect INTEGER, " +
+                "FOREIGN KEY (questionId) REFERENCES question(questionId))";
         db.execSQL(CREATE_ANSWER_TABLE);
 
-        String CREATE_RESULT_TABLE = "CREATE TABLE result (" + "resultId INTEGER PRIMARY KEY AUTOINCREMENT, " + "userId INTEGER NOT NULL, " + "quizId INTEGER NOT NULL, " + "score INTEGER, " + "completionDate TEXT, " + "correctAnswers INTEGER, " + "incorrectAnswers INTEGER, " + "FOREIGN KEY (userId) REFERENCES user(userId), " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
+        String CREATE_RESULT_TABLE = "CREATE TABLE result (" +
+                "resultId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "userId INTEGER NOT NULL, " + "quizId INTEGER NOT NULL, " +
+                "score INTEGER, " +
+                "completionDate TEXT, " +
+                "correctAnswers INTEGER, " +
+                "incorrectAnswers INTEGER, " +
+                "FOREIGN KEY (userId) REFERENCES user(userId), " +
+                "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
         db.execSQL(CREATE_RESULT_TABLE);
 
-        String CREATE_FRIEND_TABLE = "CREATE TABLE friend (" + "friendId INTEGER PRIMARY KEY AUTOINCREMENT, " + "userId INTEGER NOT NULL, " + "friendUserId INTEGER NOT NULL, " + "FOREIGN KEY (userId) REFERENCES user(userId), " + "FOREIGN KEY (friendUserId) REFERENCES user(userId))";
+        String CREATE_FRIEND_TABLE = "CREATE TABLE friend (" +
+                "friendId INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "userId INTEGER NOT NULL, " +
+                "friendUserId INTEGER NOT NULL, " +
+                "FOREIGN KEY (userId) REFERENCES user(userId), " +
+                "FOREIGN KEY (friendUserId) REFERENCES user(userId))";
         db.execSQL(CREATE_FRIEND_TABLE);
     }
 
@@ -126,31 +161,38 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public boolean insertQuiz(String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
+    public boolean insertQuiz(String quizName, int creatorId, String startTime, String endTime, String description, int isPublic, int timeLimit, String iconImage, String quizCode) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizName", quizName);
         contentValues.put("creatorId", creatorId);
-        contentValues.put("createDate", createDate);
+        contentValues.put("startTime", startTime);
+        contentValues.put("endTime", endTime);
+        contentValues.put("description", description);
         contentValues.put("isPublic", isPublic);
         contentValues.put("timeLimit", timeLimit);
         contentValues.put("iconImage", iconImage);
+        contentValues.put("quizCode", quizCode);
         db.insert("quiz", null, contentValues);
         return true;
     }
 
-    public boolean updateQuiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
+    public boolean updateQuiz(int quizId, String quizName, int creatorId, String startTime, String endTime, String description, int isPublic, int timeLimit, String iconImage, String quizCode) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("quizName", quizName);
         contentValues.put("creatorId", creatorId);
-        contentValues.put("createDate", createDate);
+        contentValues.put("startTime", startTime);
+        contentValues.put("endTime", endTime);
+        contentValues.put("description", description);
         contentValues.put("isPublic", isPublic);
         contentValues.put("timeLimit", timeLimit);
         contentValues.put("iconImage", iconImage);
+        contentValues.put("quizCode", quizCode);
         db.update("quiz", contentValues, "quizId = ? ", new String[]{Integer.toString(quizId)});
         return true;
     }
+
 
     public Integer deleteQuiz(int quizId) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -167,21 +209,27 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             int quizIdIndex = res.getColumnIndex("quizId");
             int quizNameIndex = res.getColumnIndex("quizName");
             int creatorIdIndex = res.getColumnIndex("creatorId");
-            int createDateIndex = res.getColumnIndex("createDate");
+            int startTimeIndex = res.getColumnIndex("startTime");
+            int endTimeIndex = res.getColumnIndex("endTime");
+            int descriptionIndex = res.getColumnIndex("description");
             int isPublicIndex = res.getColumnIndex("isPublic");
             int timeLimitIndex = res.getColumnIndex("timeLimit");
             int iconImageIndex = res.getColumnIndex("iconImage");
+            int quizCodeIndex = res.getColumnIndex("quizCode");
 
-            if (quizIdIndex != -1 && quizNameIndex != -1 && creatorIdIndex != -1 && createDateIndex != -1 && isPublicIndex != -1 && timeLimitIndex != -1) {
+            if (quizIdIndex != -1 && quizNameIndex != -1 && creatorIdIndex != -1 && startTimeIndex != -1 && endTimeIndex != -1 && descriptionIndex != -1 && isPublicIndex != -1 && timeLimitIndex != -1 && iconImageIndex != -1 && quizCodeIndex != -1) {
                 do {
                     int quizId = res.getInt(quizIdIndex);
                     String quizName = res.getString(quizNameIndex);
                     int creatorId = res.getInt(creatorIdIndex);
-                    String createDate = res.getString(createDateIndex);
+                    String startTime = res.getString(startTimeIndex);
+                    String endTime = res.getString(endTimeIndex);
+                    String description = res.getString(descriptionIndex);
                     int isPublic = res.getInt(isPublicIndex);
                     int timeLimit = res.getInt(timeLimitIndex);
                     String iconImage = res.getString(iconImageIndex);
-                    Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit, iconImage);
+                    String quizCode = res.getString(quizCodeIndex);
+                    Quiz quiz = new Quiz(quizId, quizName, creatorId, startTime, endTime, description, isPublic, timeLimit, iconImage, quizCode);
                     array_list.add(quiz);
                 } while (res.moveToNext());
             }
