@@ -11,21 +11,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quizapp.Quiz.models.Quiz;
-import com.example.quizapp.R;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
 
     private List<Friend> friends;
-    private List<Friend> friendsOld;
-
     private Context context;
+
     public FriendAdapter(Context context, List<Friend> friends) {
         this.friends = friends;
-        this.friendsOld = friends;
+        this.context = context;
     }
 
     @NonNull
@@ -37,9 +40,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder holder, int position) {
-//        Friend friend = friends.get(position);
-//        holder.friendName.setText(friend.getFriendUserId());
-//        holder.friendAvatar.setImageResource(friend.getAvatarResourceId());
+        Friend friend = friends.get(position);
+        holder.bind(friend);
     }
 
     @Override
@@ -47,16 +49,35 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
         return friends.size();
     }
 
-    public static class FriendViewHolder extends RecyclerView.ViewHolder {
+    public class FriendViewHolder extends RecyclerView.ViewHolder {
 
         ImageView friendAvatar;
-        TextView friendName, friendPoints;
+        TextView friendName;
 
         public FriendViewHolder(@NonNull View itemView) {
             super(itemView);
             friendAvatar = itemView.findViewById(R.id.friendAvatar);
             friendName = itemView.findViewById(R.id.friendName);
-//            friendPoints = itemView.findViewById(R.id.friendPoints);
+        }
+
+        public void bind(Friend friend) {
+            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(friend.getFriendUserId()));
+            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        String fullName = snapshot.child("fullname").getValue(String.class);
+                        friendName.setText(fullName);
+                    } else {
+                        friendName.setText("Unknown");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    friendName.setText("Error");
+                }
+            });
         }
     }
 }
