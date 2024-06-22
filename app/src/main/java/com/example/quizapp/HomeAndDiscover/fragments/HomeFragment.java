@@ -99,7 +99,7 @@ public class HomeFragment extends Fragment {
       
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
-
+        
         userRepository = new UserRepository(getContext());
         quizRepository = new QuizRepository(getContext());
         questionRepository = new QuestionRepository(getContext());
@@ -107,6 +107,7 @@ public class HomeFragment extends Fragment {
         resultRepository = new ResultRepository(getContext());
 
         new InitDataTask().execute();
+
 
         return view;
     }

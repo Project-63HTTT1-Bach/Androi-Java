@@ -1,8 +1,12 @@
 package com.example.quizapp.Auth.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,6 +25,7 @@ public class SettingActivity extends AppCompatActivity {
     private DatabaseReference userRef;
     private FirebaseDatabase database;
     private LinearLayout btnEdit;
+    private ImageView ivUserAvatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,8 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         btnEdit = findViewById(R.id.btnEdit);
+
+        ivUserAvatar = findViewById(R.id.ivUseravatar);
 
         tvFullName2 = findViewById(R.id.tvFullname2);
         tvBirthday2 = findViewById(R.id.tvBirthday2);
@@ -67,11 +74,18 @@ public class SettingActivity extends AppCompatActivity {
                         String birthday = userSnapshot.child("birthday").getValue(String.class);
                         String phone = userSnapshot.child("phone").getValue(String.class);
                         String email = userSnapshot.child("email").getValue(String.class);
+                        String profilePicture = userSnapshot.child("profilePicture").getValue(String.class);
 
                         tvFullName2.setText(fullName);
                         tvBirthday2.setText(birthday);
                         tvPhone2.setText(phone);
                         tvEmail2.setText(email);
+
+                        // Chuyển đổi chuỗi Base64 thành Bitmap và gán vào ImageView
+                        if (profilePicture != null && !profilePicture.isEmpty()) {
+                            Bitmap bitmap = decodeBase64(profilePicture);
+                            ivUserAvatar.setImageBitmap(bitmap);
+                        }
                     }
                 } else {
                     // Handle trường hợp không tìm thấy người dùng
@@ -83,5 +97,10 @@ public class SettingActivity extends AppCompatActivity {
                 // Handle lỗi
             }
         });
+    }
+
+    private Bitmap decodeBase64(String input) {
+        byte[] decodedBytes = Base64.decode(input, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 }
