@@ -100,18 +100,18 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-//        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
-//        recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
-//
-//
-//        userRepository = new UserRepository(getContext());
-//        quizRepository = new QuizRepository(getContext());
-//        initData();
-//
-//
-//        List<Quiz> quizList = QuizRepository.getQuizList();
-//        quizAdapter = new QuizAdapter(getContext(), quizList);
-//        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
+        recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
+        recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
+
+
+        userRepository = new UserRepository(getContext());
+        quizRepository = new QuizRepository(getContext());
+        initData();
+
+
+        List<Quiz> quizList = QuizRepository.getQuizList();
+        quizAdapter = new QuizAdapter(getContext(), quizList);
+        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
 
         return view;
     }
