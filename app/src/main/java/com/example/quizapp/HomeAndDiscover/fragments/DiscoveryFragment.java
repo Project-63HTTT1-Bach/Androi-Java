@@ -13,6 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.Auth.repositories.UserRepository;
+import com.example.quizapp.HomeAndDiscover.repositories.FriendRepository;
+import com.example.quizapp.Quiz.repositories.QuizRepository;
 import com.example.quizapp.R;
 import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
@@ -23,6 +27,7 @@ import com.example.quizapp.Quiz.models.Quiz;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,8 +46,9 @@ public class DiscoveryFragment extends Fragment {
     private RecyclerView rvFriends;
     private QuizAdapter quizAdapter;
     private FriendAdapter friendAdapter;
-    private List<Quiz> quizItems;
-    private List<Friend> friends;
+    private QuizRepository quizRepository;
+    private FriendRepository friendRepository;
+    private UserRepository userRepository;
 
     public DiscoveryFragment() {
         // Required empty public constructor
@@ -69,36 +75,45 @@ public class DiscoveryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discovery, container, false);
 
-        rvQuizzes = view.findViewById(R.id.rvQuizzes);
-        rvFriends = view.findViewById(R.id.rvFriends);
-
+        rvQuizzes = (RecyclerView) view.findViewById(R.id.rvQuizzes);
+        rvFriends = (RecyclerView) view.findViewById(R.id.rvFriends);
         rvQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvFriends.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        quizItems = new ArrayList<>();
-//        quizItems.add(new Quiz("Statistics Math Quiz", R.drawable.ic_quiz1));
-//        quizItems.add(new Quiz("Developer Quiz", R.drawable.ic_quiz1));
-//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-//        quizItems.add(new Quiz("Integer Quiz", R.drawable.ic_quiz1));
-//        quizItems.add(new Quiz("Matrices Quiz", R.drawable.ic_quiz1));
-//        // Add more items as needed
-//
-//        friends = new ArrayList<>();
-//        friends.add(new Friend("Maren Workman", 325, R.drawable.user_avatar));
-//        friends.add(new Friend("Brandon Matrovs", 124, R.drawable.user_avatar));
-        // Add more items as needed
+        friendRepository = new FriendRepository(getContext());
+        quizRepository = new QuizRepository(getContext());
+        initData();
 
-//        quizAdapter = new QuizAdapter(quizItems);
-//        friendAdapter = new FriendAdapter(friends);
-//
-//        rvQuizzes.setAdapter(quizAdapter);
-//        rvFriends.setAdapter(friendAdapter);
+        int userId = 1;
+        quizRepository.filterQuizzesByUserId(userId);
+
+        List<Quiz> quizList = QuizRepository.getQuizList();
+        quizAdapter = new QuizAdapter(getContext(), quizList);
+        rvQuizzes.setAdapter(quizAdapter);
+
+        friendRepository.filterFriendByUserId(userId);
+
+        List<Friend> friendList = FriendRepository.getFriendList();
+        friendAdapter = new FriendAdapter(getContext(), friendList);
+        rvFriends.setAdapter(friendAdapter);
 
         return view;
     }
+
+    private void initData(){
+        Random random = new Random();
+        List<User> users = UserRepository.getUserList();
+        for (int i = 0; i < 100; i++) {
+            int friendId = i + 1;
+            int userId = users.get(random.nextInt(users.size())).getUserId();
+            int friendUserId = users.get(random.nextInt(users.size())).getUserId();
+            Friend friend = new Friend(friendId, userId, friendUserId);
+            friendRepository.addFriend(friend);
+        }
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

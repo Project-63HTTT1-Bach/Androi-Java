@@ -2,7 +2,6 @@ package com.example.quizapp.Quiz.repositories;
 
 import android.content.Context;
 
-import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
 import com.example.quizapp.Quiz.models.Quiz;
 import com.example.quizapp.sqliteOpenHelper.SqliteOpenHelper;
 
@@ -20,11 +19,21 @@ public class QuizRepository {
     }
 
     public QuizRepository() {
-
+        // Default constructor
     }
 
     public static ArrayList<Quiz> getQuizList() {
         return quizList;
+    }
+
+    public void filterQuizzesByUserId(int userId) {
+        ArrayList<Quiz> filteredQuizzes = new ArrayList<>();
+        for (Quiz quiz : quizList) {
+            if (quiz.getCreatorId() == userId) {
+                filteredQuizzes.add(quiz);
+            }
+        }
+        quizList = filteredQuizzes;
     }
 
     public boolean checkExistedQuiz(Quiz q) {
@@ -38,7 +47,7 @@ public class QuizRepository {
 
     public boolean addQuiz(Quiz q) {
         if (!checkExistedQuiz(q)) {
-            if (dbHelper.insertQuiz(q.getQuizName(), q.getCreatorId(), q.getCreateDate(), q.getIsPublic(), q.getTimeLimit(), q.getIconImage())) {
+            if (dbHelper.insertQuiz(q.getQuizName(), q.getCreatorId(), q.getStartTime(), q.getEndTime(), q.getDescription(), q.getIsPublic(), q.getTimeLimit(), q.getIconImage(), q.getQuizCode())) {
                 quizList.add(q);
                 return true;
             }
@@ -47,15 +56,18 @@ public class QuizRepository {
     }
 
     public boolean updateQuiz(Quiz q) {
-        if (dbHelper.updateQuiz(q.getQuizId(), q.getQuizName(), q.getCreatorId(), q.getCreateDate(), q.getIsPublic(), q.getTimeLimit(), q.getIconImage())) {
+        if (dbHelper.updateQuiz(q.getQuizId(), q.getQuizName(), q.getCreatorId(), q.getStartTime(), q.getEndTime(), q.getDescription(), q.getIsPublic(), q.getTimeLimit(), q.getIconImage(), q.getQuizCode())) {
             for (Quiz quiz : quizList) {
                 if (quiz.getQuizId() == q.getQuizId()) {
                     quiz.setQuizName(q.getQuizName());
                     quiz.setCreatorId(q.getCreatorId());
-                    quiz.setCreateDate(q.getCreateDate());
+                    quiz.setStartTime(q.getStartTime());
+                    quiz.setEndTime(q.getEndTime());
+                    quiz.setDescription(q.getDescription());
                     quiz.setIsPublic(q.getIsPublic());
                     quiz.setTimeLimit(q.getTimeLimit());
                     quiz.setIconImage(q.getIconImage());
+                    quiz.setQuizCode(q.getQuizCode());
                     break;
                 }
             }

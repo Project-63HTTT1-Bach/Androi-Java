@@ -211,8 +211,8 @@
                     android:textColor="@color/Gray"
                     android:textSize="20sp" />
 
-                <EditText
-                    android:id="@+id/etEmail2"
+                <TextView
+                    android:id="@+id/tvEmail2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="2"
@@ -221,28 +221,21 @@
                     android:textSize="20sp" />
             </GridLayout>
         </LinearLayout>
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="25dp"
-            app:cardCornerRadius="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
             <LinearLayout
-                android:id="@+id/btnLogout"
+                android:id="@+id/btnSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/Green"
+                android:background="@drawable/btn_save"
                 android:gravity="center_vertical"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                app:layout_constraintHorizontal_bias="0.497">
-
+                android:layout_marginBottom="16dp"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
                 <TextView
-                    android:id="@+id/tvLogout"
+                    android:id="@+id/tvSave"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical"
@@ -251,7 +244,6 @@
                     android:textSize="28sp"
                     android:textStyle="bold" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

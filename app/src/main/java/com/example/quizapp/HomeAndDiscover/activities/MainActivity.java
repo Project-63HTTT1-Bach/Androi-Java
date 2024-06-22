@@ -20,6 +20,8 @@ import com.example.quizapp.Auth.fragments.MeFragment;
 
 public class MainActivity extends AppCompatActivity {
     private int selectedTab = 1;
+    private String userEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Lấy email từ Intent
+        Intent intent = getIntent();
+        userEmail = intent.getStringExtra("userEmail");
 
         final LinearLayout llHome = findViewById(R.id.llHome);
         final LinearLayout llDiscovery = findViewById(R.id.llDiscovery);
@@ -42,14 +48,16 @@ public class MainActivity extends AppCompatActivity {
         final ImageView ivDiscovery = findViewById(R.id.ivDiscovery);
         final ImageView ivChart = findViewById(R.id.ivChart);
         final ImageView ivMe = findViewById(R.id.ivMe);
+
         getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                                .replace(R.id.fcvFragment, HomeFragment.class,null)
-                                    .commit();
+                .setReorderingAllowed(true)
+                .replace(R.id.fcvFragment, HomeFragment.class, null)
+                .commit();
+
         llHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedTab!=1){
+                if (selectedTab != 1) {
                     ivHome.setImageResource(R.drawable.ic_navhomeselected);
                     ivDiscovery.setImageResource(R.drawable.ic_navsearch);
                     ivChart.setImageResource(R.drawable.ic_navchart);
@@ -57,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedTab = 1;
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.fcvFragment, HomeFragment.class,null)
+                            .replace(R.id.fcvFragment, HomeFragment.class, null)
                             .commit();
                 }
             }
@@ -65,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         llDiscovery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedTab!=2){
+                if (selectedTab != 2) {
                     ivHome.setImageResource(R.drawable.ic_navhome);
                     ivDiscovery.setImageResource(R.drawable.ic_navsearchselected);
                     ivChart.setImageResource(R.drawable.ic_navchart);
@@ -73,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedTab = 2;
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.fcvFragment, DiscoveryFragment.class,null)
+                            .replace(R.id.fcvFragment, DiscoveryFragment.class, null)
                             .commit();
                 }
             }
@@ -81,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         llChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedTab!=3){
+                if (selectedTab != 3) {
                     ivHome.setImageResource(R.drawable.ic_navhome);
                     ivDiscovery.setImageResource(R.drawable.ic_navsearch);
                     ivChart.setImageResource(R.drawable.ic_navchartselected);
@@ -89,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
                     selectedTab = 3;
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.fcvFragment, ChartFragment.class,null)
+                            .replace(R.id.fcvFragment, ChartFragment.class, null)
                             .commit();
                 }
             }
@@ -97,15 +105,19 @@ public class MainActivity extends AppCompatActivity {
         llMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(selectedTab!=4){
+                if (selectedTab != 4) {
                     ivHome.setImageResource(R.drawable.ic_navhome);
                     ivDiscovery.setImageResource(R.drawable.ic_navsearch);
                     ivChart.setImageResource(R.drawable.ic_navchart);
                     ivMe.setImageResource(R.drawable.ic_navmeselected);
                     selectedTab = 4;
+                    MeFragment meFragment = new MeFragment();
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+                    meFragment.setArguments(args);
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
-                            .replace(R.id.fcvFragment, MeFragment.class,null)
+                            .replace(R.id.fcvFragment, meFragment, null)
                             .commit();
                 }
             }
