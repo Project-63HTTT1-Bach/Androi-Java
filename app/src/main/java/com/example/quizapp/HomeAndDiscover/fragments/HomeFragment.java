@@ -2,6 +2,7 @@ package com.example.quizapp.HomeAndDiscover.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.example.quizapp.Quiz.models.Quiz;
 import com.example.quizapp.Quiz.models.Result;
 import com.example.quizapp.Quiz.repositories.AnswerRepository;
 import com.example.quizapp.Quiz.repositories.QuestionRepository;
+
 import com.example.quizapp.Quiz.repositories.QuizRepository;
 import com.example.quizapp.Quiz.repositories.ResultRepository;
 import com.example.quizapp.R;
@@ -33,6 +35,7 @@ import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
@@ -93,6 +96,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+      
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 

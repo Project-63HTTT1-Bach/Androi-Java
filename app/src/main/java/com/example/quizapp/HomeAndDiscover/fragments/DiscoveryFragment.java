@@ -88,11 +88,13 @@ public class DiscoveryFragment extends Fragment {
 
         int userId = 1;
         quizRepository.filterQuizzesByUserId(userId);
+
         List<Quiz> quizList = QuizRepository.getQuizList();
         quizAdapter = new QuizAdapter(getContext(), quizList);
         rvQuizzes.setAdapter(quizAdapter);
 
         friendRepository.filterFriendByUserId(userId);
+
         List<Friend> friendList = FriendRepository.getFriendList();
         friendAdapter = new FriendAdapter(getContext(), friendList);
         rvFriends.setAdapter(friendAdapter);

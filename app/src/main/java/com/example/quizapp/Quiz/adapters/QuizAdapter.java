@@ -45,7 +45,6 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         holder.quizName.setText(item.getQuizName());
         int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
         holder.quizIcon.setImageResource(imageResource);
-
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DescriptionQuizActivity.class);
             intent.putExtra("quizName", item.getQuizName());

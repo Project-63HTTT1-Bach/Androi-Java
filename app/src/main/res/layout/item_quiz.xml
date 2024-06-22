@@ -33,4 +33,5 @@
         android:layout_gravity="center"
         android:layout_marginStart="70dp"
         android:src="@drawable/ic_quizmoreinfo" />
+
 </LinearLayout>

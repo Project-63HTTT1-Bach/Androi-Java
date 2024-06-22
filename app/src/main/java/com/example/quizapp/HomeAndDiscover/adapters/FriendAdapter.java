@@ -21,6 +21,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
 
     private List<Friend> friends;
     private List<Friend> friendsOld;
+
     private Context context;
     public FriendAdapter(Context context, List<Friend> friends) {
         this.friends = friends;

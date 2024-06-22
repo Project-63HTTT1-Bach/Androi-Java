@@ -51,17 +51,20 @@ public class FindFriendsActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+      
         rvFriends = (RecyclerView) findViewById(R.id.rvFriends);
         rvFriends.setLayoutManager(new LinearLayoutManager(this));
         rvFindFriend = (RecyclerView) findViewById(R.id.rvFindFriend);
         rvFindFriend.setLayoutManager(new LinearLayoutManager(this));
+
+        searchEditText = (EditText) findViewById(R.id.searchEditText);
 
         friendRepository = new FriendRepository(this);
 
         List<Friend> friendList = FriendRepository.getFriendList();
         friendAdapter = new FriendAdapter(this, friendList);
         rvFriends.setAdapter(friendAdapter);
+        rvFindFriend.setAdapter(friendAdapter);
 
         btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(new View.OnClickListener() {

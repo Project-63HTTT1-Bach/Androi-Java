@@ -177,7 +177,6 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         return true;
     }
 
-
     public boolean updateQuiz(int quizId, String quizName, int creatorId, String startTime, String endTime, String description, int isPublic, int timeLimit, String iconImage, String quizCode) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
