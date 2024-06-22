@@ -1,21 +1,15 @@
+// FindFriendsActivity.java
 package com.example.quizapp.HomeAndDiscover.activities;
 
-import static java.util.Locale.filter;
-
-import android.app.SearchManager;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.Menu;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -24,19 +18,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.HomeAndDiscover.adapters.FriendAdapter;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
-import com.example.quizapp.HomeAndDiscover.repositories.FriendRepository;
 import com.example.quizapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FindFriendsActivity extends AppCompatActivity {
     private ImageView btnBack;
     private RecyclerView rvFindFriend;
     private RecyclerView rvFriends;
-    private FriendRepository friendRepository;
     private FriendAdapter friendAdapter;
-    private Toolbar toolbar;
-    private SearchView searchView;
+    private EditText etFindFriend;
+    private DatabaseReference usersRef;
+    private List<Friend> friendList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,63 +48,62 @@ public class FindFriendsActivity extends AppCompatActivity {
             return insets;
         });
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-      
-        rvFriends = (RecyclerView) findViewById(R.id.rvFriends);
+        btnBack = findViewById(R.id.btnBack);
+        rvFriends = findViewById(R.id.rvFriends);
+        rvFindFriend = findViewById(R.id.rvFindFriend);
+        etFindFriend = findViewById(R.id.etFindFriend);
+
         rvFriends.setLayoutManager(new LinearLayoutManager(this));
-        rvFindFriend = (RecyclerView) findViewById(R.id.rvFindFriend);
         rvFindFriend.setLayoutManager(new LinearLayoutManager(this));
 
-        searchEditText = (EditText) findViewById(R.id.searchEditText);
-
-        friendRepository = new FriendRepository(this);
-
-        List<Friend> friendList = FriendRepository.getFriendList();
+        usersRef = FirebaseDatabase.getInstance().getReference("users");
+        friendList = new ArrayList<>();
         friendAdapter = new FriendAdapter(this, friendList);
-        rvFriends.setAdapter(friendAdapter);
         rvFindFriend.setAdapter(friendAdapter);
 
-        btnBack = findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
+        btnBack.setOnClickListener(v -> finish());
+
+        etFindFriend.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View v) {
-                finish();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Do nothing
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchFriendsByEmail(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Do nothing
             }
         });
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_search, menu);
-//
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//        searchView.setMaxWidth(Integer.MAX_VALUE);
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                friendAdapter.getFilter().filter(query);
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                friendAdapter.getFilter().filter(newText);
-//                return false;
-//            }
-//        });
-//        return true;
-//    }
+    private void searchFriendsByEmail(String email) {
+        usersRef.orderByChild("email").startAt(email).endAt(email + "\uf8ff")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        friendList.clear();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            int userId = Integer.parseInt(snapshot.getKey());
+                            String userEmail = snapshot.child("email").getValue(String.class);
 
-    @Override
-    public void onBackPressed() {
-        if(!searchView.isIconified()){
-            searchView.setIconified(true);
-            return;
-        }
-        super.onBackPressed();
+                            if (userEmail != null && userEmail.contains(email)) {
+                                // Tạo đối tượng Friend với đầy đủ thông tin
+                                Friend friend = new Friend(0, 0, userId);
+                                friendList.add(friend);
+                            }
+                        }
+                        friendAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Handle errors here
+                    }
+                });
     }
 }

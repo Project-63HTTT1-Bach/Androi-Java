@@ -28,6 +28,7 @@ public class MeFragment extends Fragment {
     private String userEmail;
     private ImageView ivUserAvatar;
     private DatabaseReference userRef;
+    private TextView tvUsername;
 
     public MeFragment() {
         // Required empty public constructor
@@ -65,6 +66,7 @@ public class MeFragment extends Fragment {
 
         ImageView btnSetting = view.findViewById(R.id.btnSetting);
         ivUserAvatar = view.findViewById(R.id.ivUseravatar);
+        tvUsername = view.findViewById(R.id.tvUsername);
 
         btnSetting.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), SettingActivity.class);
@@ -86,8 +88,9 @@ public class MeFragment extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         String profilePicture = userSnapshot.child("profilePicture").getValue(String.class);
+                        String fullName = userSnapshot.child("fullname").getValue(String.class);
 
-
+                        tvUsername.setText(fullName);
                         // Chuyển đổi chuỗi Base64 thành Bitmap và gán vào ImageView
                         if (profilePicture != null && !profilePicture.isEmpty()) {
                             Bitmap bitmap = decodeBase64(profilePicture);

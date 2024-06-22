@@ -1,6 +1,5 @@
 package com.example.quizapp.Auth.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,7 +10,6 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,8 +22,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -187,13 +183,13 @@ public class ChangeProfileActivity extends AppCompatActivity {
     private void showConfirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.activity_confirm, null);
+        View dialogView = inflater.inflate(R.layout.dialog_confirm_changes, null);
         builder.setView(dialogView);
 
         AlertDialog dialog = builder.create();
 
-        Button buttonNo = dialogView.findViewById(R.id.button_no);
-        Button buttonYes = dialogView.findViewById(R.id.button_yes);
+        Button buttonNo = dialogView.findViewById(R.id.btnNo);
+        Button buttonYes = dialogView.findViewById(R.id.btnYes);
 
         buttonNo.setOnClickListener(v -> dialog.dismiss());
 
@@ -204,12 +200,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
         dialog.show();
 
-//        // Điều chỉnh kích thước dialog cho vừa khung
-//        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
-//        layoutParams.copyFrom(dialog.getWindow().getAttributes());
-//        layoutParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-//        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
-//        dialog.getWindow().setAttributes(layoutParams);
     }
 
 
