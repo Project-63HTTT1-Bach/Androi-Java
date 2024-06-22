@@ -30,6 +30,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    // Thêm block packagingOptions để loại bỏ các tập tin xung đột
+    packagingOptions {
+        exclude ("META-INF/NOTICE.md")
+        exclude ("META-INF/LICENSE.md")
+    }
+
 }
 
 dependencies {
@@ -49,6 +55,9 @@ dependencies {
     // Add the dependency for the Firebase Authentication library
     // Also add the dependency for the Google Play services library and specify its version
     implementation(libs.play.services.auth)
+    implementation ("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation ("com.sun.mail:android-mail:1.6.7")
+    implementation ("com.sun.mail:android-activation:1.6.7")
 
 
 }

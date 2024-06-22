@@ -27,12 +27,5 @@
             android:text="name"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/friendPoints"
-            android:layout_width="wrap_content"
-            android:text="point"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp" />
     </LinearLayout>
 </LinearLayout>

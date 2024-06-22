@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/showQuiz"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/rounded_quizitem"
-    android:orientation="horizontal"
-    android:padding="10dp"
     android:layout_margin="10dp"
-    android:gravity="center_vertical">
+    android:background="@drawable/rounded_quizitem"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
 
     <ImageView
         android:id="@+id/quizIcon"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_margin="5dp"
-        android:src="@drawable/ic_quiz1"/>
+        android:src="@drawable/ic_quiz1" />
 
     <TextView
         android:id="@+id/quizName"
@@ -23,13 +24,13 @@
         android:layout_weight="1"
         android:text="Quiz Title"
         android:textSize="18dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <ImageView
         android:id="@+id/moreInfoIcon"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:layout_gravity="center"
         android:layout_marginStart="70dp"
-        android:src="@drawable/ic_quizmoreinfo"
-        android:layout_gravity="center"/>
+        android:src="@drawable/ic_quizmoreinfo" />
 </LinearLayout>
