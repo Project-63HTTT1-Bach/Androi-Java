@@ -2,6 +2,8 @@ package com.example.quizapp.HomeAndDiscover.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,15 +20,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizapp.Auth.models.User;
 import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.Quiz.adapters.QuizAdapter;
+import com.example.quizapp.Quiz.models.Answer;
+import com.example.quizapp.Quiz.models.Question;
 import com.example.quizapp.Quiz.models.Quiz;
+import com.example.quizapp.Quiz.models.Result;
+import com.example.quizapp.Quiz.repositories.AnswerRepository;
+import com.example.quizapp.Quiz.repositories.QuestionRepository;
+
 import com.example.quizapp.Quiz.repositories.QuizRepository;
+import com.example.quizapp.Quiz.repositories.ResultRepository;
 import com.example.quizapp.R;
 import com.example.quizapp.HomeAndDiscover.activities.AllQuizActivity;
 import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
 import java.lang.reflect.Field;
-
-
 import java.util.ArrayList;
 
 import java.util.List;
@@ -39,33 +46,24 @@ import java.util.Random;
  */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private RecyclerView recyclerViewLiveQuizzes;
     private UserRepository userRepository;
     private QuizRepository quizRepository;
+    private QuestionRepository questionRepository;
+    private AnswerRepository answerRepository;
+    private ResultRepository resultRepository;
     private QuizAdapter quizAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
@@ -76,7 +74,6 @@ public class HomeFragment extends Fragment {
     }
 
     public static int getResId(String resName, Class<?> c) {
-
         try {
             Field idField = c.getDeclaredField(resName);
             return idField.getInt(idField);
@@ -99,48 +96,100 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
+      
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 
-
         userRepository = new UserRepository(getContext());
         quizRepository = new QuizRepository(getContext());
-        initData();
+        questionRepository = new QuestionRepository(getContext());
+        answerRepository = new AnswerRepository(getContext());
+        resultRepository = new ResultRepository(getContext());
 
-
-        List<Quiz> quizList = QuizRepository.getQuizList();
-        quizAdapter = new QuizAdapter(getContext(), quizList);
-        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
+        new InitDataTask().execute();
 
         return view;
     }
 
+    private class InitDataTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            initData();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            updateUI();
+        }
+    }
+
     private void initData() {
-        for (int i = 0; i < 10; i++) {
+        // Thêm 10 người dùng mẫu
+        for (int i = 0; i < 2; i++) {
             String username = "username" + (i + 1);
             String password = "password" + (i + 1);
             String fullname = "fullName" + (i + 1);
             String phone = "phone" + (i + 1);
-            String birthday = "";
+            String birthday = "1990-01-01";
             String email = "email" + (i + 1) + "@gmail.com";
             String profilePicture = "user_avatar";
             User user = new User(i, username, password, fullname, email, profilePicture, birthday, phone);
             userRepository.addUser(user);
         }
+
         Random random = new Random();
         List<User> users = UserRepository.getUserList();
-        for (int i = 0; i < 100; i++) {
+
+        for (int i = 0; i < 20; i++) {
             int quizId = i + 1;
             String quizName = "Quiz " + (i + 1);
             int creatorId = users.get(random.nextInt(users.size())).getUserId();
-            String createDate = "2024-06-19";
+            String startTime = "2024-06-19 09:00";
+            String endTime = "2024-06-19 10:00";
+            String description = "Description for Quiz " + (i + 1);
             int isPublic = 1;
             int timeLimit = 60;
             String iconImage = "ic_quiz1";
-            Quiz quiz = new Quiz(quizId, quizName, creatorId, createDate, isPublic, timeLimit, iconImage);
+            String quizCode = "QZ" + (1000 + i + 1);
+            Quiz quiz = new Quiz(quizId, quizName, creatorId, startTime, endTime, description, isPublic, timeLimit, iconImage, quizCode);
             quizRepository.addQuiz(quiz);
+
+            for (int j = 0; j < 5; j++) {
+                int questionId = (i * 5) + j + 1;
+                String questionText = "Question " + (j + 1) + " for " + quizName;
+                String questionType = "Multiple Choice";
+                Question question = new Question(questionId, quizId, questionText, questionType);
+                questionRepository.addQuestion(question);
+
+                for (int k = 0; k < 4; k++) {
+                    int answerId = (questionId * 4) + k + 1;
+                    String answerText = "Answer " + (k + 1) + " for " + questionText;
+                    int isCorrect = (k == 0) ? 1 : 0;  // Đáp án đúng là đáp án đầu tiên
+                    Answer answer = new Answer(answerId, questionId, answerText, isCorrect);
+                    answerRepository.addAnswer(answer);
+                }
+            }
+
+            for (User user : users) {
+                int score = random.nextInt(101);
+                String completionDate = "2024-06-19";
+                int correctAnswers = random.nextInt(6);
+                int incorrectAnswers = 5 - correctAnswers;
+                Result result = new Result(0, user.getUserId(), quizId, score, completionDate, correctAnswers, incorrectAnswers);
+                resultRepository.addResult(result);
+            }
         }
+    }
+
+    private void updateUI() {
+        int userId = 1;
+        quizRepository.filterQuizzesByUserId(userId);
+        List<Quiz> quizList = QuizRepository.getQuizList();
+
+        quizAdapter = new QuizAdapter(getContext(), quizList);
+        recyclerViewLiveQuizzes.setAdapter(quizAdapter);
     }
 
     public Uri getUri(int resId) {

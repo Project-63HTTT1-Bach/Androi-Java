@@ -23,6 +23,16 @@ public class FriendRepository {
 
     }
 
+    public void filterFriendByUserId(int userId) {
+        ArrayList<Friend> filteredFriends = new ArrayList<>();
+        for (Friend friend : friendList) {
+            if (friend.getUserId() == userId) {
+                filteredFriends.add(friend);
+            }
+        }
+        friendList = filteredFriends;
+    }
+
     public static ArrayList<Friend> getFriendList() {
         return friendList;
     }

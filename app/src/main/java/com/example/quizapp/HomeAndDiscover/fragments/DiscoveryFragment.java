@@ -75,7 +75,6 @@ public class DiscoveryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_discovery, container, false);
 
         rvQuizzes = (RecyclerView) view.findViewById(R.id.rvQuizzes);
@@ -87,9 +86,14 @@ public class DiscoveryFragment extends Fragment {
         quizRepository = new QuizRepository(getContext());
         initData();
 
+        int userId = 1;
+        quizRepository.filterQuizzesByUserId(userId);
+
         List<Quiz> quizList = QuizRepository.getQuizList();
         quizAdapter = new QuizAdapter(getContext(), quizList);
         rvQuizzes.setAdapter(quizAdapter);
+
+        friendRepository.filterFriendByUserId(userId);
 
         List<Friend> friendList = FriendRepository.getFriendList();
         friendAdapter = new FriendAdapter(getContext(), friendList);

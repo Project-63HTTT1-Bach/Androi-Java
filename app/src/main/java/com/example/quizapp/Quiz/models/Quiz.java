@@ -5,19 +5,25 @@ public class Quiz {
     private int quizId;
     private String quizName;
     private int creatorId;
-    private String createDate;
+    private String startTime;
+    private String endTime;
+    private String description;
     private int isPublic;
     private int timeLimit;
     private String iconImage;
+    private String quizCode;
 
-    public Quiz(int quizId, String quizName, int creatorId, String createDate, int isPublic, int timeLimit, String iconImage) {
+    public Quiz(int quizId, String quizName, int creatorId, String startTime, String endTime, String description, int isPublic, int timeLimit, String iconImage, String quizCode) {
         this.quizId = quizId;
         this.quizName = quizName;
         this.creatorId = creatorId;
-        this.createDate = createDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.description = description;
         this.isPublic = isPublic;
         this.timeLimit = timeLimit;
         this.iconImage = iconImage;
+        this.quizCode = quizCode;
     }
 
     public int getQuizId() {
@@ -44,12 +50,28 @@ public class Quiz {
         this.creatorId = creatorId;
     }
 
-    public String getCreateDate() {
-        return createDate;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setCreateDate(String createDate) {
-        this.createDate = createDate;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getIsPublic() {
@@ -74,5 +96,13 @@ public class Quiz {
 
     public void setIconImage(String iconImage) {
         this.iconImage = iconImage;
+    }
+
+    public String getQuizCode() {
+        return quizCode;
+    }
+
+    public void setQuizCode(String quizCode) {
+        this.quizCode = quizCode;
     }
 }

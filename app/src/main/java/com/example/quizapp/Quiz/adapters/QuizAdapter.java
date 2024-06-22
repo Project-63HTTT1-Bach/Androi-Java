@@ -1,6 +1,7 @@
 package com.example.quizapp.Quiz.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.Quiz.activities.DescriptionQuizActivity;
 import com.example.quizapp.R;
 import com.example.quizapp.Quiz.models.Quiz;
 
@@ -43,6 +45,19 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         holder.quizName.setText(item.getQuizName());
         int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
         holder.quizIcon.setImageResource(imageResource);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, DescriptionQuizActivity.class);
+            intent.putExtra("quizName", item.getQuizName());
+            intent.putExtra("creatorId", item.getCreatorId());
+            intent.putExtra("startTime", item.getStartTime());
+            intent.putExtra("endTime", item.getEndTime());
+            intent.putExtra("description", item.getDescription());
+            intent.putExtra("isPublic", item.getIsPublic());
+            intent.putExtra("timeLimit", item.getTimeLimit());
+            intent.putExtra("iconImage", item.getIconImage());
+            intent.putExtra("quizCode", item.getQuizCode());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -61,7 +76,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
                 } else {
                     List<Quiz> list = new ArrayList<>();
                     for (Quiz quiz : quizItemsOld) {
-                        if (quiz.getQuizName().contains(strSearch.toLowerCase())) {
+                        if (quiz.getQuizName().toLowerCase().contains(strSearch.toLowerCase())) {
                             list.add(quiz);
                         }
                     }
