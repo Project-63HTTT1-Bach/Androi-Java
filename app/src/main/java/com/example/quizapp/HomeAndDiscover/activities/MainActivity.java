@@ -63,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                     ivChart.setImageResource(R.drawable.ic_navchart);
                     ivMe.setImageResource(R.drawable.ic_navme);
                     selectedTab = 1;
+
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .replace(R.id.fcvFragment, HomeFragment.class, null)
@@ -79,6 +83,10 @@ public class MainActivity extends AppCompatActivity {
                     ivChart.setImageResource(R.drawable.ic_navchart);
                     ivMe.setImageResource(R.drawable.ic_navme);
                     selectedTab = 2;
+
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .replace(R.id.fcvFragment, DiscoveryFragment.class, null)
@@ -95,6 +103,10 @@ public class MainActivity extends AppCompatActivity {
                     ivChart.setImageResource(R.drawable.ic_navchartselected);
                     ivMe.setImageResource(R.drawable.ic_navme);
                     selectedTab = 3;
+
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .replace(R.id.fcvFragment, ChartFragment.class, null)
@@ -112,8 +124,10 @@ public class MainActivity extends AppCompatActivity {
                     ivMe.setImageResource(R.drawable.ic_navmeselected);
                     selectedTab = 4;
                     MeFragment meFragment = new MeFragment();
+
                     Bundle args = new Bundle();
                     args.putString("userEmail", userEmail);
+
                     meFragment.setArguments(args);
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)

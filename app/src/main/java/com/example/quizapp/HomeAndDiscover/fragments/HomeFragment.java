@@ -52,6 +52,8 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String userEmail;
+
     private RecyclerView recyclerViewLiveQuizzes;
     private UserRepository userRepository;
     private QuizRepository quizRepository;
@@ -89,6 +91,7 @@ public class HomeFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+            userEmail = getArguments().getString("userEmail");
         }
     }
 

@@ -42,6 +42,8 @@ public class DiscoveryFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private String userEmail;
+
     private RecyclerView rvQuizzes;
     private RecyclerView rvFriends;
     private QuizAdapter quizAdapter;
@@ -69,6 +71,7 @@ public class DiscoveryFragment extends Fragment {
         if (getArguments() != null) {
             String mParam1 = getArguments().getString(ARG_PARAM1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
+            userEmail = getArguments().getString("userEmail");
         }
     }
 

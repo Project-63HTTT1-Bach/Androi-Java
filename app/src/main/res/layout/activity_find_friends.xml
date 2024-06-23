@@ -30,6 +30,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
 <!--        <androidx.appcompat.widget.Toolbar-->
 <!--            android:id="@+id/toolbar"-->
 <!--            android:layout_width="match_parent"-->
@@ -47,6 +49,7 @@
             android:background="@drawable/edittext_background"
             android:inputType="text"
             android:textSize="16sp" />
+
     </LinearLayout>
 
     <LinearLayout
