@@ -208,7 +208,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
     }
 
 
-
     private void updateUserData() {
         String newFullName = etFullname.getText().toString().trim();
         String newBirthday = etBirthday.getText().toString().trim();

@@ -28,57 +28,22 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE user (" +
-                "userId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "username TEXT NOT NULL, " + "password TEXT NOT NULL, " +
-                "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " +
-                "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
+        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY AUTOINCREMENT, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
         db.execSQL(CREATE_USER_TABLE);
 
-        String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" +
-                "quizId INTEGER PRIMARY KEY, " +
-                "quizName TEXT NOT NULL, " +
-                "creatorId INTEGER NOT NULL, " +
-                "startTime TEXT, " +
-                "endTime TEXT, " +
-                "description TEXT, " +
-                "isPublic INTEGER, " +
-                "timeLimit INTEGER, " +
-                "iconImage TEXT, " +
-                "quizCode TEXT, " +
-                "FOREIGN KEY (creatorId) REFERENCES user(userId))";
+        String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" + "quizId INTEGER PRIMARY KEY, " + "quizName TEXT NOT NULL, " + "creatorId INTEGER NOT NULL, " + "startTime TEXT, " + "endTime TEXT, " + "description TEXT, " + "isPublic INTEGER, " + "timeLimit INTEGER, " + "iconImage TEXT, " + "quizCode TEXT, " + "FOREIGN KEY (creatorId) REFERENCES user(userId))";
         db.execSQL(CREATE_QUIZ_TABLE);
 
-        String CREATE_QUESTION_TABLE = "CREATE TABLE question (" +
-                "questionId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "quizId INTEGER NOT NULL, " + "questionText TEXT NOT NULL, " +
-                "questionType TEXT, " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
+        String CREATE_QUESTION_TABLE = "CREATE TABLE question (" + "questionId INTEGER PRIMARY KEY AUTOINCREMENT, " + "quizId INTEGER NOT NULL, " + "questionText TEXT NOT NULL, " + "questionType TEXT, " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
         db.execSQL(CREATE_QUESTION_TABLE);
 
-        String CREATE_ANSWER_TABLE = "CREATE TABLE answer (" +
-                "answerId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "questionId INTEGER NOT NULL, " + "answerText TEXT NOT NULL, " +
-                "isCorrect INTEGER, " +
-                "FOREIGN KEY (questionId) REFERENCES question(questionId))";
+        String CREATE_ANSWER_TABLE = "CREATE TABLE answer (" + "answerId INTEGER PRIMARY KEY AUTOINCREMENT, " + "questionId INTEGER NOT NULL, " + "answerText TEXT NOT NULL, " + "isCorrect INTEGER, " + "FOREIGN KEY (questionId) REFERENCES question(questionId))";
         db.execSQL(CREATE_ANSWER_TABLE);
 
-        String CREATE_RESULT_TABLE = "CREATE TABLE result (" +
-                "resultId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "userId INTEGER NOT NULL, " + "quizId INTEGER NOT NULL, " +
-                "score INTEGER, " +
-                "completionDate TEXT, " +
-                "correctAnswers INTEGER, " +
-                "incorrectAnswers INTEGER, " +
-                "FOREIGN KEY (userId) REFERENCES user(userId), " +
-                "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
+        String CREATE_RESULT_TABLE = "CREATE TABLE result (" + "resultId INTEGER PRIMARY KEY AUTOINCREMENT, " + "userId INTEGER NOT NULL, " + "quizId INTEGER NOT NULL, " + "score INTEGER, " + "completionDate TEXT, " + "correctAnswers INTEGER, " + "incorrectAnswers INTEGER, " + "FOREIGN KEY (userId) REFERENCES user(userId), " + "FOREIGN KEY (quizId) REFERENCES quiz(quizId))";
         db.execSQL(CREATE_RESULT_TABLE);
 
-        String CREATE_FRIEND_TABLE = "CREATE TABLE friend (" +
-                "friendId INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "userId INTEGER NOT NULL, " +
-                "friendUserId INTEGER NOT NULL, " +
-                "FOREIGN KEY (userId) REFERENCES user(userId), " +
-                "FOREIGN KEY (friendUserId) REFERENCES user(userId))";
+        String CREATE_FRIEND_TABLE = "CREATE TABLE friend (" + "friendId INTEGER PRIMARY KEY AUTOINCREMENT, " + "userId INTEGER NOT NULL, " + "friendUserId INTEGER NOT NULL, " + "FOREIGN KEY (userId) REFERENCES user(userId), " + "FOREIGN KEY (friendUserId) REFERENCES user(userId))";
         db.execSQL(CREATE_FRIEND_TABLE);
     }
 

@@ -29,7 +29,7 @@ public class SettingActivity extends AppCompatActivity {
     private DatabaseReference userRef;
     private FirebaseDatabase database;
     private LinearLayout btnEdit, btnLogout;
-    private ImageView ivUserAvatar;
+    private ImageView ivUserAvatar, btnBack;
     private FirebaseAuth mAuth;
 
     @Override
@@ -41,6 +41,8 @@ public class SettingActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         btnEdit = findViewById(R.id.btnEdit);
+        btnBack = findViewById(R.id.btnBack);
+
         ivUserAvatar = findViewById(R.id.ivUseravatar);
         tvFullName2 = findViewById(R.id.tvFullname2);
         tvBirthday2 = findViewById(R.id.tvBirthday2);
@@ -54,6 +56,13 @@ public class SettingActivity extends AppCompatActivity {
         // Lấy email từ Intent
         Intent intent = getIntent();
         String userEmail = intent.getStringExtra("userEmail");
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();  // Quay lại activity trước đó
+            }
+        });
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
