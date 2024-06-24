@@ -1,6 +1,8 @@
 package com.example.quizapp.HomeAndDiscover.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 
 import android.os.AsyncTask;
@@ -63,8 +65,11 @@ public class HomeFragment extends Fragment {
     private ResultRepository resultRepository;
     private FriendRepository friendRepository;
     private QuizAdapter quizAdapter;
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "QuizAppPrefs";
+    private static final String KEY_INIT_DATA_DONE = "initDataDone";
+    private InitDataTask initDataTask;
     private int userId;
-
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -102,6 +107,8 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        sharedPreferences = getContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -112,8 +119,15 @@ public class HomeFragment extends Fragment {
         resultRepository = new ResultRepository(getContext());
         friendRepository = new FriendRepository(getContext());
 
-        new InitDataTask().execute();
-        updateUI();
+        boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
+
+        if (!initDataDone) {
+            initDataTask = new InitDataTask();
+            initDataTask.execute();
+        } else {
+            updateUI();
+        }
+
         return view;
     }
 
@@ -127,6 +141,9 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(KEY_INIT_DATA_DONE, true);
+            editor.apply();
             updateUI();
         }
     }
@@ -211,6 +228,12 @@ public class HomeFragment extends Fragment {
 
     public Uri getUri(int resId) {
         return Uri.parse("android.resource://" + this.getParentFragment() + "/" + resId);
+    }
+
+    private void resetInitDataFlag() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY_INIT_DATA_DONE, false);
+        editor.apply();
     }
 
     @Override
