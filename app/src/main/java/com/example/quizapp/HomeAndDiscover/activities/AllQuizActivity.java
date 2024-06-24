@@ -2,7 +2,6 @@ package com.example.quizapp.HomeAndDiscover.activities;
 
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;

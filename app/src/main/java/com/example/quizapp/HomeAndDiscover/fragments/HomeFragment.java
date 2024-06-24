@@ -1,12 +1,8 @@
 package com.example.quizapp.HomeAndDiscover.fragments;
 
-import static android.content.ContentValues.TAG;
-import static android.content.Intent.getIntent;
-
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +29,7 @@ import com.example.quizapp.Quiz.models.Quiz;
 import com.example.quizapp.Quiz.models.Result;
 import com.example.quizapp.Quiz.repositories.AnswerRepository;
 import com.example.quizapp.Quiz.repositories.QuestionRepository;
+
 import com.example.quizapp.Quiz.repositories.QuizRepository;
 import com.example.quizapp.Quiz.repositories.ResultRepository;
 import com.example.quizapp.R;
@@ -41,6 +38,7 @@ import com.example.quizapp.HomeAndDiscover.activities.FindFriendsActivity;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 
