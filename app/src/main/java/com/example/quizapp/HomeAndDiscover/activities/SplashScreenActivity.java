@@ -15,7 +15,6 @@ import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
-
     private UserRepository userRepository;
 
     @Override
@@ -27,8 +26,8 @@ public class SplashScreenActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
-
         });
+
         userRepository = new UserRepository(this);
         userRepository.importUsersFromFirebase();
 
@@ -36,7 +35,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void run() {
                 Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
-
                 startActivity(intent);
                 finish();
             }
