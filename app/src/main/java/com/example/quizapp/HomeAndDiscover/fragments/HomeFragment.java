@@ -108,6 +108,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         sharedPreferences = getContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+//        resetInitDataFlag();
 
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -127,7 +128,6 @@ public class HomeFragment extends Fragment {
         } else {
             updateUI();
         }
-
         return view;
     }
 
@@ -151,23 +151,23 @@ public class HomeFragment extends Fragment {
     private void initData() {
         Random random = new Random();
         List<User> users = UserRepository.getUserList();
-        Log.d("HomeFragment", "size: " + users.size());
-        for (int i = 0; i < 2; i++) {
-            String username = "username" + (i + 1);
-            String password = "password" + (i + 1);
-            String fullname = "fullName" + (i + 1);
-            String phone = "phone" + (i + 1);
-            String birthday = "1990-01-01";
-            String email = "email" + (i + 1) + "@gmail.com";
-            String profilePicture = "user_avatar";
-            User user = new User(i, username, password, fullname, email, profilePicture, birthday, phone);
-            userRepository.addUser(user);
-        }
+        Log.d("HomeFragment", "size: " + userRepository.getUserCount());
+//        for (int i = 7; i < 7+3; i++) {
+//            String username = "username" + (i + 1);
+//            String password = "password" + (i + 1);
+//            String fullname = "fullName" + (i + 1);
+//            String phone = "phone" + (i + 1);
+//            String birthday = "1990-01-01";
+//            String email = "email" + (i + 1) + "@gmail.com";
+//            String profilePicture = "user_avatar";
+//            User user = new User(i, username, password, fullname, email, profilePicture, birthday, phone);
+//            userRepository.addUser(user);
+//        }
 
         for (int i = 0; i < 20; i++) {
             int quizId = i + 1;
             String quizName = "Quiz " + (i + 1);
-            int creatorId = users.get(random.nextInt(users.size())).getUserId();
+            int creatorId = random.nextInt(6) + 1;
             String startTime = "2024-06-19 09:00";
             String endTime = "2024-06-19 10:00";
             String description = "Description for Quiz " + (i + 1);
@@ -188,7 +188,7 @@ public class HomeFragment extends Fragment {
                 for (int k = 0; k < 4; k++) {
                     int answerId = (questionId * 4) + k + 1;
                     String answerText = "Answer " + (k + 1) + " for " + questionText;
-                    int isCorrect = (k == 0) ? 1 : 0;  // Đáp án đúng là đáp án đầu tiên
+                    int isCorrect = (k == 0) ? 1 : 0;
                     Answer answer = new Answer(answerId, questionId, answerText, isCorrect);
                     answerRepository.addAnswer(answer);
                 }
@@ -196,29 +196,35 @@ public class HomeFragment extends Fragment {
 
             for (User user : users) {
                 int resultId = (i * 20) + user.getUserId() + 1;
+                int userId = random.nextInt(6) + 1;
                 int score = random.nextInt(101);
                 String completionDate = "2024-06-19";
                 int correctAnswers = random.nextInt(6);
                 int incorrectAnswers = 5 - correctAnswers;
-                Result result = new Result(resultId, user.getUserId(), quizId, score, completionDate, correctAnswers, incorrectAnswers);
+                Result result = new Result(resultId, userId, quizId, score, completionDate, correctAnswers, incorrectAnswers);
                 resultRepository.addResult(result);
             }
         }
 
         for (int i = 0; i < 10; i++) {
             int friendId = i + 1;
-            int userId = users.get(random.nextInt(users.size())).getUserId();
-            int friendUserId = users.get(random.nextInt(users.size())).getUserId();
+            int userId = random.nextInt(6) + 1;
+            int friendUserId = random.nextInt(6) + 1;
             Friend friend = new Friend(friendId, userId, friendUserId);
             friendRepository.addFriend(friend);
         }
     }
 
     private void updateUI() {
-//        Intent intent = getActivity().getIntent();
-//        String userEmail = intent.getStringExtra("userEmail");
-//        userId = userRepository.getUserId(userEmail);
-        userId = 1;
+        Intent intent = getActivity().getIntent();
+        for (User user : userRepository.getAllUsers()) {
+            Log.d("UserRepository", "User: " + user.getEmail() + ", ID: " + user.getUserId());
+        }
+        String userEmail = intent.getStringExtra("userEmail");
+        Log.d("HomeFragment", "userEmail: " + userEmail);
+        userId = userRepository.getUserId(userEmail);
+        Log.d("HomeFragment", "userId: " + userId);
+//        userId = 1;
         quizRepository.filterQuizzesByUserId(userId);
         List<Quiz> quizList = QuizRepository.getQuizList();
 

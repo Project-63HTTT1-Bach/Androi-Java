@@ -111,26 +111,14 @@ public class UserRepository {
                 for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                     User user = userSnapshot.getValue(User.class);
                     if (user != null) {
-                        ContentValues contentValues = new ContentValues();
-                        contentValues.put("userId", userSnapshot.child("id").getValue(Integer.class));  // Sử dụng 'id' từ Firebase làm userId
-                        contentValues.put("username", user.getUsername());
-                        contentValues.put("password", user.getPassword());
-                        contentValues.put("fullname", user.getFullname());
-                        contentValues.put("email", user.getEmail());
-                        contentValues.put("profilePicture", user.getProfilePicture());
-                        contentValues.put("birthday", user.getBirthday());
-                        contentValues.put("phone", user.getPhone());
-
+                        user.setUserId(userSnapshot.child("id").getValue(Integer.class));
                         try {
-                            SQLiteDatabase db = dbHelper.getWritableDatabase();
-                            db.insertOrThrow("user", null, contentValues);
-                        } catch (SQLiteConstraintException e) {
+                            addUser(user); // Sử dụng phương thức addUser thay vì chèn trực tiếp vào cơ sở dữ liệu
+                        } catch (Exception e) {
                             Log.e("UserRepository", "Error inserting user: " + user.getEmail(), e);
                         }
                     }
                 }
-                // Tải lại danh sách người dùng từ SQLite vào userList
-                userList = dbHelper.getAllUsers();
             }
 
             @Override
