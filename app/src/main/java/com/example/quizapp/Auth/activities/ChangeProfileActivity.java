@@ -26,6 +26,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -49,6 +51,8 @@ public class ChangeProfileActivity extends AppCompatActivity {
     private String userEmail;
     private String selectedAvatarBase64;
     private ImageView selectedAvatarView;
+    private UserRepository userRepository;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
 
         database = FirebaseDatabase.getInstance();
         userEmail = getIntent().getStringExtra("userEmail");
+        userRepository = new UserRepository(this);
 
         loadUserData(userEmail);
     }
@@ -203,7 +208,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
     }
 
 
-
     private void updateUserData() {
         String newFullName = etFullname.getText().toString().trim();
         String newBirthday = etBirthday.getText().toString().trim();
@@ -221,6 +225,16 @@ public class ChangeProfileActivity extends AppCompatActivity {
                             userRef.child(userId).child("birthday").setValue(newBirthday);
                             userRef.child(userId).child("phone").setValue(newPhone);
                             userRef.child(userId).child("profilePicture").setValue(selectedAvatarBase64);
+
+                            User user = new User();
+                            user.setUserId(Integer.parseInt(userId)); // Chuyển đổi userId từ String sang int
+                            user.setUsername(email);
+                            user.setFullname(newFullName);
+                            user.setBirthday(newBirthday);
+                            user.setPhone(newPhone);
+                            user.setProfilePicture(selectedAvatarBase64);
+                            userRepository.updateUser(user);
+
                             Toast.makeText(ChangeProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(ChangeProfileActivity.this, SettingActivity.class);
