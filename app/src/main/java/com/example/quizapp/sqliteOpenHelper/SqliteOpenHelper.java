@@ -126,6 +126,11 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         return db.delete("user", "userId = ? ", new String[]{Integer.toString(userId)});
     }
 
+    public void deleteAllUsers() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM user");
+    }
+
     public ArrayList<User> getAllUsers() {
         ArrayList<User> array_list = new ArrayList<>();
 
