@@ -25,11 +25,12 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
     private List<Quiz> quizItems;
     private List<Quiz> quizItemsOld;
     private final Context context;
-
-    public QuizAdapter(Context context, List<Quiz> quizItems) {
+    private int userId;
+    public QuizAdapter(Context context, List<Quiz> quizItems, int userId) {
         this.context = context;
         this.quizItems = quizItems;
         this.quizItemsOld = quizItems;
+        this.userId = userId;
     }
 
     @NonNull
@@ -56,6 +57,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
             intent.putExtra("timeLimit", item.getTimeLimit());
             intent.putExtra("iconImage", item.getIconImage());
             intent.putExtra("quizCode", item.getQuizCode());
+            intent.putExtra("userId", userId);
             context.startActivity(intent);
         });
     }
