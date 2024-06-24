@@ -11,9 +11,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.quizapp.Auth.activities.LoginActivity;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    private UserRepository userRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,9 @@ public class SplashScreenActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        userRepository = new UserRepository(this);
+        userRepository.importUsersFromFirebase();
 
         new Handler().postDelayed(new Runnable() {
             @Override

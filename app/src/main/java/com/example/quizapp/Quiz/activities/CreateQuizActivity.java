@@ -1,5 +1,6 @@
 package com.example.quizapp.Quiz.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -26,6 +28,7 @@ public class CreateQuizActivity extends AppCompatActivity {
     private TextView descriptionTextView;
     private TextView quizCodeTextView;
     private UserRepository userRepository;
+    private AppCompatButton btnEdit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,7 @@ public class CreateQuizActivity extends AppCompatActivity {
         descriptionTextView = (TextView) findViewById(R.id.decription);
         quizCodeTextView = (TextView) findViewById(R.id.quizCode);
         btnBack = (ImageView) findViewById(R.id.btnBack);
+        btnEdit = (AppCompatButton) findViewById(R.id.btnEdit);
 
         String quizName = getIntent().getStringExtra("quizName");
         int creatorId = getIntent().getIntExtra("creatorId", -1);
@@ -78,5 +82,10 @@ public class CreateQuizActivity extends AppCompatActivity {
         quizCodeTextView.setText(quizCode);
 
         btnBack.setOnClickListener(v -> finish());
+
+        btnEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(CreateQuizActivity.this, EditDescriptionActivity.class);
+            startActivity(intent);
+        });
     }
 }
