@@ -175,28 +175,28 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/btnOnLoginGithub"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/link_border"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="25dp"
-                    android:paddingVertical="15dp">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/btnOnLoginGithub"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:background="@drawable/link_border"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="25dp"-->
+<!--                    android:paddingVertical="15dp">-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:src="@drawable/github" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginEnd="20dp"-->
+<!--                        android:src="@drawable/github" />-->
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Continue with Github"
-                        android:textSize="18sp" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Continue with Github"-->
+<!--                        android:textSize="18sp" />-->
+<!--                </LinearLayout>-->
 
             </LinearLayout>
         </ScrollView>

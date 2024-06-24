@@ -55,6 +55,15 @@ public class UserRepository {
         return null;
     }
 
+    public int getUserId(String email) {
+        for (User user : userList) {
+            if (user.getEmail().equals(email)) {
+                return user.getUserId();
+            }
+        }
+        return -1;
+    }
+
     public ArrayList<User> getAllUsers() {
         return userList;
     }

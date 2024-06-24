@@ -49,6 +49,7 @@ public class DiscoveryFragment extends Fragment {
     private QuizRepository quizRepository;
     private FriendRepository friendRepository;
     private UserRepository userRepository;
+    private int userId;
 
     public DiscoveryFragment() {
         // Required empty public constructor
@@ -84,13 +85,15 @@ public class DiscoveryFragment extends Fragment {
 
         friendRepository = new FriendRepository(getContext());
         quizRepository = new QuizRepository(getContext());
-        initData();
 
-        int userId = 1;
+//        Intent intent = getActivity().getIntent();
+//        String userEmail = intent.getStringExtra("userEmail");
+//        int userId = userRepository.getUserId(userEmail);
+        userId = 1;
         quizRepository.filterQuizzesByUserId(userId);
 
         List<Quiz> quizList = QuizRepository.getQuizList();
-        quizAdapter = new QuizAdapter(getContext(), quizList);
+        quizAdapter = new QuizAdapter(getContext(), quizList, userId);
         rvQuizzes.setAdapter(quizAdapter);
 
         friendRepository.filterFriendByUserId(userId);
@@ -100,18 +103,6 @@ public class DiscoveryFragment extends Fragment {
         rvFriends.setAdapter(friendAdapter);
 
         return view;
-    }
-
-    private void initData(){
-        Random random = new Random();
-        List<User> users = UserRepository.getUserList();
-        for (int i = 0; i < 100; i++) {
-            int friendId = i + 1;
-            int userId = users.get(random.nextInt(users.size())).getUserId();
-            int friendUserId = users.get(random.nextInt(users.size())).getUserId();
-            Friend friend = new Friend(friendId, userId, friendUserId);
-            friendRepository.addFriend(friend);
-        }
     }
 
     @Override
@@ -125,6 +116,7 @@ public class DiscoveryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FindFriendsActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -133,6 +125,7 @@ public class DiscoveryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AllQuizActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
