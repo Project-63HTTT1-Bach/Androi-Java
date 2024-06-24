@@ -36,6 +36,7 @@ public class AllQuizActivity extends AppCompatActivity {
     private QuizAdapter quizAdapter;
     private Toolbar toolbar;
     private SearchView searchView;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +53,17 @@ public class AllQuizActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+//        Intent intent = getIntent();
+//        userId = intent.getIntExtra("userId", -1);
+        userId = 1;
+
         rvQuizzes = findViewById(R.id.rvQuizzes);
         rvQuizzes.setLayoutManager(new LinearLayoutManager(this));
 
         quizRepository = new QuizRepository(this);
 
         List<Quiz> quizList = QuizRepository.getQuizList();
-        quizAdapter = new QuizAdapter(this, quizList);
+        quizAdapter = new QuizAdapter(this, quizList, userId);
         rvQuizzes.setAdapter(quizAdapter);
 
         btnBack = findViewById(R.id.btnBack);
