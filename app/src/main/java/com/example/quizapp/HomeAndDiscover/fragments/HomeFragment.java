@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         sharedPreferences = getContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-//        resetInitDataFlag();
+        resetInitDataFlag();
 
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -122,12 +122,14 @@ public class HomeFragment extends Fragment {
 
         boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
 
-        if (!initDataDone) {
-            initDataTask = new InitDataTask();
-            initDataTask.execute();
-        } else {
-            updateUI();
-        }
+
+//        if (!initDataDone) {
+//            initDataTask = new InitDataTask();
+//            initDataTask.execute();
+//        } else {
+//            updateUI();
+//        }
+
         return view;
     }
 
@@ -144,7 +146,9 @@ public class HomeFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(KEY_INIT_DATA_DONE, true);
             editor.apply();
-            updateUI();
+            if (isAdded()) { // Ensure fragment is attached before calling updateUI
+                updateUI();
+            }
         }
     }
 
@@ -266,5 +270,13 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
+
+        if (!initDataDone) {
+            initDataTask = new InitDataTask();
+            initDataTask.execute();
+        } else {
+            updateUI();
+        }
     }
 }

@@ -20,7 +20,9 @@ import java.util.ArrayList;
 
 public class SqliteOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "quizapp.db";
-    private static final int DATABASE_VERSION = 28;
+
+    private static final int DATABASE_VERSION = 33;
+
 
     public SqliteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -28,7 +30,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY AUTOINCREMENT, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
+        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" + "quizId INTEGER PRIMARY KEY, " + "quizName TEXT NOT NULL, " + "creatorId INTEGER NOT NULL, " + "startTime TEXT, " + "endTime TEXT, " + "description TEXT, " + "isPublic INTEGER, " + "timeLimit INTEGER, " + "iconImage TEXT, " + "quizCode TEXT, " + "FOREIGN KEY (creatorId) REFERENCES user(userId))";
