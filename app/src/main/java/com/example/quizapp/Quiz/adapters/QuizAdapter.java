@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.Quiz.activities.CreateQuizActivity;
 import com.example.quizapp.Quiz.activities.DescriptionQuizActivity;
 import com.example.quizapp.R;
 import com.example.quizapp.Quiz.models.Quiz;
@@ -47,7 +48,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
         holder.quizIcon.setImageResource(imageResource);
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, DescriptionQuizActivity.class);
+            Intent intent = new Intent(context, CreateQuizActivity.class);
             intent.putExtra("quizName", item.getQuizName());
             intent.putExtra("creatorId", item.getCreatorId());
             intent.putExtra("startTime", item.getStartTime());
