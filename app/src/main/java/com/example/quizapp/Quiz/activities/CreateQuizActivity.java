@@ -3,6 +3,7 @@ package com.example.quizapp.Quiz.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,11 +35,6 @@ public class CreateQuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_create_quiz);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
 
         userRepository = new UserRepository(this);
 
@@ -52,6 +48,7 @@ public class CreateQuizActivity extends AppCompatActivity {
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnEdit = (AppCompatButton) findViewById(R.id.btnEdit);
 
+        int quizId = getIntent().getIntExtra("quizId", -1);
         String quizName = getIntent().getStringExtra("quizName");
         int creatorId = getIntent().getIntExtra("creatorId", -1);
         String startTime = getIntent().getStringExtra("startTime");
@@ -81,11 +78,30 @@ public class CreateQuizActivity extends AppCompatActivity {
         descriptionTextView.setText(description);
         quizCodeTextView.setText(quizCode);
 
-        btnBack.setOnClickListener(v -> finish());
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
-        btnEdit.setOnClickListener(v -> {
-            Intent intent = new Intent(CreateQuizActivity.this, EditDescriptionActivity.class);
-            startActivity(intent);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CreateQuizActivity.this, EditDescriptionActivity.class);
+                intent.putExtra("quizId", quizId);
+                intent.putExtra("quizName", quizName);
+                intent.putExtra("creatorId", creatorId);
+                intent.putExtra("startTime", startTime);
+                intent.putExtra("endTime", endTime);
+                intent.putExtra("description", description);
+                intent.putExtra("isPublic", isPublic);
+                intent.putExtra("timeLimit", timeLimit);
+                intent.putExtra("iconImage", iconImage);
+                intent.putExtra("quizCode", quizCode);
+                startActivity(intent);
+                finish();
+            }
         });
     }
 }
