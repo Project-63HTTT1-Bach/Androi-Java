@@ -104,11 +104,10 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         sharedPreferences = getContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        resetInitDataFlag();
+//        resetInitDataFlag();
 
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -122,13 +121,12 @@ public class HomeFragment extends Fragment {
 
         boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
 
-
-//        if (!initDataDone) {
-//            initDataTask = new InitDataTask();
-//            initDataTask.execute();
-//        } else {
-//            updateUI();
-//        }
+        if (!initDataDone) {
+            initDataTask = new InitDataTask();
+            initDataTask.execute();
+        } else {
+            updateUI();
+        }
 
         return view;
     }
@@ -168,10 +166,10 @@ public class HomeFragment extends Fragment {
 //            userRepository.addUser(user);
 //        }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             int quizId = i + 1;
             String quizName = "Quiz " + (i + 1);
-            int creatorId = random.nextInt(6) + 1;
+            int creatorId = random.nextInt(userRepository.getUserCount()) + 1;
             String startTime = "2024-06-19 09:00";
             String endTime = "2024-06-19 10:00";
             String description = "Description for Quiz " + (i + 1);
@@ -199,11 +197,11 @@ public class HomeFragment extends Fragment {
             }
 
             for (User user : users) {
-                int resultId = (i * 20) + user.getUserId() + 1;
-                int userId = random.nextInt(6) + 1;
+                int resultId = (i * userRepository.getUserCount()) + user.getUserId();
+                int userId = user.getUserId();
                 int score = random.nextInt(101);
                 String completionDate = "2024-06-19";
-                int correctAnswers = random.nextInt(6);
+                int correctAnswers = random.nextInt(5);
                 int incorrectAnswers = 5 - correctAnswers;
                 Result result = new Result(resultId, userId, quizId, score, completionDate, correctAnswers, incorrectAnswers);
                 resultRepository.addResult(result);
@@ -212,23 +210,21 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < 10; i++) {
             int friendId = i + 1;
-            int userId = random.nextInt(6) + 1;
-            int friendUserId = random.nextInt(6) + 1;
+            int userId = random.nextInt(userRepository.getUserCount()) + 1;
+            int friendUserId = random.nextInt(userRepository.getUserCount()) + 1;
             Friend friend = new Friend(friendId, userId, friendUserId);
             friendRepository.addFriend(friend);
         }
+
     }
 
     private void updateUI() {
         Intent intent = getActivity().getIntent();
-        for (User user : userRepository.getAllUsers()) {
-            Log.d("UserRepository", "User: " + user.getEmail() + ", ID: " + user.getUserId());
-        }
         String userEmail = intent.getStringExtra("userEmail");
         Log.d("HomeFragment", "userEmail: " + userEmail);
         userId = userRepository.getUserId(userEmail);
         Log.d("HomeFragment", "userId: " + userId);
-//        userId = 1;
+
         quizRepository.filterQuizzesByUserId(userId);
         List<Quiz> quizList = QuizRepository.getQuizList();
 
@@ -270,13 +266,5 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
-
-        if (!initDataDone) {
-            initDataTask = new InitDataTask();
-            initDataTask.execute();
-        } else {
-            updateUI();
-        }
     }
 }
