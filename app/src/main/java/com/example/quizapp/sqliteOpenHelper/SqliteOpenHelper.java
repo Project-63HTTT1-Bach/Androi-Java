@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
-import com.example.quizapp.HomeAndDiscover.fragments.HomeFragment;
-
 import com.example.quizapp.Quiz.models.Answer;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
 import com.example.quizapp.Quiz.models.Question;
@@ -30,7 +28,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT)";
+        String CREATE_USER_TABLE = "CREATE TABLE user (" + "userId INTEGER PRIMARY KEY, " + "username TEXT NOT NULL, " + "password TEXT NOT NULL, " + "fullname TEXT NOT NULL, " + "email TEXT NOT NULL, " + "profilePicture TEXT, " + "birthDay TEXT," + "phone TEXT," +"createAt TEXT)";
         db.execSQL(CREATE_USER_TABLE);
 
         String CREATE_QUIZ_TABLE = "CREATE TABLE quiz (" + "quizId INTEGER PRIMARY KEY, " + "quizName TEXT NOT NULL, " + "creatorId INTEGER NOT NULL, " + "startTime TEXT, " + "endTime TEXT, " + "description TEXT, " + "isPublic INTEGER, " + "timeLimit INTEGER, " + "iconImage TEXT, " + "quizCode TEXT, " + "FOREIGN KEY (creatorId) REFERENCES user(userId))";
@@ -60,7 +58,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertUser(String username, String password, String fullname, String email, String profilePicture, String birthDay, String phone) {
+    public boolean insertUser(String username, String password, String fullname, String email, String profilePicture, String birthDay, String phone, String createAt) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -70,11 +68,12 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("birthday", birthDay);
         contentValues.put("email", email);
         contentValues.put("profilePicture", profilePicture);
+        contentValues.put("createAt", createAt);
         db.insert("user", null, contentValues);
         return true;
     }
 
-    public boolean updateUser(int userId, String username, String password, String fullname, String email, String profilePicture, String birthDay, String phone) {
+    public boolean updateUser(int userId, String username, String password, String fullname, String email, String profilePicture, String birthDay, String phone, String createAt) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("username", username);
@@ -84,6 +83,7 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         contentValues.put("birthday", birthDay);
         contentValues.put("email", email);
         contentValues.put("profilePicture", profilePicture);
+        contentValues.put("createAt", createAt);
         db.update("user", contentValues, "userId = ? ", new String[]{Integer.toString(userId)});
         return true;
     }
@@ -113,8 +113,9 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             int birthdayIndex = res.getColumnIndex("birthday");
             int emailIndex = res.getColumnIndex("email");
             int profilePictureIndex = res.getColumnIndex("profilePicture");
+            int createAtIndex = res.getColumnIndex("createAt");
 
-            if (userIdIndex != -1 && birthdayIndex != -1 && usernameIndex != -1 && passwordIndex != -1 && fullnameIndex != -1 && phoneIndex != -1 && emailIndex != -1 && profilePictureIndex != -1) {
+            if (userIdIndex != -1 && birthdayIndex != -1 && usernameIndex != -1 && passwordIndex != -1 && fullnameIndex != -1 && phoneIndex != -1 && emailIndex != -1 && profilePictureIndex != -1 && createAtIndex != -1) {
                 do {
                     int userId = res.getInt(userIdIndex);
                     String username = res.getString(usernameIndex);
@@ -124,7 +125,8 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
                     String email = res.getString(emailIndex);
                     String birthday = res.getString(birthdayIndex);
                     String profilePicture = res.getString(profilePictureIndex);
-                    User user = new User(userId, username, password, fullname, email, profilePicture, birthday, phone);
+                    String createAt = res.getString(createAtIndex);
+                    User user = new User(userId, username, password, fullname, email, profilePicture, birthday, phone, createAt);
                     array_list.add(user);
                 } while (res.moveToNext());
             }

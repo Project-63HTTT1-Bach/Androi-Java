@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +32,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.ByteArrayOutputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -136,7 +137,10 @@ public class RegisterActivity extends AppCompatActivity {
                                                 // Lấy hình ảnh từ drawable và chuyển đổi thành chuỗi Base64
                                                 String profilePictureBase64 = getImageBase64();
 
-                                                User user = new User(newId, email, password, email, email, profilePictureBase64, defaultBirthday, defaultPhone);
+                                                // Lấy ngày hiện tại
+                                                String createAt = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+                                                User user = new User(newId, email, password, email, email, profilePictureBase64, defaultBirthday, defaultPhone, createAt);
 
                                                 // Lưu người dùng mới vào Firebase
                                                 HashMap<String, Object> map = new HashMap<>();
@@ -148,6 +152,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 map.put("profilePicture", profilePictureBase64);
                                                 map.put("birthday", defaultBirthday);
                                                 map.put("phone", defaultPhone);
+                                                map.put("createAt", createAt); // Thêm trường createAt
                                                 database.getReference().child("users").child(newId.toString()).setValue(map);
 
                                                 // Lưu người dùng mới vào SQLite

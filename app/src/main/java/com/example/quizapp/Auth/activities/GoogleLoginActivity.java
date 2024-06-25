@@ -2,13 +2,11 @@ package com.example.quizapp.Auth.activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.Shader;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
@@ -47,7 +45,10 @@ import android.graphics.drawable.Drawable;
 
 import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class GoogleLoginActivity extends LoginActivity {
     FirebaseAuth mAuth;
@@ -201,10 +202,12 @@ public class GoogleLoginActivity extends LoginActivity {
                         String defaultBirthday = "";
                         String defaultPhone = "";
 
+                        String createAt = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
                         // Tạo chuỗi ngẫu nhiên cho password
                         String randomPassword = generateRandomString();
 
-                        User newUser = new User(newId, email, randomPassword, fullName, email, avatarBase64, defaultBirthday, defaultPhone);
+                        User newUser = new User(newId, email, randomPassword, fullName, email, avatarBase64, defaultBirthday, defaultPhone, createAt);
 
                         // Lưu người dùng mới vào Firebase
                         HashMap<String, Object> map = new HashMap<>();
