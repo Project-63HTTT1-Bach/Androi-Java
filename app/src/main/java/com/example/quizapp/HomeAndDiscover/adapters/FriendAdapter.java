@@ -2,6 +2,9 @@
 package com.example.quizapp.HomeAndDiscover.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
 import com.example.quizapp.R;
 import com.google.firebase.database.DataSnapshot;
@@ -25,10 +30,12 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
 
     private List<Friend> friends;
     private Context context;
+    private UserRepository userRepository;
 
-    public FriendAdapter(Context context, List<Friend> friends) {
+    public FriendAdapter(Context context, List<Friend> friends, UserRepository userRepository) {
         this.friends = friends;
         this.context = context;
+        this.userRepository = userRepository;
     }
 
     @NonNull
@@ -49,6 +56,11 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
         return friends.size();
     }
 
+    public void updateList(List<Friend> newList) {
+        friends = newList;
+        notifyDataSetChanged();
+    }
+
     public class FriendViewHolder extends RecyclerView.ViewHolder {
 
         ImageView friendAvatar;
@@ -61,23 +73,21 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
         }
 
         public void bind(Friend friend) {
-            DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(String.valueOf(friend.getFriendUserId()));
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        String fullName = snapshot.child("fullname").getValue(String.class);
-                        friendName.setText(fullName);
-                    } else {
-                        friendName.setText("Unknown");
-                    }
-                }
+            User user = userRepository.getUser(friend.getFriendUserId());
+            if (user != null) {
+                friendName.setText(user.getFullname());
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    friendName.setText("Error");
+                if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
+                    byte[] decodedString = Base64.decode(user.getProfilePicture(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    friendAvatar.setImageBitmap(decodedByte);
+                } else {
+                    friendAvatar.setImageResource(R.drawable.user_avatar);
                 }
-            });
+            } else {
+                friendName.setText("Unknown");
+                friendAvatar.setImageResource(R.drawable.user_avatar);
+            }
         }
     }
 }

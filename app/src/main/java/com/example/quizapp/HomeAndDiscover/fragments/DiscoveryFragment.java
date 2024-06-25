@@ -105,7 +105,7 @@ public class DiscoveryFragment extends Fragment {
         friendRepository.filterFriendByUserId(userId);
 
         List<Friend> friendList = FriendRepository.getFriendList();
-        friendAdapter = new FriendAdapter(getContext(), friendList);
+        friendAdapter = new FriendAdapter(getContext(), friendList, userRepository);
         rvFriends.setAdapter(friendAdapter);
     }
 

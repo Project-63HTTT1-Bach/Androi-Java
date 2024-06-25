@@ -7,7 +7,7 @@ public class Friend {
     private int friendUserId;
 
     public Friend(int friendId, int userId, int friendUserId) {
-        this.friendId = friendId;
+//        this.friendId = friendId;
         this.userId = userId;
         this.friendUserId = friendUserId;
     }

@@ -4,6 +4,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
@@ -40,7 +46,6 @@ import java.io.ByteArrayOutputStream;
 public class ChangeProfileActivity extends AppCompatActivity {
     private static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int REQUEST_CAMERA_PERMISSION = 100;
-    private static final int REQUEST_CAMERA2_CAPTURE = 101;
 
     private ImageView btnBack, iv1, iv2, iv3, iv4, iv5, iv6;
     private TextView tvEmail;
@@ -52,7 +57,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
     private String selectedAvatarBase64;
     private ImageView selectedAvatarView;
     private UserRepository userRepository;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +89,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
         iv3.setOnClickListener(v -> selectAvatar(iv3, R.drawable.user_avatar3));
         iv4.setOnClickListener(v -> selectAvatar(iv4, R.drawable.user_avatar4));
         iv5.setOnClickListener(v -> selectAvatar(iv5, R.drawable.user_avatar5));
-        iv6.setOnClickListener(v -> openCamera2Activity());
+        iv6.setOnClickListener(v -> dispatchTakePictureIntent());
 
         btnBack.setOnClickListener(v -> finish());
         btnSave.setOnClickListener(v -> showConfirmDialog());
@@ -103,7 +107,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
         selectedAvatarView = imageView;
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableId);
-        selectedAvatarBase64 = encodeToBase64(bitmap);
+        selectedAvatarBase64 = encodeToBase64(getCircularBitmap(bitmap, 200, 200)); // Set kích thước cố định 200x200
     }
 
     private void clearAvatarSelection() {
@@ -113,11 +117,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
         iv4.setImageResource(R.drawable.user_avatar4);
         iv5.setImageResource(R.drawable.user_avatar5);
         iv6.setImageResource(R.drawable.photo_camera);
-    }
-
-    private void openCamera2Activity() {
-        Intent intent = new Intent(this, Camera2Activity.class);
-        startActivityForResult(intent, REQUEST_CAMERA2_CAPTURE);
     }
 
     private void dispatchTakePictureIntent() {
@@ -130,14 +129,14 @@ public class ChangeProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CAMERA2_CAPTURE && resultCode == RESULT_OK) {
-            String imageBase64 = data.getStringExtra("imageBase64");
-            byte[] decodedString = Base64.decode(imageBase64, Base64.DEFAULT);
-            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-            clearAvatarSelection();  // Clear previous selection
-            iv6.setImageBitmap(decodedByte);
-            selectedAvatarBase64 = imageBase64;
+            clearAvatarSelection(); // Clear previous selection
+            Bitmap circularBitmap = getCircularBitmap(imageBitmap, 200, 200); // Set kích thước cố định 200x200
+            iv6.setImageBitmap(circularBitmap);
+            selectedAvatarBase64 = encodeToBase64(circularBitmap);
             iv6.setImageResource(R.drawable.ic_avatarselected);
         }
     }
@@ -147,6 +146,25 @@ public class ChangeProfileActivity extends AppCompatActivity {
         image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
         byte[] byteArray = byteArrayOutputStream.toByteArray();
         return Base64.encodeToString(byteArray, Base64.DEFAULT);
+    }
+
+    private Bitmap getCircularBitmap(Bitmap bitmap, int width, int height) {
+        Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, height, false);
+        Bitmap output = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, width, height);
+        final RectF rectF = new RectF(rect);
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        canvas.drawOval(rectF, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(scaledBitmap, rect, rect, paint);
+
+        return output;
     }
 
     private void loadUserData(String email) {
@@ -169,6 +187,8 @@ public class ChangeProfileActivity extends AppCompatActivity {
                         if (profilePicture != null) {
                             byte[] decodedString = Base64.decode(profilePicture, Base64.DEFAULT);
                             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                            Bitmap circularBitmap = getCircularBitmap(decodedByte, 200, 200); // Set kích thước cố định 200x200
+                            iv6.setImageBitmap(circularBitmap);
                             selectedAvatarBase64 = profilePicture;
                         }
                     }
@@ -183,7 +203,6 @@ public class ChangeProfileActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void showConfirmDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -204,9 +223,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
         });
 
         dialog.show();
-
     }
-
 
     private void updateUserData() {
         String newFullName = etFullname.getText().toString().trim();
