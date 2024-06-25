@@ -87,4 +87,7 @@ public class QuizRepository {
         }
         return false;
     }
+    public int getQuestionCountByQuizId(int quizId) {
+        return dbHelper.getQuestionCountByQuizId(quizId);
+    }
 }

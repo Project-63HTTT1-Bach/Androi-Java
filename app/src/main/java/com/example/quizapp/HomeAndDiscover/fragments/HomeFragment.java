@@ -208,7 +208,7 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             int friendId = i + 1;
             int userId = random.nextInt(userRepository.getUserCount()) + 1;
             int friendUserId = random.nextInt(userRepository.getUserCount()) + 1;
@@ -266,5 +266,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        updateUI();
     }
 }

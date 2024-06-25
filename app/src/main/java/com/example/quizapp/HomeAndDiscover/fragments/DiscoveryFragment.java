@@ -2,6 +2,7 @@ package com.example.quizapp.HomeAndDiscover.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,11 +86,16 @@ public class DiscoveryFragment extends Fragment {
 
         friendRepository = new FriendRepository(getContext());
         quizRepository = new QuizRepository(getContext());
+        userRepository = new UserRepository(getContext());
 
-//        Intent intent = getActivity().getIntent();
-//        String userEmail = intent.getStringExtra("userEmail");
-//        int userId = userRepository.getUserId(userEmail);
-        userId = 1;
+        Intent intent = getActivity().getIntent();
+        String userEmail = intent.getStringExtra("userEmail");
+        userId = userRepository.getUserId(userEmail);
+        updateUI();
+        return view;
+    }
+
+    private void updateUI() {
         quizRepository.filterQuizzesByUserId(userId);
 
         List<Quiz> quizList = QuizRepository.getQuizList();
@@ -101,8 +107,6 @@ public class DiscoveryFragment extends Fragment {
         List<Friend> friendList = FriendRepository.getFriendList();
         friendAdapter = new FriendAdapter(getContext(), friendList);
         rvFriends.setAdapter(friendAdapter);
-
-        return view;
     }
 
     @Override
@@ -129,5 +133,6 @@ public class DiscoveryFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        updateUI();
     }
 }
