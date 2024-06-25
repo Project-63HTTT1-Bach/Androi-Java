@@ -21,7 +21,7 @@ import java.util.ArrayList;
 public class SqliteOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "quizapp.db";
 
-    private static final int DATABASE_VERSION = 54;
+    private static final int DATABASE_VERSION = 55;
 
 
     public SqliteOpenHelper(Context context) {
@@ -208,6 +208,18 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
             res.close();
         }
         return array_list;
+    }
+
+    public int getQuestionCountByQuizId(int quizId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT COUNT(*) FROM question WHERE quizId = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(quizId)});
+        int count = 0;
+        if (cursor.moveToFirst()) {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+        return count;
     }
 
     public boolean insertQuestion(int quizId, String questionText, String questionType) {

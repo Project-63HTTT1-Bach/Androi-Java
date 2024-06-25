@@ -8,16 +8,6 @@
     android:background="@drawable/primary_background"
     tools:context=".Quiz.activities.EditDescriptionActivity">
 
-    <ImageView
-        android:id="@+id/image_view_back"
-        android:layout_width="24dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_back" />
-
     <include layout="@layout/layout_desc" />
 
     <ImageView
@@ -46,19 +36,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/text_view_exam_test"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Exam test"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:hint="Quiz Name"
+            android:textSize="20sp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/input_quiz_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal">
 
             <TextView
@@ -68,18 +61,12 @@
                 android:text="Questions: "
                 android:textSize="18sp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/text_view_questions_count"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/input_questions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Number of questions"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:text="0"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -112,8 +99,6 @@
                     android:id="@+id/input_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="false"
                     android:hint="Select time" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

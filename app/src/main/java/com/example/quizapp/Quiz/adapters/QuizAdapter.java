@@ -50,6 +50,7 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
         holder.quizIcon.setImageResource(imageResource);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, CreateQuizActivity.class);
+            intent.putExtra("quizId", item.getQuizId());
             intent.putExtra("quizName", item.getQuizName());
             intent.putExtra("creatorId", item.getCreatorId());
             intent.putExtra("startTime", item.getStartTime());
