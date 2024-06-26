@@ -33,6 +33,7 @@ public class DescriptionQuizActivity extends AppCompatActivity {
     private UserRepository userRepository;
     private QuizRepository quizRepository;
     private AppCompatButton btnStart;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,9 @@ public class DescriptionQuizActivity extends AppCompatActivity {
         String quizCode = getIntent().getStringExtra("quizCode");
         int question = quizRepository.getQuestionCountByQuizId(quizId);
 
+        Intent intent = getIntent();
+        userId = intent.getIntExtra("userId", -1);
+
         User creator = userRepository.getUser(creatorId);
         if (creator == null) {
             Toast.makeText(this, "Creator not found", Toast.LENGTH_SHORT).show();
@@ -87,10 +91,11 @@ public class DescriptionQuizActivity extends AppCompatActivity {
         btnBack.setOnClickListener(v -> finish());
 
         btnStart.setOnClickListener(v -> {
-            Intent intent = new Intent(DescriptionQuizActivity.this, QuestionActivity.class);
-            intent.putExtra("quizId", quizId);
-            intent.putExtra("timeLimit", timeLimit);
-            startActivity(intent);
+            Intent intent2 = new Intent(DescriptionQuizActivity.this, QuestionActivity.class);
+            intent2.putExtra("quizId", quizId);
+            intent2.putExtra("userId", userId);
+            intent2.putExtra("timeLimit", timeLimit);
+            startActivity(intent2);
         });
     }
 }
