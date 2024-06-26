@@ -19,9 +19,8 @@ import java.util.ArrayList;
 public class SqliteOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "quizapp.db";
 
-    private static final int DATABASE_VERSION = 57;
-
-
+    private static final int DATABASE_VERSION = 59;
+    
     public SqliteOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

@@ -69,6 +69,7 @@ public class JoinQuizActivity extends AppCompatActivity {
                 Quiz quiz = quizRepository.getQuizByCode(code);
                 if (quiz != null) {
                     Intent intent2 = new Intent(JoinQuizActivity.this, DescriptionQuizActivity.class);
+                    intent2.putExtra("userId", userId);
                     intent2.putExtra("quizId", quiz.getQuizId());
                     intent2.putExtra("quizName", quiz.getQuizName());
                     intent2.putExtra("creatorId", quiz.getCreatorId());

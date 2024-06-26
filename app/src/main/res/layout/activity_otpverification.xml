@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
-            android:paddingHorizontal="20dp">
+            android:gravity="center">
 
             <EditText
                 android:id="@+id/etDigit1"
