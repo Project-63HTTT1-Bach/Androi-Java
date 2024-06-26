@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.R;
 import com.example.quizapp.Leaderboard.fragments.ChartFragment;
 import com.example.quizapp.HomeAndDiscover.fragments.DiscoveryFragment;
@@ -21,6 +22,8 @@ import com.example.quizapp.Auth.fragments.MeFragment;
 public class MainActivity extends AppCompatActivity {
     private int selectedTab = 1;
     private String userEmail;
+    private UserRepository userRepository;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        userRepository = new UserRepository(this);
+
         // Lấy email từ Intent
         Intent intent = getIntent();
         userEmail = intent.getStringExtra("userEmail");
+        userId = userRepository.getUserId(userEmail);
 
         final LinearLayout llHome = findViewById(R.id.llHome);
         final LinearLayout llDiscovery = findViewById(R.id.llDiscovery);
@@ -140,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, JoinQuizActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });

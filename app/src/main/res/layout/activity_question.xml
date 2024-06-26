@@ -12,9 +12,9 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="20dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/tv_question_count"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginEnd="4dp"
@@ -37,6 +38,7 @@
             android:src="@drawable/ic_clock" />
 
         <TextView
+            android:id="@+id/tv_timer"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="30s"
@@ -45,31 +47,32 @@
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progressBar2"
+        android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="20dp"
         android:progressDrawable="@drawable/progessbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/linearLayout" />
 
     <LinearLayout
-        android:id="@+id/optionConrainer"
+        android:id="@+id/optionContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/circle_border"
         android:orientation="vertical"
-        android:background="@drawable/auth_border"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar2">
+        app:layout_constraintTop_toBottomOf="@+id/progressBar">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView2"
@@ -78,8 +81,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="16dp"
-            android:background="#6A5AE0"
-            app:cardBackgroundColor="#6A5AE0"
+            app:cardBackgroundColor="@color/primaryColor"
             app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -87,22 +89,27 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/question"
+                android:id="@+id/tv_question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:textSize="24sp"
                 android:text="Question"
                 android:textColor="@color/white"
+                android:textSize="24sp"
                 android:textStyle="bold" />
-
         </androidx.cardview.widget.CardView>
 
-        <androidx.recyclerview.widget.RecyclerView
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+            android:layout_height="450dp"
+            android:layout_margin="20dp">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_options"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -47,7 +47,7 @@ public class UserRepository {
 
     public boolean addUser(User u) {
         if (!checkUser(u)) {
-            dbHelper.insertUser(u.getUsername(), u.getPassword(), u.getFullname(), u.getEmail(), u.getProfilePicture(), u.getBirthday(), u.getPhone());
+            dbHelper.insertUser(u.getUsername(), u.getPassword(), u.getFullname(), u.getEmail(), u.getProfilePicture(), u.getBirthday(), u.getPhone(), u.getCreateAt());
             userList.add(u); // Add to the static list
             return true;
         } else {
@@ -95,7 +95,7 @@ public class UserRepository {
                 user.setProfilePicture(u.getProfilePicture());
                 user.setFullname(u.getFullname());
                 user.setPassword(u.getPassword());
-                dbHelper.updateUser(u.getUserId(), u.getUsername(), u.getPassword(), u.getFullname(), u.getEmail(), u.getProfilePicture(), u.getPhone(), u.getBirthday());
+                dbHelper.updateUser(u.getUserId(), u.getUsername(), u.getPassword(), u.getFullname(), u.getEmail(), u.getProfilePicture(), u.getBirthday(), u.getPhone(), u.getCreateAt());
                 return true;
             }
         }

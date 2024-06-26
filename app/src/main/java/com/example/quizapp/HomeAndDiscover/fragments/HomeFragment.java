@@ -71,7 +71,6 @@ public class HomeFragment extends Fragment {
     private InitDataTask initDataTask;
     private int userId;
     public HomeFragment() {
-        // Required empty public constructor
     }
 
     public static HomeFragment newInstance(String param1, String param2) {
@@ -144,7 +143,7 @@ public class HomeFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(KEY_INIT_DATA_DONE, true);
             editor.apply();
-            if (isAdded()) { // Ensure fragment is attached before calling updateUI
+            if (isAdded()) {
                 updateUI();
             }
         }
@@ -266,6 +265,12 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        updateUI();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
         updateUI();
     }
 }
