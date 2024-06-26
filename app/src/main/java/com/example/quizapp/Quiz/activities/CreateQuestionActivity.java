@@ -1,6 +1,7 @@
 package com.example.quizapp.Quiz.activities;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -72,7 +73,6 @@ public class CreateQuestionActivity extends AppCompatActivity {
     }
 
     private void showAddAnswerDialog() {
-        // Show dialog to add a new answer
         EditText input = new EditText(this);
         input.setHint("Enter answer text");
 
@@ -135,6 +135,9 @@ public class CreateQuestionActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Question saved successfully", Toast.LENGTH_SHORT).show();
+
+        Intent resultIntent = new Intent();
+        setResult(RESULT_OK, resultIntent);
         finish();
     }
 }

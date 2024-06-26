@@ -11,9 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Calendar;
 
@@ -24,11 +21,10 @@ import com.example.quizapp.R;
 public class EditDescriptionActivity extends AppCompatActivity {
     private ImageView btnBack;
     private EditText inputTime, inputStartTime, inputEndTime, inputQuizName, inputDescription;
-    private TextView textViewQuestionsCount;
     private AppCompatButton btnEditQuestions, btnSave;
     private QuizRepository quizRepository;
 
-    private int quizId;
+    private int quizId = -1;
     private String quizName;
     private int creatorId;
     private String startTime;
@@ -49,32 +45,35 @@ public class EditDescriptionActivity extends AppCompatActivity {
         inputStartTime = findViewById(R.id.input_start_time);
         inputEndTime = findViewById(R.id.input_end_time);
         inputDescription = findViewById(R.id.input_description);
-        textViewQuestionsCount = findViewById(R.id.text_view_questions_count);
         btnBack = findViewById(R.id.btnBack);
         btnEditQuestions = findViewById(R.id.button_edit_question);
         btnSave = findViewById(R.id.button_save);
 
         quizRepository = new QuizRepository(this);
 
-        quizId = getIntent().getIntExtra("quizId", -1);
-        quizName = getIntent().getStringExtra("quizName");
-        creatorId = getIntent().getIntExtra("creatorId", -1);
-        startTime = getIntent().getStringExtra("startTime");
-        endTime = getIntent().getStringExtra("endTime");
-        isPublic = getIntent().getBooleanExtra("isPublic", false);
-        description = getIntent().getStringExtra("description");
-        timeLimit = getIntent().getIntExtra("timeLimit", 0);
-        iconImage = getIntent().getStringExtra("iconImage");
-        quizCode = getIntent().getStringExtra("quizCode");
+        Intent intent = getIntent();
+        if (intent != null && intent.getExtras() != null) {
+            quizId = intent.getIntExtra("quizId", -1);
+            quizName = intent.getStringExtra("quizName");
+            creatorId = intent.getIntExtra("creatorId", -1);
+            startTime = intent.getStringExtra("startTime");
+            endTime = intent.getStringExtra("endTime");
+            isPublic = intent.getBooleanExtra("isPublic", false);
+            description = intent.getStringExtra("description");
+            timeLimit = intent.getIntExtra("timeLimit", 0);
+            iconImage = intent.getStringExtra("iconImage");
+            quizCode = intent.getStringExtra("quizCode");
 
-        inputQuizName.setText(quizName);
-        inputStartTime.setText(startTime);
-        inputEndTime.setText(endTime);
-        inputTime.setText(String.valueOf(timeLimit) + " minutes");
-        inputDescription.setText(description);
+            inputQuizName.setText(quizName);
+            inputStartTime.setText(startTime);
+            inputEndTime.setText(endTime);
+            inputTime.setText(timeLimit > 0 ? timeLimit + " minutes" : "");
+            inputDescription.setText(description);
+        }
 
-        int questionCount = quizRepository.getQuestionCountByQuizId(quizId);
-        textViewQuestionsCount.setText(String.valueOf(questionCount));
+        if (creatorId == -1) {
+            creatorId = intent.getIntExtra("userId", -1);
+        }
 
         btnBack.setOnClickListener(v -> finish());
 
@@ -82,13 +81,14 @@ public class EditDescriptionActivity extends AppCompatActivity {
         inputEndTime.setOnClickListener(v -> showDateTimePickerDialog(inputEndTime));
 
         btnEditQuestions.setOnClickListener(v -> {
-            Intent intent = new Intent(EditDescriptionActivity.this, AddQuestionActivity.class);
-            intent.putExtra("quizId", quizId);
-            intent.putExtra("quizName", quizName);
-            startActivity(intent);
+            if (quizId == -1) {
+                saveQuizDetails(true); // Save and navigate to AddQuestionActivity
+            } else {
+                navigateToAddQuestionActivity();
+            }
         });
 
-        btnSave.setOnClickListener(v -> saveQuizDetails());
+        btnSave.setOnClickListener(v -> saveQuizDetails(false));
     }
 
     private void showDateTimePickerDialog(EditText dateTimeField) {
@@ -112,7 +112,7 @@ public class EditDescriptionActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void saveQuizDetails() {
+    private void saveQuizDetails(boolean navigateToQuestions) {
         String quizName = inputQuizName.getText().toString().trim();
         String startTime = inputStartTime.getText().toString().trim();
         String endTime = inputEndTime.getText().toString().trim();
@@ -153,12 +153,37 @@ public class EditDescriptionActivity extends AppCompatActivity {
             return;
         }
 
-        Quiz updatedQuiz = new Quiz(quizId, quizName, creatorId, startTime, endTime, description, isPublic ? 1 : 0, timeLimit, iconImage, quizCode);
-        if (quizRepository.updateQuiz(updatedQuiz)) {
-            Toast.makeText(this, "Quiz updated successfully", Toast.LENGTH_SHORT).show();
-            finish();
+        if (quizId == -1) {
+            Quiz newQuiz = new Quiz(0, quizName, creatorId, startTime, endTime, description, isPublic ? 1 : 0, timeLimit, iconImage, quizCode);
+            if (quizRepository.addQuiz(newQuiz)) {
+                Toast.makeText(this, "Quiz added successfully", Toast.LENGTH_SHORT).show();
+                if (navigateToQuestions) {
+                    navigateToAddQuestionActivity();
+                } else {
+                    finish();
+                }
+            } else {
+                Toast.makeText(EditDescriptionActivity.this, "Failed to add quiz", Toast.LENGTH_LONG).show();
+            }
         } else {
-            Toast.makeText(EditDescriptionActivity.this, "Failed to update quiz", Toast.LENGTH_LONG).show();
+            Quiz updatedQuiz = new Quiz(quizId, quizName, creatorId, startTime, endTime, description, isPublic ? 1 : 0, timeLimit, iconImage, quizCode);
+            if (quizRepository.updateQuiz(updatedQuiz)) {
+                Toast.makeText(this, "Quiz updated successfully", Toast.LENGTH_SHORT).show();
+                if (navigateToQuestions) {
+                    navigateToAddQuestionActivity();
+                } else {
+                    finish();
+                }
+            } else {
+                Toast.makeText(EditDescriptionActivity.this, "Failed to update quiz", Toast.LENGTH_LONG).show();
+            }
         }
+    }
+
+    private void navigateToAddQuestionActivity() {
+        Intent addQuestionIntent = new Intent(EditDescriptionActivity.this, AddQuestionActivity.class);
+        addQuestionIntent.putExtra("quizId", quizId);
+        addQuestionIntent.putExtra("quizName", inputQuizName.getText().toString().trim());
+        startActivity(addQuestionIntent);
     }
 }

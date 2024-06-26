@@ -135,4 +135,10 @@ public class DiscoveryFragment extends Fragment {
         });
         updateUI();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
 }

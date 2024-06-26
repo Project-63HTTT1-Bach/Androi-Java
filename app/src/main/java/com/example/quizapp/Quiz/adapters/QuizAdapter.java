@@ -13,8 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quizapp.Quiz.activities.CreateQuizActivity;
-import com.example.quizapp.Quiz.activities.DescriptionQuizActivity;
+import com.example.quizapp.Quiz.activities.EditDescriptionActivity;
 import com.example.quizapp.R;
 import com.example.quizapp.Quiz.models.Quiz;
 
@@ -46,13 +45,26 @@ public class QuizAdapter extends RecyclerView.Adapter<QuizAdapter.QuizViewHolder
     public void onBindViewHolder(@NonNull QuizViewHolder holder, int position) {
         Quiz item = quizItems.get(position);
         holder.quizName.setText(item.getQuizName());
-        int imageResource = context.getResources().getIdentifier(item.getIconImage(), "drawable", context.getPackageName());
-        holder.quizIcon.setImageResource(imageResource);
+
+        String iconImageName = item.getIconImage();
+        if (iconImageName != null && !iconImageName.isEmpty()) {
+            int imageResource = context.getResources().getIdentifier(iconImageName, "drawable", context.getPackageName());
+            if (imageResource != 0) {
+                holder.quizIcon.setImageResource(imageResource);
+            } else {
+                int defaultImageResource = context.getResources().getIdentifier("ic_quiz1", "drawable", context.getPackageName());
+                holder.quizIcon.setImageResource(defaultImageResource);
+            }
+        } else {
+            int defaultImageResource = context.getResources().getIdentifier("ic_quiz1", "drawable", context.getPackageName());
+            holder.quizIcon.setImageResource(defaultImageResource);
+        }
+
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(context, CreateQuizActivity.class);
+            Intent intent = new Intent(context, EditDescriptionActivity.class);
             intent.putExtra("quizId", item.getQuizId());
             intent.putExtra("quizName", item.getQuizName());
-            intent.putExtra("creatorId", item.getCreatorId());
+            intent.putExtra("creatorId", userId);
             intent.putExtra("startTime", item.getStartTime());
             intent.putExtra("endTime", item.getEndTime());
             intent.putExtra("description", item.getDescription());
