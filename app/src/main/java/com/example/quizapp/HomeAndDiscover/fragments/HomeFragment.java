@@ -82,16 +82,6 @@ public class HomeFragment extends Fragment {
         return fragment;
     }
 
-    public static int getResId(String resName, Class<?> c) {
-        try {
-            Field idField = c.getDeclaredField(resName);
-            return idField.getInt(idField);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -1;
-        }
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,7 +96,6 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         sharedPreferences = getContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-//        resetInitDataFlag();
 
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -119,6 +108,15 @@ public class HomeFragment extends Fragment {
         friendRepository = new FriendRepository(getContext());
 
         boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
+
+        boolean firstLogin = sharedPreferences.getBoolean("firstLogin", true);
+
+        if (firstLogin) {
+            resetInitDataFlag();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstLogin", false);
+            editor.apply();
+        }
 
         if (!initDataDone) {
             initDataTask = new InitDataTask();

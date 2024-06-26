@@ -1,5 +1,6 @@
 package com.example.quizapp.Quiz.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.ImageView;
@@ -14,10 +15,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quizapp.Quiz.adapters.OptionAdapter;
 import com.example.quizapp.Quiz.models.Answer;
 import com.example.quizapp.Quiz.models.Question;
+import com.example.quizapp.Quiz.models.Result;
 import com.example.quizapp.Quiz.repositories.AnswerRepository;
 import com.example.quizapp.Quiz.repositories.QuestionRepository;
+import com.example.quizapp.Quiz.repositories.ResultRepository;
 import com.example.quizapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,12 +36,17 @@ public class QuestionActivity extends AppCompatActivity {
     private List<Question> questions;
     private List<Answer> answers;
     private int currentQuestionIndex = 0;
+    private int correctAnswers = 0;
+    private int incorrectAnswers = 0;
     private CountDownTimer timer;
     private CountDownTimer answerTimer;
     private QuestionRepository questionRepository;
     private AnswerRepository answerRepository;
+    private ResultRepository resultRepository;
     private OptionAdapter optionAdapter;
     private int totalTimeLimit;
+    private int userId;
+    private int quizId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +61,12 @@ public class QuestionActivity extends AppCompatActivity {
 
         questionRepository = new QuestionRepository(this);
         answerRepository = new AnswerRepository(this);
+        resultRepository = new ResultRepository(this);
 
-        int quizId = getIntent().getIntExtra("quizId", -1);
-        if (quizId == -1) {
-            Toast.makeText(this, "Invalid quiz ID", Toast.LENGTH_SHORT).show();
+        quizId = getIntent().getIntExtra("quizId", -1);
+        userId = getIntent().getIntExtra("userId", -1);
+        if (quizId == -1 || userId == -1) {
+            Toast.makeText(this, "Invalid quiz or user ID", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -107,6 +119,12 @@ public class QuestionActivity extends AppCompatActivity {
         Answer selectedAnswer = answers.get(position);
         boolean isCorrect = selectedAnswer.getIsCorrect() == 1;
 
+        if (isCorrect) {
+            correctAnswers++;
+        } else {
+            incorrectAnswers++;
+        }
+
         optionAdapter.setAnswerSelected(position, isCorrect);
 
         if (answerTimer != null) {
@@ -129,6 +147,19 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void finishQuiz() {
+        int score = (int) (((double) correctAnswers / questions.size()) * 100);
+        String completionDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        Result result = new Result(0, userId, getIntent().getIntExtra("quizId", -1), score, completionDate, correctAnswers, incorrectAnswers);
+        resultRepository.addResult(result);
+
+        Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+        intent.putExtra("score", score);
+        intent.putExtra("correctAnswers", correctAnswers);
+        intent.putExtra("incorrectAnswers", incorrectAnswers);
+        intent.putExtra("userId", userId);
+        startActivity(intent);
+
         Toast.makeText(this, "Quiz completed", Toast.LENGTH_SHORT).show();
         finish();
     }
