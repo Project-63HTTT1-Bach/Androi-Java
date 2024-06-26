@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText tietEmail, tietPassword;
     private UserRepository userRepository;
     private Button btnOnLogin;
-    private LinearLayout btnOnLoginGoogle, btnOnLoginGithub;
+    private LinearLayout btnOnLoginGoogle;
     private TextView btnRegister;
     private TextView btnForgotPassword;
     private FirebaseDatabase database;
@@ -55,7 +55,6 @@ public class LoginActivity extends AppCompatActivity {
         btnOnLogin = findViewById(R.id.btnOnLogin);
         btnRegister = findViewById(R.id.btnRegister);
         btnOnLoginGoogle = findViewById(R.id.btnOnLoginGoogle);
-        btnOnLoginGithub = findViewById(R.id.btnOnLoginGithub);
 
         userRepository = new UserRepository(this);
         database = FirebaseDatabase.getInstance();
@@ -105,13 +104,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnOnLoginGithub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, GithubLoginActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     private void loginUser(String email, String password) {

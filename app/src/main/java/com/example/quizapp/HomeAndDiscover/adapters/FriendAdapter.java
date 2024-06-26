@@ -2,6 +2,9 @@
 package com.example.quizapp.HomeAndDiscover.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,21 +14,28 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quizapp.Quiz.models.Quiz;
-import com.example.quizapp.R;
+import com.example.quizapp.Auth.models.User;
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendViewHolder> {
 
     private List<Friend> friends;
-    private List<Friend> friendsOld;
-
     private Context context;
-    public FriendAdapter(Context context, List<Friend> friends) {
+    private UserRepository userRepository;
+
+    public FriendAdapter(Context context, List<Friend> friends, UserRepository userRepository) {
         this.friends = friends;
-        this.friendsOld = friends;
+        this.context = context;
+        this.userRepository = userRepository;
     }
 
     @NonNull
@@ -37,9 +47,8 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
 
     @Override
     public void onBindViewHolder(@NonNull FriendViewHolder holder, int position) {
-//        Friend friend = friends.get(position);
-//        holder.friendName.setText(friend.getFriendUserId());
-//        holder.friendAvatar.setImageResource(friend.getAvatarResourceId());
+        Friend friend = friends.get(position);
+        holder.bind(friend);
     }
 
     @Override
@@ -47,16 +56,38 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.FriendView
         return friends.size();
     }
 
-    public static class FriendViewHolder extends RecyclerView.ViewHolder {
+    public void updateList(List<Friend> newList) {
+        friends = newList;
+        notifyDataSetChanged();
+    }
+
+    public class FriendViewHolder extends RecyclerView.ViewHolder {
 
         ImageView friendAvatar;
-        TextView friendName, friendPoints;
+        TextView friendName;
 
         public FriendViewHolder(@NonNull View itemView) {
             super(itemView);
             friendAvatar = itemView.findViewById(R.id.friendAvatar);
             friendName = itemView.findViewById(R.id.friendName);
-//            friendPoints = itemView.findViewById(R.id.friendPoints);
+        }
+
+        public void bind(Friend friend) {
+            User user = userRepository.getUser(friend.getFriendUserId());
+            if (user != null) {
+                friendName.setText(user.getFullname());
+
+                if (user.getProfilePicture() != null && !user.getProfilePicture().isEmpty()) {
+                    byte[] decodedString = Base64.decode(user.getProfilePicture(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    friendAvatar.setImageBitmap(decodedByte);
+                } else {
+                    friendAvatar.setImageResource(R.drawable.user_avatar);
+                }
+            } else {
+                friendName.setText("Unknown");
+                friendAvatar.setImageResource(R.drawable.user_avatar);
+            }
         }
     }
 }

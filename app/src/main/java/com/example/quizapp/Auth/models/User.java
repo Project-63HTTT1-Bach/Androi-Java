@@ -9,7 +9,8 @@ public class User {
     private String profilePicture;
     private String phone;
     private String birthday;
-    public User(int userId, String username, String password, String fullname, String email, String profilePicture, String phone, String birthday) {
+    private String createAt;
+    public User(int userId, String username, String password, String fullname, String email, String profilePicture, String phone, String birthday, String createAt) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -18,6 +19,10 @@ public class User {
         this.birthday = birthday;
         this.email = email;
         this.profilePicture = profilePicture;
+        this.createAt = createAt;
+    }
+
+    public User() {
     }
 
     public int getUserId() {
@@ -83,5 +88,14 @@ public class User {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
     }
 }

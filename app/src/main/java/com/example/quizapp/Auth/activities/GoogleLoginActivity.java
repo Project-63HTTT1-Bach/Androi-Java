@@ -1,7 +1,14 @@
 package com.example.quizapp.Auth.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -31,9 +38,17 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import android.graphics.drawable.Drawable;
+
+import java.io.ByteArrayOutputStream;
 import java.security.SecureRandom;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class GoogleLoginActivity extends LoginActivity {
     FirebaseAuth mAuth;
@@ -102,30 +117,38 @@ public class GoogleLoginActivity extends LoginActivity {
                     FirebaseUser user = mAuth.getCurrentUser();
 
                     if (user != null) {
-                        String userId = user.getUid();
-                        String userFullName = user.getDisplayName();
                         String userEmail = user.getEmail();
-                        String userAvatar = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
+                        String userFullName = user.getDisplayName();
+                        String userPhotoUrl = (user.getPhotoUrl() != null) ? user.getPhotoUrl().toString() : "";
 
-                        // Kiểm tra xem email đã tồn tại trong Firebase chưa
-                        userRef = database.getReference("users");
-                        userRef.orderByChild("email").equalTo(userEmail).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    // Email đã tồn tại, đăng nhập với user tương ứng
-                                    proceedToMainActivity(userEmail);
-                                } else {
-                                    // Tăng giá trị ID và thêm người dùng mới
-                                    addUserWithCurrentID(userEmail, userFullName, userAvatar);
+                        if (!userPhotoUrl.isEmpty()) {
+                            // Tải và mã hóa ảnh
+                            Picasso.get().load(userPhotoUrl).into(new Target() {
+                                @Override
+                                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                                    // Bo tròn ảnh
+                                    Bitmap roundedBitmap = getCircularBitmap(bitmap);
+                                    String userAvatarBase64 = encodeToBase64(roundedBitmap);
+
+                                    // Tiếp tục xử lý đăng nhập
+                                    processLogin(userEmail, userFullName, userAvatarBase64);
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                                Log.e("GoogleLoginActivity", "Lỗi khi đọc dữ liệu người dùng", error.toException());
-                            }
-                        });
+                                @Override
+                                public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+                                    // Xử lý khi tải ảnh thất bại
+                                    Toast.makeText(GoogleLoginActivity.this, "Failed to load profile picture", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                                    // Xử lý khi chuẩn bị tải ảnh
+                                }
+                            });
+                        } else {
+                            // Nếu không có URL ảnh, tiếp tục xử lý đăng nhập với avatar trống
+                            processLogin(userEmail, userFullName, "");
+                        }
                     }
                 } else {
                     Toast.makeText(GoogleLoginActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -134,7 +157,29 @@ public class GoogleLoginActivity extends LoginActivity {
         });
     }
 
-    private void addUserWithCurrentID(String email, String fullName, String avatarUrl) {
+    private void processLogin(String email, String fullName, String avatarBase64) {
+        // Kiểm tra xem email đã tồn tại trong Firebase chưa
+        userRef = database.getReference("users");
+        userRef.orderByChild("email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    // Email đã tồn tại, đăng nhập với user tương ứng
+                    proceedToMainActivity(email);
+                } else {
+                    // Tăng giá trị ID và thêm người dùng mới
+                    addUserWithCurrentID(email, fullName, avatarBase64);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("GoogleLoginActivity", "Lỗi khi đọc dữ liệu người dùng", error.toException());
+            }
+        });
+    }
+
+    private void addUserWithCurrentID(String email, String fullName, String avatarBase64) {
         userIdRef.runTransaction(new Transaction.Handler() {
             @NonNull
             @Override
@@ -157,10 +202,12 @@ public class GoogleLoginActivity extends LoginActivity {
                         String defaultBirthday = "";
                         String defaultPhone = "";
 
+                        String createAt = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
                         // Tạo chuỗi ngẫu nhiên cho password
                         String randomPassword = generateRandomString();
 
-                        User newUser = new User(newId, email, randomPassword, fullName, email, avatarUrl, defaultBirthday, defaultPhone);
+                        User newUser = new User(newId, email, randomPassword, fullName, email, avatarBase64, defaultBirthday, defaultPhone, createAt);
 
                         // Lưu người dùng mới vào Firebase
                         HashMap<String, Object> map = new HashMap<>();
@@ -169,7 +216,7 @@ public class GoogleLoginActivity extends LoginActivity {
                         map.put("password", randomPassword); // Mật khẩu ngẫu nhiên
                         map.put("fullname", fullName);
                         map.put("email", email);
-                        map.put("profilePicture", avatarUrl);
+                        map.put("profilePicture", avatarBase64);
                         map.put("birthday", defaultBirthday);
                         map.put("phone", defaultPhone);
                         database.getReference().child("users").child(newId.toString()).setValue(map);
@@ -206,5 +253,28 @@ public class GoogleLoginActivity extends LoginActivity {
             sb.append(CHARACTERS.charAt(random.nextInt(CHARACTERS.length())));
         }
         return sb.toString();
+    }
+
+    private Bitmap getCircularBitmap(Bitmap bitmap) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        canvas.drawCircle(bitmap.getWidth() / 2, bitmap.getHeight() / 2, bitmap.getWidth() / 2, paint);
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
+    }
+
+    private String encodeToBase64(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(byteArray, Base64.DEFAULT);
     }
 }

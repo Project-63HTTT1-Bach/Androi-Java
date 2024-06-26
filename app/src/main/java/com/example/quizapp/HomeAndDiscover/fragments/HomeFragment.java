@@ -1,10 +1,13 @@
 package com.example.quizapp.HomeAndDiscover.fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quizapp.Auth.models.User;
 import com.example.quizapp.Auth.repositories.UserRepository;
+import com.example.quizapp.HomeAndDiscover.models.Friend;
+import com.example.quizapp.HomeAndDiscover.repositories.FriendRepository;
 import com.example.quizapp.Quiz.adapters.QuizAdapter;
 import com.example.quizapp.Quiz.models.Answer;
 import com.example.quizapp.Quiz.models.Question;
@@ -58,10 +63,14 @@ public class HomeFragment extends Fragment {
     private QuestionRepository questionRepository;
     private AnswerRepository answerRepository;
     private ResultRepository resultRepository;
+    private FriendRepository friendRepository;
     private QuizAdapter quizAdapter;
-
+    private SharedPreferences sharedPreferences;
+    private static final String PREFS_NAME = "QuizAppPrefs";
+    private static final String KEY_INIT_DATA_DONE = "initDataDone";
+    private InitDataTask initDataTask;
+    private int userId;
     public HomeFragment() {
-        // Required empty public constructor
     }
 
     public static HomeFragment newInstance(String param1, String param2) {
@@ -94,9 +103,11 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-      
+
+        sharedPreferences = getContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+//        resetInitDataFlag();
+
         recyclerViewLiveQuizzes = view.findViewById(R.id.recyclerViewLiveQuizzes);
         recyclerViewLiveQuizzes.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -105,8 +116,16 @@ public class HomeFragment extends Fragment {
         questionRepository = new QuestionRepository(getContext());
         answerRepository = new AnswerRepository(getContext());
         resultRepository = new ResultRepository(getContext());
+        friendRepository = new FriendRepository(getContext());
 
-        new InitDataTask().execute();
+        boolean initDataDone = sharedPreferences.getBoolean(KEY_INIT_DATA_DONE, false);
+
+        if (!initDataDone) {
+            initDataTask = new InitDataTask();
+            initDataTask.execute();
+        } else {
+            updateUI();
+        }
 
         return view;
     }
@@ -121,31 +140,35 @@ public class HomeFragment extends Fragment {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            updateUI();
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(KEY_INIT_DATA_DONE, true);
+            editor.apply();
+            if (isAdded()) {
+                updateUI();
+            }
         }
     }
 
     private void initData() {
-        // Thêm 10 người dùng mẫu
-        for (int i = 0; i < 2; i++) {
-            String username = "username" + (i + 1);
-            String password = "password" + (i + 1);
-            String fullname = "fullName" + (i + 1);
-            String phone = "phone" + (i + 1);
-            String birthday = "1990-01-01";
-            String email = "email" + (i + 1) + "@gmail.com";
-            String profilePicture = "user_avatar";
-            User user = new User(i, username, password, fullname, email, profilePicture, birthday, phone);
-            userRepository.addUser(user);
-        }
-
         Random random = new Random();
         List<User> users = UserRepository.getUserList();
+        Log.d("HomeFragment", "size: " + userRepository.getUserCount());
+//        for (int i = 7; i < 7+3; i++) {
+//            String username = "username" + (i + 1);
+//            String password = "password" + (i + 1);
+//            String fullname = "fullName" + (i + 1);
+//            String phone = "phone" + (i + 1);
+//            String birthday = "1990-01-01";
+//            String email = "email" + (i + 1) + "@gmail.com";
+//            String profilePicture = "user_avatar";
+//            User user = new User(i, username, password, fullname, email, profilePicture, birthday, phone);
+//            userRepository.addUser(user);
+//        }
 
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 100; i++) {
             int quizId = i + 1;
             String quizName = "Quiz " + (i + 1);
-            int creatorId = users.get(random.nextInt(users.size())).getUserId();
+            int creatorId = random.nextInt(userRepository.getUserCount()) + 1;
             String startTime = "2024-06-19 09:00";
             String endTime = "2024-06-19 10:00";
             String description = "Description for Quiz " + (i + 1);
@@ -166,34 +189,56 @@ public class HomeFragment extends Fragment {
                 for (int k = 0; k < 4; k++) {
                     int answerId = (questionId * 4) + k + 1;
                     String answerText = "Answer " + (k + 1) + " for " + questionText;
-                    int isCorrect = (k == 0) ? 1 : 0;  // Đáp án đúng là đáp án đầu tiên
+                    int isCorrect = (k == 0) ? 1 : 0;
                     Answer answer = new Answer(answerId, questionId, answerText, isCorrect);
                     answerRepository.addAnswer(answer);
                 }
             }
 
             for (User user : users) {
+                int resultId = (i * userRepository.getUserCount()) + user.getUserId();
+                int userId = user.getUserId();
                 int score = random.nextInt(101);
                 String completionDate = "2024-06-19";
-                int correctAnswers = random.nextInt(6);
+                int correctAnswers = random.nextInt(5);
                 int incorrectAnswers = 5 - correctAnswers;
-                Result result = new Result(0, user.getUserId(), quizId, score, completionDate, correctAnswers, incorrectAnswers);
+                Result result = new Result(resultId, userId, quizId, score, completionDate, correctAnswers, incorrectAnswers);
                 resultRepository.addResult(result);
             }
         }
+
+        for (int i = 0; i < 100; i++) {
+            int friendId = i + 1;
+            int userId = random.nextInt(userRepository.getUserCount()) + 1;
+            int friendUserId = random.nextInt(userRepository.getUserCount()) + 1;
+            Friend friend = new Friend(friendId, userId, friendUserId);
+            friendRepository.addFriend(friend);
+        }
+
     }
 
     private void updateUI() {
-        int userId = 1;
+        Intent intent = getActivity().getIntent();
+        String userEmail = intent.getStringExtra("userEmail");
+        Log.d("HomeFragment", "userEmail: " + userEmail);
+        userId = userRepository.getUserId(userEmail);
+        Log.d("HomeFragment", "userId: " + userId);
+
         quizRepository.filterQuizzesByUserId(userId);
         List<Quiz> quizList = QuizRepository.getQuizList();
 
-        quizAdapter = new QuizAdapter(getContext(), quizList);
+        quizAdapter = new QuizAdapter(getContext(), quizList, userId);
         recyclerViewLiveQuizzes.setAdapter(quizAdapter);
     }
 
     public Uri getUri(int resId) {
         return Uri.parse("android.resource://" + this.getParentFragment() + "/" + resId);
+    }
+
+    private void resetInitDataFlag() {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(KEY_INIT_DATA_DONE, false);
+        editor.apply();
     }
 
     @Override
@@ -207,6 +252,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FindFriendsActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -215,8 +261,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AllQuizActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
+        updateUI();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
     }
 }

@@ -87,4 +87,24 @@ public class QuizRepository {
         }
         return false;
     }
+
+    public int getLastInsertedQuizId() {
+        if (!quizList.isEmpty()) {
+            return quizList.get(quizList.size() - 1).getQuizId();
+        } else {
+            return -1;
+        }
+    }
+
+    public Quiz getQuizByCode(String code) {
+        if (code == null || code.trim().isEmpty()) {
+            return null;
+        }
+        return dbHelper.getQuizByCode(code);
+    }
+
+
+    public int getQuestionCountByQuizId(int quizId) {
+        return dbHelper.getQuestionCountByQuizId(quizId);
+    }
 }

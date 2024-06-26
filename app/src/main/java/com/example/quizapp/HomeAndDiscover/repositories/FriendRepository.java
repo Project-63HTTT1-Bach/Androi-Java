@@ -17,6 +17,7 @@ public class FriendRepository {
         if (friendList.isEmpty()) {
             friendList = dbHelper.getAllFriends();
         }
+
     }
 
     public FriendRepository() {
@@ -67,4 +68,15 @@ public class FriendRepository {
         }
         return false;
     }
+
+    public int countFriendsByUserId(int userId) {
+        int count = 0;
+        for (Friend friend : friendList) {
+            if (friend.getUserId() == userId) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 }

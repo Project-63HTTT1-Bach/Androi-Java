@@ -2,6 +2,7 @@ package com.example.quizapp.HomeAndDiscover.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class DiscoveryFragment extends Fragment {
     private QuizRepository quizRepository;
     private FriendRepository friendRepository;
     private UserRepository userRepository;
+    private int userId;
 
     public DiscoveryFragment() {
         // Required empty public constructor
@@ -84,34 +86,27 @@ public class DiscoveryFragment extends Fragment {
 
         friendRepository = new FriendRepository(getContext());
         quizRepository = new QuizRepository(getContext());
-        initData();
+        userRepository = new UserRepository(getContext());
 
-        int userId = 1;
+        Intent intent = getActivity().getIntent();
+        String userEmail = intent.getStringExtra("userEmail");
+        userId = userRepository.getUserId(userEmail);
+        updateUI();
+        return view;
+    }
+
+    private void updateUI() {
         quizRepository.filterQuizzesByUserId(userId);
 
         List<Quiz> quizList = QuizRepository.getQuizList();
-        quizAdapter = new QuizAdapter(getContext(), quizList);
+        quizAdapter = new QuizAdapter(getContext(), quizList, userId);
         rvQuizzes.setAdapter(quizAdapter);
 
         friendRepository.filterFriendByUserId(userId);
 
         List<Friend> friendList = FriendRepository.getFriendList();
-        friendAdapter = new FriendAdapter(getContext(), friendList);
+        friendAdapter = new FriendAdapter(getContext(), friendList, userRepository);
         rvFriends.setAdapter(friendAdapter);
-
-        return view;
-    }
-
-    private void initData(){
-        Random random = new Random();
-        List<User> users = UserRepository.getUserList();
-        for (int i = 0; i < 100; i++) {
-            int friendId = i + 1;
-            int userId = users.get(random.nextInt(users.size())).getUserId();
-            int friendUserId = users.get(random.nextInt(users.size())).getUserId();
-            Friend friend = new Friend(friendId, userId, friendUserId);
-            friendRepository.addFriend(friend);
-        }
     }
 
     @Override
@@ -125,6 +120,7 @@ public class DiscoveryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), FindFriendsActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
@@ -133,8 +129,16 @@ public class DiscoveryFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), AllQuizActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
+        updateUI();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
     }
 }

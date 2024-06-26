@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.quizapp.Auth.repositories.UserRepository;
 import com.example.quizapp.R;
 import com.example.quizapp.Leaderboard.fragments.ChartFragment;
 import com.example.quizapp.HomeAndDiscover.fragments.DiscoveryFragment;
@@ -21,6 +22,8 @@ import com.example.quizapp.Auth.fragments.MeFragment;
 public class MainActivity extends AppCompatActivity {
     private int selectedTab = 1;
     private String userEmail;
+    private UserRepository userRepository;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        userRepository = new UserRepository(this);
+
         // Lấy email từ Intent
         Intent intent = getIntent();
         userEmail = intent.getStringExtra("userEmail");
+        userId = userRepository.getUserId(userEmail);
 
         final LinearLayout llHome = findViewById(R.id.llHome);
         final LinearLayout llDiscovery = findViewById(R.id.llDiscovery);
@@ -63,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                     ivChart.setImageResource(R.drawable.ic_navchart);
                     ivMe.setImageResource(R.drawable.ic_navme);
                     selectedTab = 1;
+
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .replace(R.id.fcvFragment, HomeFragment.class, null)
@@ -79,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
                     ivChart.setImageResource(R.drawable.ic_navchart);
                     ivMe.setImageResource(R.drawable.ic_navme);
                     selectedTab = 2;
+
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .replace(R.id.fcvFragment, DiscoveryFragment.class, null)
@@ -95,6 +109,10 @@ public class MainActivity extends AppCompatActivity {
                     ivChart.setImageResource(R.drawable.ic_navchartselected);
                     ivMe.setImageResource(R.drawable.ic_navme);
                     selectedTab = 3;
+
+                    Bundle args = new Bundle();
+                    args.putString("userEmail", userEmail);
+
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
                             .replace(R.id.fcvFragment, ChartFragment.class, null)
@@ -112,8 +130,10 @@ public class MainActivity extends AppCompatActivity {
                     ivMe.setImageResource(R.drawable.ic_navmeselected);
                     selectedTab = 4;
                     MeFragment meFragment = new MeFragment();
+
                     Bundle args = new Bundle();
                     args.putString("userEmail", userEmail);
+
                     meFragment.setArguments(args);
                     getSupportFragmentManager().beginTransaction()
                             .setReorderingAllowed(true)
@@ -126,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, JoinQuizActivity.class);
+                intent.putExtra("userId", userId);
                 startActivity(intent);
             }
         });
