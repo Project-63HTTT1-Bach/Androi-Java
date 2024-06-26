@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class SqliteOpenHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "quizapp.db";
 
-    private static final int DATABASE_VERSION = 56;
+    private static final int DATABASE_VERSION = 57;
 
 
     public SqliteOpenHelper(Context context) {
@@ -223,6 +223,44 @@ public class SqliteOpenHelper extends SQLiteOpenHelper {
         cursor.close();
         return count;
     }
+
+    public Quiz getQuizByCode(String code) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM quiz WHERE quizCode = ?";
+        Cursor cursor = db.rawQuery(query, new String[]{code});
+
+        Quiz quiz = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            int quizIdIndex = cursor.getColumnIndex("quizId");
+            int quizNameIndex = cursor.getColumnIndex("quizName");
+            int creatorIdIndex = cursor.getColumnIndex("creatorId");
+            int startTimeIndex = cursor.getColumnIndex("startTime");
+            int endTimeIndex = cursor.getColumnIndex("endTime");
+            int descriptionIndex = cursor.getColumnIndex("description");
+            int isPublicIndex = cursor.getColumnIndex("isPublic");
+            int timeLimitIndex = cursor.getColumnIndex("timeLimit");
+            int iconImageIndex = cursor.getColumnIndex("iconImage");
+            int quizCodeIndex = cursor.getColumnIndex("quizCode");
+
+            if (quizIdIndex != -1 && quizNameIndex != -1 && creatorIdIndex != -1 && startTimeIndex != -1 && endTimeIndex != -1 && descriptionIndex != -1 && isPublicIndex != -1 && timeLimitIndex != -1 && iconImageIndex != -1 && quizCodeIndex != -1) {
+                int quizId = cursor.getInt(quizIdIndex);
+                String quizName = cursor.getString(quizNameIndex);
+                int creatorId = cursor.getInt(creatorIdIndex);
+                String startTime = cursor.getString(startTimeIndex);
+                String endTime = cursor.getString(endTimeIndex);
+                String description = cursor.getString(descriptionIndex);
+                int isPublic = cursor.getInt(isPublicIndex);
+                int timeLimit = cursor.getInt(timeLimitIndex);
+                String iconImage = cursor.getString(iconImageIndex);
+                String quizCode = cursor.getString(quizCodeIndex);
+
+                quiz = new Quiz(quizId, quizName, creatorId, startTime, endTime, description, isPublic, timeLimit, iconImage, quizCode);
+            }
+            cursor.close();
+        }
+        return quiz;
+    }
+
 
     public boolean insertQuestion(int quizId, String questionText, String questionType) {
         SQLiteDatabase db = this.getWritableDatabase();

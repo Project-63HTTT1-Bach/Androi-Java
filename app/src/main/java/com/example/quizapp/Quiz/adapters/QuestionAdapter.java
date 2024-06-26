@@ -1,5 +1,6 @@
 package com.example.quizapp.Quiz.adapters;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,8 +21,10 @@ import java.util.function.Consumer;
 public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> {
     private List<Question> questionList;
     private Consumer<Integer> onDeleteClickListener;
+    private Activity activity;
 
-    public QuestionAdapter(List<Question> questionList, Consumer<Integer> onDeleteClickListener) {
+    public QuestionAdapter(Activity activity, List<Question> questionList, Consumer<Integer> onDeleteClickListener) {
+        this.activity = activity;
         this.questionList = questionList;
         this.onDeleteClickListener = onDeleteClickListener;
     }
@@ -44,7 +47,7 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             Intent intent = new Intent(holder.itemView.getContext(), CreateQuestionActivity.class);
             intent.putExtra("questionId", question.getQuestionId());
             intent.putExtra("quizId", question.getQuizId());
-            holder.itemView.getContext().startActivity(intent);
+            activity.startActivityForResult(intent, REQUEST_CODE_EDIT_QUESTION);
         });
     }
 
@@ -79,4 +82,6 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
             btnEditQuestion = itemView.findViewById(R.id.btn_edit_question);
         }
     }
+
+    private static final int REQUEST_CODE_EDIT_QUESTION = 1;
 }
