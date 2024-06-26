@@ -219,6 +219,7 @@ public class GoogleLoginActivity extends LoginActivity {
                         map.put("profilePicture", avatarBase64);
                         map.put("birthday", defaultBirthday);
                         map.put("phone", defaultPhone);
+                        map.put("createAt", createAt);
                         database.getReference().child("users").child(newId.toString()).setValue(map);
 
                         // Lưu người dùng mới vào SQLite
