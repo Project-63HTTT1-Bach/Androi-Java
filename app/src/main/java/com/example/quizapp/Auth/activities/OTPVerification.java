@@ -21,10 +21,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.quizapp.Auth.Utils.GmailSender;
 import com.example.quizapp.R;
-
-import java.util.Random;
 
 public class OTPVerification extends AppCompatActivity {
     private EditText etDigit1, etDigit2, etDigit3, etDigit4, etDigit5, etDigit6;
@@ -76,7 +73,7 @@ public class OTPVerification extends AppCompatActivity {
             public void onClick(View v) {
                 if (resendEnabled) {
                     startCountDownTimer();
-                    sendOTP(email);
+                    // Gửi lại mã OTP tại đây
                 }
             }
         });
@@ -96,20 +93,7 @@ public class OTPVerification extends AppCompatActivity {
             }
         });
     }
-    private void sendOTP(String email) {
-        String generatedOTP = generateOTP();
-        String subject = "Your OTP Code";
-        String body = "Your OTP code is: " + generatedOTP;
 
-        GmailSender.sendEmail(email, subject, body);
-        receivedOTP = generatedOTP; // Cập nhật mã OTP mới
-    }
-
-    private String generateOTP() {
-        Random random = new Random();
-        int otp = 100000 + random.nextInt(900000);
-        return String.valueOf(otp);
-    }
     private void verifyOTP(String enteredOTP) {
         if (enteredOTP.equals(receivedOTP)) {
             Intent intent = new Intent(OTPVerification.this, ChangePasswordActivity.class);
