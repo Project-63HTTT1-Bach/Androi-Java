@@ -101,9 +101,8 @@ public class AddQuestionActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == REQUEST_CODE_EDIT_QUESTION && resultCode == RESULT_OK) {
-            List<Question> questionList = questionRepository.getQuestionsByQuizId(quizId);
-            questionAdapter = new QuestionAdapter(this, questionList, this::showDeleteConfirmationDialog);
-            recyclerViewQuestions.setAdapter(questionAdapter);
+            List<Question> updatedQuestionList = questionRepository.getQuestionsByQuizId(quizId);
+            questionAdapter.updateQuestionList(updatedQuestionList);
         }
     }
 

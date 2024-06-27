@@ -55,16 +55,18 @@ public class CreateQuestionActivity extends AppCompatActivity {
 
         quizId = getIntent().getIntExtra("quizId", -1);
         questionId = getIntent().getIntExtra("questionId", -1);
-        answerList = questionId != -1 ? answerRepository.getAnswersByQuestionId(questionId) : new ArrayList<>();
-
-        answerAdapter = new AnswerAdapter(answerList, this::showDeleteConfirmationDialog, this::setCorrectAnswer);
-        recyclerViewAnswers.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewAnswers.setAdapter(answerAdapter);
 
         if (questionId != -1) {
             Question question = questionRepository.getQuestionById(questionId);
             inputQuestionText.setText(question.getQuestionText());
+            answerList = answerRepository.getAnswersByQuestionId(questionId);
+        } else {
+            answerList = new ArrayList<>();
         }
+
+        answerAdapter = new AnswerAdapter(answerList, this::showDeleteConfirmationDialog, this::setCorrectAnswer);
+        recyclerViewAnswers.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewAnswers.setAdapter(answerAdapter);
 
         fabAddAnswer.setOnClickListener(v -> showAddAnswerDialog());
         btnSaveAnswer.setOnClickListener(v -> saveQuestion());
@@ -118,16 +120,18 @@ public class CreateQuestionActivity extends AppCompatActivity {
             return;
         }
 
-        Question question = new Question(questionId, quizId, questionText, "Multiple Choice");
+        Question question;
         if (questionId == -1) {
-            questionRepository.addQuestion(question);
+            question = new Question(0, quizId, questionText, "Multiple Choice");
+            questionId = questionRepository.addQuestion(question);
         } else {
+            question = new Question(questionId, quizId, questionText, "Multiple Choice");
             questionRepository.updateQuestion(question);
         }
 
         for (Answer answer : answerList) {
+            answer.setQuestionId(questionId);
             if (answer.getAnswerId() == 0) {
-                answer.setQuestionId(question.getQuestionId());
                 answerRepository.addAnswer(answer);
             } else {
                 answerRepository.updateAnswer(answer);
@@ -140,4 +144,5 @@ public class CreateQuestionActivity extends AppCompatActivity {
         setResult(RESULT_OK, resultIntent);
         finish();
     }
+
 }

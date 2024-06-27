@@ -70,6 +70,11 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.Questi
         notifyItemInserted(questionList.size() - 1);
     }
 
+    public void updateQuestionList(List<Question> newQuestionList) {
+        this.questionList = newQuestionList;
+        notifyDataSetChanged();
+    }
+
     static class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView textViewQuestion;
         ImageView btnDeleteQuestion;

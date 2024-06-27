@@ -133,7 +133,7 @@ public class ChangeProfileActivity extends AppCompatActivity {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-            clearAvatarSelection(); // Clear previous selection
+            clearAvatarSelection();
             Bitmap circularBitmap = getCircularBitmap(imageBitmap, 200, 200); // Set kích thước cố định 200x200
             iv6.setImageBitmap(circularBitmap);
             selectedAvatarBase64 = encodeToBase64(circularBitmap);

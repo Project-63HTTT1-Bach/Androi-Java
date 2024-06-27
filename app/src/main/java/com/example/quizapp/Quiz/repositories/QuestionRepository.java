@@ -23,12 +23,12 @@ public class QuestionRepository {
         return questionList;
     }
 
-    public boolean addQuestion(Question question) {
+    public int addQuestion(Question question) {
         if (dbHelper.insertQuestion(question.getQuizId(), question.getQuestionText(), question.getQuestionType())) {
             questionList.add(question);
-            return true;
+            return question.getQuestionId();
         }
-        return false;
+        return -1;
     }
 
     public boolean updateQuestion(Question question) {

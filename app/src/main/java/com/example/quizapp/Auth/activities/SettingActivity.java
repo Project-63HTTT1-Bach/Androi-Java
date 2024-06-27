@@ -111,13 +111,13 @@ public class SettingActivity extends AppCompatActivity {
                         }
                     }
                 } else {
-                    // Handle trường hợp không tìm thấy người dùng
+
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Handle lỗi
+
             }
         });
     }
